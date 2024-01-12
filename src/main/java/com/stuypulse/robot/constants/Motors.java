@@ -22,9 +22,14 @@ import static com.revrobotics.CANSparkMax.IdleMode;
  *  - The Open Loop Ramp Rate
  */
 public interface Motors {
-
     /** Classes to store all of the values a motor needs */
-    CANSparkMaxConfig SHOOTER = new CANSparkMaxConfig(false, null);
+
+    public interface Shooter {
+        CANSparkMaxConfig FLYWHEEL_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
+        CANSparkMaxConfig TWO_WHEEL_LEFT_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
+        CANSparkMaxConfig TWO_WHEEL_RIGHT_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
+
+    }
 
     public static class TalonSRXConfig {
         public final boolean INVERTED;

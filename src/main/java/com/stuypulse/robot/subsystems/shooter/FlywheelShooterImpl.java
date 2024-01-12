@@ -8,14 +8,20 @@ import com.stuypulse.robot.constants.Ports;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ShooterImpl extends Shooter {
+public class FlywheelShooterImpl extends FlywheelShooter {
     private CANSparkMax flywheel;
     private RelativeEncoder encoder;
 
-    public ShooterImpl() {
-        flywheel = new CANSparkMax(Ports.Shooter.MOTOR, MotorType.kBrushless);
+    public FlywheelShooterImpl() {
+        flywheel = new CANSparkMax(Ports.Shooter.FLYWHEEL_MOTOR, MotorType.kBrushless);
         encoder = flywheel.getEncoder();
-        Motors.SHOOTER.configure(flywheel);
+        Motors.Shooter.FLYWHEEL_SHOOTER.configure(flywheel);
+    }
+
+
+    @Override 
+    public void stop() {
+        targetRPM.set(0.0);
     }
 
     @Override
@@ -24,11 +30,11 @@ public class ShooterImpl extends Shooter {
     }
 
     public void periodic() {
-        SmartDashboard.putNumber("Shooter/RPM", getShooterRPM());
-        SmartDashboard.putNumber("Shooter/Target RPM", getTargetRPM());
-        SmartDashboard.putNumber("Shooter/Voltage", flywheel.getOutputCurrent());
+        SmartDashboard.putNumber("FlyWheel Shooter/RPM", getShooterRPM());
+        SmartDashboard.putNumber("Flywheel Shooter/Target RPM", getTargetRPM());
+        SmartDashboard.putNumber("Flywheel Shooter/Voltage", flywheel.getBusVoltage());
 
-        controller.update(targetRPM.getAsDouble(), getShooterRPM());
+        controller.update(getTargetRPM(), getShooterRPM());
         flywheel.setVoltage(controller.getOutput());
     }
 }
