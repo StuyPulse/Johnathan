@@ -1,15 +1,13 @@
 package com.stuypulse.robot.subsystems.shooter;
 
+import com.stuypulse.robot.constants.Settings.Shooter.*;
+
+import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedback.PIDController;
-// import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-// import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-// import java.lang.ModuleLayer.Controller;
-
-// import com.revrobotics.CANSparkMax;
+import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
 import com.stuypulse.stuylib.network.SmartNumber;
-import com.stuypulse.robot.constants.Settings;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class Shooter extends SubsystemBase {
     private static final Shooter shooter;
@@ -22,12 +20,13 @@ public abstract class Shooter extends SubsystemBase {
         return shooter;
     }
 
-    public SmartNumber targetRPM;
-    public PIDController controller; 
+    protected SmartNumber targetRPM;
+    protected Controller controller; 
 
     public Shooter() {
         targetRPM = new SmartNumber("Shooter/Target RPM", 0.0);
-        controller = new PIDController(Settings.Shooter.kP.getAsDouble(), Settings.Shooter.kI.getAsDouble(), Settings.Shooter.kD.getAsDouble());
+        controller = new MotorFeedforward(FeedForward.kS.getAsDouble(), FeedForward.kV.getAsDouble(), FeedForward.kA.getAsDouble()).velocity()
+                    .add(new PIDController(PID.kP.getAsDouble(), PID.kI.getAsDouble(), PID.kD.getAsDouble()));
     }
     
     public void stop() {

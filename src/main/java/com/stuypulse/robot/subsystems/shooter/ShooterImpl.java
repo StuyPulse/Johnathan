@@ -15,13 +15,12 @@ public class ShooterImpl extends Shooter {
     public ShooterImpl() {
         flywheel = new CANSparkMax(Ports.Shooter.MOTOR, MotorType.kBrushless);
         encoder = flywheel.getEncoder();
-        
-        //configure motors 
-        Motors.SHOOTER.configure(flywheel); 
+        Motors.SHOOTER.configure(flywheel);
     }
-    
-    public double getShooterRPM() { 
-        return encoder.getVelocity(); 
+
+    @Override
+    public double getShooterRPM() {
+        return encoder.getVelocity();
     }
 
     public void periodic() {
