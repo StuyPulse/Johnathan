@@ -1,7 +1,7 @@
-package com.stuypulse.robot.commands.shooter;
+package com.stuypulse.robot.commands.shooter.TwoWheelShooter;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter;
+import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
 
 public class TwoWheelShooterSetRPM extends InstantCommand {
     private final TwoWheelShooter twoWheelShooter;
@@ -17,7 +17,7 @@ public class TwoWheelShooterSetRPM extends InstantCommand {
 
     @Override
     public void initialize() {
-        twoWheelShooter.setTargetRPM(leftTargetRPM, rightTargetRPM);
+        twoWheelShooter.setTargetRPM(leftTargetRPM.doubleValue(), rightTargetRPM.doubleValue());
     }
     
 }

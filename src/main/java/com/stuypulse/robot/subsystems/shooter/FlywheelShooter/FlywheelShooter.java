@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
 
 import com.stuypulse.robot.constants.Settings.FlyWheelShooter.*;
 
@@ -28,7 +28,17 @@ public abstract class FlywheelShooter extends SubsystemBase {
         targetRPM.set(rpm);
     }
 
+    protected abstract void setShooterVoltageImpl(double voltage);
+
     public double getTargetRPM() {
         return targetRPM.getAsDouble();
-    };
+    }
+
+    @Override
+    public final void periodic() {
+        controller.update(getTargetRPM(), getShooterRPM());
+        setShooterVoltageImpl(controller.getOutput());
+        periodicallyCalled();
+    }
+    public void periodicallyCalled() {}
 }

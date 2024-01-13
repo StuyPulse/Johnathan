@@ -9,9 +9,14 @@ import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
-import com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
-import com.stuypulse.robot.subsystems.shooter.FlywheelShooterImpl;
-import com.stuypulse.robot.subsystems.shooter.TwoWheelShooterImpl;
+import com.stuypulse.robot.subsystems.shooter.FlywheelShooter.FlywheelShooter;
+import com.stuypulse.robot.subsystems.shooter.FlywheelShooter.FlywheelShooterImpl;
+
+import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
+import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooterImpl;
+
+import com.stuypulse.robot.subsystems.shooter.HorizontalShooter.HorizontalShooter;
+import com.stuypulse.robot.subsystems.shooter.HorizontalShooter.HorizontalShooterImpl;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,8 +29,9 @@ public class RobotContainer {
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
     
     // Subsystems
-    public final FlywheelShooter shooter = new FlywheelShooterImpl();
+    // public final FlywheelShooter shooter = new FlywheelShooterImpl();
     // public final TwoWheelShooter shooter = new TwoWheelShooterImpl();
+    public final HorizontalShooter shooter = new HorizontalShooterImpl();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();

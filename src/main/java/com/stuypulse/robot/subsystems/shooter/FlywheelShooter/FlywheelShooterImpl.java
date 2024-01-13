@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -25,16 +25,19 @@ public class FlywheelShooterImpl extends FlywheelShooter {
     }
 
     @Override
+    protected void setShooterVoltageImpl(double voltage) {
+        flywheel.setVoltage(voltage);
+    }
+
+    @Override
     public double getShooterRPM() {
         return encoder.getVelocity();
     }
 
-    public void periodic() {
+    @Override
+    public void periodicallyCalled() {
         SmartDashboard.putNumber("FlyWheel Shooter/RPM", getShooterRPM());
         SmartDashboard.putNumber("Flywheel Shooter/Target RPM", getTargetRPM());
-        SmartDashboard.putNumber("Flywheel Shooter/Voltage", flywheel.getBusVoltage());
-
-        controller.update(getTargetRPM(), getShooterRPM());
-        flywheel.setVoltage(controller.getOutput());
+        SmartDashboard.putNumber("Flywheel Shooter/Voltage", flywheel.getBusVoltage());        
     }
 }

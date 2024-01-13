@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.TwoWheelShooter;
 import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
@@ -39,5 +39,18 @@ public abstract class TwoWheelShooter extends SubsystemBase {
 
     public abstract double getLeftShooterRPM(); 
     public abstract double getRightShooterRPM(); 
+
+    protected abstract void setLeftMotorVoltageImpl(double voltage);
+    protected abstract void setRightMotorVoltageImpl(double voltage);
+
+    @Override
+    public final void periodic(){
+        leftController.update(getLeftTargetRPM(), getLeftShooterRPM());
+        rightController.update(getRightTargetRPM(), getRightShooterRPM());
+        setLeftMotorVoltageImpl(leftController.getOutput());
+        setRightMotorVoltageImpl(rightController.getOutput());
+        periodicallyCalled();
+    }
+    public void periodicallyCalled() {}
 
 }
