@@ -17,7 +17,7 @@ public class TwoWheelShooterSetRPM extends InstantCommand {
 
     @Override
     public void initialize() {
-        twoWheelShooter.setTargetRPM(leftTargetRPM, rightTargetRPM);
+        twoWheelShooter.setTargetRPM(leftTargetRPM.doubleValue(), rightTargetRPM.doubleValue());
     }
     
 }

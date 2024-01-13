@@ -2,13 +2,13 @@ package com.stuypulse.robot.commands.shooter.TwoWheelShooter;
 
 import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import com.stuypulse.robot.constants.Settings;
 
-public class TwoWheelShooterPodiumShot extends InstantCommand {
+public class TwoWheelShooterPodiumShot extends TwoWheelShooterSetRPM {
     
 
     public TwoWheelShooterPodiumShot(TwoWheelShooter twoWheelShooter){
-
+        super(twoWheelShooter, Settings.TWO_WHEEL_PODIUM_LEFT_RPM, Settings.TWO_WHEEL_PODIUM_RIGHT_RPM);
 
     }
 }

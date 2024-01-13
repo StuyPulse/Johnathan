@@ -15,9 +15,15 @@ import com.stuypulse.stuylib.network.SmartNumber;
  * values that we can edit on Shuffleboard.
  */
 public interface Settings {
-    public interface FlyWheelShooter {
+    SmartNumber FLYWHEEL_PODIUM_RPM = new SmartNumber("FlywheelShooter/Podium RPM", 0);
 
-        SmartNumber PODIUM_RPM = new SmartNumber("FlywheelShooter/Podium RPM", 0);
+    SmartNumber TWO_WHEEL_PODIUM_LEFT_RPM = new SmartNumber("TwoWheelShooter/Left Podium RPM", 0);
+    SmartNumber TWO_WHEEL_PODIUM_RIGHT_RPM = new SmartNumber("TwoWheelShooter/Right Podium RPM", 0);
+
+    SmartNumber HORIZONTAL_PODIUM_TOP_RPM = new SmartNumber("HorizontalShooter/Top Podium RPM", 0);
+    SmartNumber HORIZONTAL_PODIUM_BOTTOM_RPM = new SmartNumber("HorizontalShooter/Bottom Podium RPM", 0);
+    
+    public interface FlyWheelShooter {
 
         public interface PID {
             SmartNumber kP = new SmartNumber("FlywheelShooter kP", 0);
@@ -34,8 +40,6 @@ public interface Settings {
 
     public interface TwoWheelShooter {
 
-        SmartNumber PODIUM_RPM = new SmartNumber("TwoWheelShooter/Podium RPM", 0);
-
         public interface PID {
             SmartNumber kP = new SmartNumber("TwoWheelShooter kP", 0);
             SmartNumber kI = new SmartNumber("TwoWheelShooter kI", 0);
@@ -49,8 +53,6 @@ public interface Settings {
         }
     }
     public interface HorizontalShooter{
-
-        SmartNumber PODIUM_RPM = new SmartNumber("HorizontalShooter/Podium RPM", 0);
 
         public interface PID {
             SmartNumber kP = new SmartNumber("HorizontalShooter kP", 0);

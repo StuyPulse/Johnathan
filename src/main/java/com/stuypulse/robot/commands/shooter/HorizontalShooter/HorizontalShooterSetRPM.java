@@ -17,7 +17,7 @@ public class HorizontalShooterSetRPM extends InstantCommand {
 
     @Override
     public void initialize() {
-        horizontalShooter.setTargetRPM(topTargetRPM, bottomTargetRPM);
+        horizontalShooter.setTargetRPM(topTargetRPM.doubleValue(), bottomTargetRPM.doubleValue());
     }
 
 
