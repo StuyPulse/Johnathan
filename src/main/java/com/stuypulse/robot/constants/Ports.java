@@ -20,4 +20,35 @@ public interface Ports {
         int HORIZONTAL_TOP_SHOOTER = 3;
         int HORIZONTAL_BOTTOM_SHOOTER = 4;
     }
+    
+    public interface Swerve {
+        public interface FrontRight {
+            int DRIVE = 10;
+            int TURN = 11;
+            int ENCODER = 2;
+        }
+
+        public interface FrontLeft {
+            int DRIVE = 12;
+            int TURN = 13;
+            int ENCODER = 1;
+        }
+        
+        public interface BackLeft {
+            int DRIVE = 14;
+            int TURN = 15;
+            int ENCODER = 4;
+        }
+        
+        public interface BackRight {
+            int DRIVE = 16;
+            int TURN = 17;
+            int ENCODER = 3;
+        }
+    }
+    
+    public interface Intake {
+        public int TOP_MOTOR = 20;
+        public int BOTTOM_MOTOR = 21;
+    }
 }
