@@ -80,7 +80,7 @@ public class RobotContainer {
     /**************/
 
     public void configureAutons() {
-        autonChooser.addOption("Do Nothing", new DoNothingAuton());
+        autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
         
         SmartDashboard.putData("Autonomous", autonChooser);
     }
