@@ -4,8 +4,8 @@ import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
 import com.stuypulse.stuylib.network.SmartNumber;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.stuypulse.stuylib.control.feedback.PIDController;
-import com.stuypulse.robot.constants.Settings.HorizontalShooter.*;
-
+import com.stuypulse.robot.constants.Settings.Shooter.HorizontalShooter.FeedForward;
+import com.stuypulse.robot.constants.Settings.Shooter.HorizontalShooter.PID;
 
 public abstract class HorizontalShooter extends SubsystemBase {
     protected SmartNumber topTargetRPM;

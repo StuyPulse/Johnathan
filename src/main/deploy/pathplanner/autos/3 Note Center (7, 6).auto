@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": null,
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (7, 6) Pt1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (7, 6) Pt2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (7, 6) Pt3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (7, 6) Pt4"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

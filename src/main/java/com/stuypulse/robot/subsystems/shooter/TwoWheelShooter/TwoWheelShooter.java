@@ -4,7 +4,8 @@ import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
 import com.stuypulse.stuylib.network.SmartNumber;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.stuypulse.robot.constants.Settings.TwoWheelShooter.*;
+import com.stuypulse.robot.constants.Settings.Shooter.TwoWheelShooter.FeedForward;
+import com.stuypulse.robot.constants.Settings.Shooter.TwoWheelShooter.PID;
 
 public abstract class TwoWheelShooter extends SubsystemBase {
    
@@ -13,7 +14,7 @@ public abstract class TwoWheelShooter extends SubsystemBase {
     protected Controller leftController; 
     protected Controller rightController;
     
-    public TwoWheelShooter(){
+    public TwoWheelShooter() {
         leftTargetRPM = new SmartNumber("TwoWheelShooter/Left Target RPM", 0.0);
         rightTargetRPM = new SmartNumber("TwoWheelShooter/Right Target RPM", 0.0);
         leftController = new MotorFeedforward(FeedForward.kS.getAsDouble(), FeedForward.kV.getAsDouble(), FeedForward.kA.getAsDouble()).velocity()

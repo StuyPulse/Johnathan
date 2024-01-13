@@ -1,7 +1,8 @@
 package com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
 
-import com.stuypulse.robot.constants.Settings.FlyWheelShooter.*;
 
+import com.stuypulse.robot.constants.Settings.Shooter.FlyWheelShooter.FeedForward;
+import com.stuypulse.robot.constants.Settings.Shooter.FlyWheelShooter.PID;
 import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
