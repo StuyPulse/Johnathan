@@ -5,6 +5,8 @@
 
 package com.stuypulse.robot;
 
+import com.stuypulse.robot.constants.Settings.RobotType;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -14,12 +16,15 @@ public class Robot extends TimedRobot {
     private RobotContainer robot;
     private Command auto;
 
-    /*************************/
-    /*** ROBOT SCHEDULEING ***/
-    /*************************/
+    public RobotType robotType;
+
+    /************************/
+    /*** ROBOT SCHEDULING ***/
+    /************************/
 
     @Override
     public void robotInit() {
+        robotType = RobotType.fromString(System.getenv("serialnum"));
         robot = new RobotContainer();
     }
 
