@@ -7,7 +7,7 @@ import com.stuypulse.robot.constants.Settings;
 public class HorizontalShooterPodiumShot extends HorizontalShooterSetRPM {
     
     public HorizontalShooterPodiumShot(HorizontalShooter horizontalShooter){
-        super(horizontalShooter, Settings.HORIZONTAL_PODIUM_TOP_RPM, Settings.HORIZONTAL_PODIUM_BOTTOM_RPM);
+        super(horizontalShooter, Settings.HorizontalShooter.HORIZONTAL_PODIUM_TOP_RPM, Settings.HorizontalShooter.HORIZONTAL_PODIUM_BOTTOM_RPM);
     }
 
 }

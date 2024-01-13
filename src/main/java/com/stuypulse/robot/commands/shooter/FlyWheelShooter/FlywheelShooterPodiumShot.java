@@ -5,6 +5,6 @@ import com.stuypulse.robot.subsystems.shooter.FlywheelShooter.FlywheelShooter;
 public class FlywheelShooterPodiumShot extends FlywheelShooterSetRPM{
 
     public FlywheelShooterPodiumShot(FlywheelShooter shooter) {
-        super(shooter,Settings.FLYWHEEL_PODIUM_RPM);
+        super(shooter, Settings.FlyWheelShooter.FLYWHEEL_PODIUM_RPM);
     }
 }

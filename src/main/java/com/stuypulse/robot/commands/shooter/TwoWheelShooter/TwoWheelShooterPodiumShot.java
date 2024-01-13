@@ -8,7 +8,7 @@ public class TwoWheelShooterPodiumShot extends TwoWheelShooterSetRPM {
     
 
     public TwoWheelShooterPodiumShot(TwoWheelShooter twoWheelShooter){
-        super(twoWheelShooter, Settings.TWO_WHEEL_PODIUM_LEFT_RPM, Settings.TWO_WHEEL_PODIUM_RIGHT_RPM);
+        super(twoWheelShooter, Settings.TwoWheelShooter.TWO_WHEEL_PODIUM_LEFT_RPM, Settings.TwoWheelShooter.TWO_WHEEL_PODIUM_RIGHT_RPM);
 
     }
 }
