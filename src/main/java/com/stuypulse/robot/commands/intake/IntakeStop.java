@@ -16,7 +16,7 @@ public class IntakeStop extends Command {
 
     @Override
     public void initialize() {
-        intake.setRPM(0);
+        intake.setSpeed(0);
     }
 
 }

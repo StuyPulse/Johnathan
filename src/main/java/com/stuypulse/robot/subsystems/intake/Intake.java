@@ -3,54 +3,43 @@ package com.stuypulse.robot.subsystems.intake;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.stuypulse.stuylib.network.SmartNumber;
-import com.stuypulse.robot.constants.Settings.Intake.*;
+import com.stuypulse.robot.constants.Ports;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
 
-    private CANSparkMax topMotor;
-    private RelativeEncoder topEncoder;
+    public static final Intake instance;
 
-    private CANSparkMax bottomMotor;
-    private RelativeEncoder bottomEncoder;
-
-
-    public static Intake instance;
+    static {
+        instance = new Intake();
+    }
     
     public static Intake getInstance(){
-        if(instance != null){
-            return instance;
-        }
-        instance = new Intake();
         return instance;
     }
+
+    private final CANSparkMax motor;
+    private final RelativeEncoder encoder;
     
     public Intake() {
-
-        topMotor = new CANSparkMax(Ports.topMotor , MotorType.kBrushless);
-        topEncoder = topMotor.getEncoder();
-        
-        bottomMotor = new CANSparkMax(Ports.bottomMotor, MotorType.kBrushless);
-        bottomEncoder = bottomMotor.getEncoder();
+        motor = new CANSparkMax(Ports.Intake.MOTOR, MotorType.kBrushless);
+        encoder = motor.getEncoder();
     }
   
-    public void setRPM(double velocity) {
-        topMotor.set(velocity);
-        bottomMotor.set(-velocity);
+    public void setSpeed(double speed) {
+        motor.set(speed);
     }
 
     public double getRPM() {
-        return bottomEncoder.getVelocity();
+        return encoder.getVelocity();
     }
 
     @Override
     public void periodic() {
-        
-       SmartDashboard.putNumber("Velocity", getRPM());
-       
+        SmartDashboard.putNumber("Intake/Speed", motor.get());
+        SmartDashboard.putNumber("Intake/RPM", getRPM());
     }
 
 }

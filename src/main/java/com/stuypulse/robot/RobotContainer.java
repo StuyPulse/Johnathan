@@ -52,12 +52,12 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         operator.getRightTriggerButton()
-        .whileTrue(new IntakeAcquire())
-        .onFalse(new IntakeStop());
+            .whileTrue(new IntakeAcquire())
+            .onFalse(new IntakeStop());
 
         operator.getLeftTriggerButton()
-        .whileTrue(new IntakeDeacquire())
-        .onFalse(new IntakeStop());
+            .whileTrue(new IntakeDeacquire())
+            .onFalse(new IntakeStop());
     }
 
     /**************/

@@ -5,7 +5,6 @@
 
 package com.stuypulse.robot.constants;
 
-import com.stuypulse.stuylib.network.SmartBoolean;
 import com.stuypulse.stuylib.network.SmartNumber;
 
 /*-
@@ -15,15 +14,8 @@ import com.stuypulse.stuylib.network.SmartNumber;
  * values that we can edit on Shuffleboard.
  */
 public interface Settings {
-
     public interface Intake {
-
-        public interface Ports {
-            public int topMotor = 0;
-            public int bottomMotor = 1;
-
-        }
-
+        SmartNumber ACQUIRE_SPEED = new SmartNumber("Intake/Acquire Speed", 1);
+        SmartNumber DEACQUIRE_SPEED = new SmartNumber("Intake/Deacquire Speed", 1);
     }
-
 }
