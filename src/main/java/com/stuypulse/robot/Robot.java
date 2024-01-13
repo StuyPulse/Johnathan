@@ -16,7 +16,11 @@ public class Robot extends TimedRobot {
     private RobotContainer robot;
     private Command auto;
 
-    public RobotType robotType;
+    public static RobotType robotType;
+
+    static {
+        robotType = RobotType.fromString(System.getenv("serialnum"));
+    }
 
     /************************/
     /*** ROBOT SCHEDULING ***/
@@ -24,7 +28,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        robotType = RobotType.fromString(System.getenv("serialnum"));
         robot = new RobotContainer();
     }
 
