@@ -11,6 +11,11 @@ import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.Odometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+import com.stuypulse.robot.commands.intake.IntakeAcquire;
+import com.stuypulse.robot.commands.intake.IntakeDeacquire;
+import com.stuypulse.robot.commands.intake.IntakeStop;
+import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.subsystems.intake.*;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
@@ -29,6 +34,7 @@ public class RobotContainer {
     public final Odometry odometry = Odometry.getInstance();
     
     // Subsystem
+    public final Intake intake = Intake.getInstance();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -46,8 +52,8 @@ public class RobotContainer {
     /****************/
 
     private void configureDefaultCommands() {
-        // Swerve
         swerve.setDefaultCommand(new SwerveDriveDrive(driver));
+        intake.setDefaultCommand(new IntakeStop());
     }
 
     /***************/
@@ -59,6 +65,14 @@ public class RobotContainer {
         driver.getDPadDown().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(0)));
         driver.getDPadLeft().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
         driver.getDPadRight().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(90)));
+        
+        operator.getRightTriggerButton()
+            .whileTrue(new IntakeAcquire())
+            .onFalse(new IntakeStop());
+
+        operator.getLeftTriggerButton()
+            .whileTrue(new IntakeDeacquire())
+            .onFalse(new IntakeStop());
     }
 
     /**************/
