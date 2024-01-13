@@ -17,7 +17,10 @@ public class Robot extends TimedRobot {
     public static final RobotType robotType;
 
     static {
-        robotType = RobotType.fromString(System.getenv("serialnum"));
+        if (Robot.isSimulation())
+            robotType = RobotType.SIM;
+        else
+            robotType = RobotType.fromString(System.getenv("serialnum"));
     }
 
     private RobotContainer robot;
