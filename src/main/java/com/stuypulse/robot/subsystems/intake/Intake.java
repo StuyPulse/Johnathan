@@ -20,26 +20,35 @@ public class Intake extends SubsystemBase {
         return instance;
     }
 
-    private final CANSparkMax motor;
-    private final RelativeEncoder encoder;
+    private final CANSparkMax topMotor;
+    private final RelativeEncoder topEncoder;
+
+    private final CANSparkMax bottomMotor;
+    private final RelativeEncoder bottomEncoder;
     
     public Intake() {
-        motor = new CANSparkMax(Ports.Intake.MOTOR, MotorType.kBrushless);
-        encoder = motor.getEncoder();
+        topMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
+        topEncoder = topMotor.getEncoder();
+
+        bottomMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
+        bottomEncoder = topMotor.getEncoder();
+
     }
   
-    public void setSpeed(double speed) {
-        motor.set(speed);
+    public void setSpeed(double topSpeed, double bottomSpeed) {
+        topMotor.set(topSpeed);
+        bottomMotor.set(bottomSpeed);
     }
 
-    public double getRPM() {
-        return encoder.getVelocity();
-    }
+    
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Intake/Speed", motor.get());
-        SmartDashboard.putNumber("Intake/RPM", getRPM());
+        SmartDashboard.putNumber("Intake/Top Motor Speed",topMotor.get());
+        SmartDashboard.putNumber("Intake/Bottom Motor Speed", bottomMotor.get());
+
+        SmartDashboard.putNumber("Intake/Top Motor RPM", topEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake/Bottom Motor RPM", bottomEncoder.getVelocity());
     }
 
 }
