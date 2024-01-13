@@ -12,4 +12,9 @@ public interface Ports {
         int OPERATOR = 1;
         int DEBUGGER = 2;
     }
+
+    public interface Intake {
+        public int TOP_MOTOR = 20;
+        public int BOTTOM_MOTOR = 21;
+    }
 }
