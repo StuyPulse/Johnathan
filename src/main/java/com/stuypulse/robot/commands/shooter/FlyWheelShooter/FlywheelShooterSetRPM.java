@@ -1,7 +1,7 @@
-package com.stuypulse.robot.commands.shooter;
+package com.stuypulse.robot.commands.shooter.FlyWheelShooter;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
+import com.stuypulse.robot.subsystems.shooter.FlywheelShooter.FlywheelShooter;
 
 public class FlywheelShooterSetRPM extends InstantCommand {
     private final FlywheelShooter flywheelShooter;

@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.TwoWheelShooter;
 import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;

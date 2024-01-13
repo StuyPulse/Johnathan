@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.FlywheelShooter;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;

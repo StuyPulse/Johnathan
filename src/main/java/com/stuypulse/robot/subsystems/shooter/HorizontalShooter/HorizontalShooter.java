@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.shooter;
+package com.stuypulse.robot.subsystems.shooter.HorizontalShooter;
 import com.stuypulse.stuylib.control.Controller;
 import com.stuypulse.stuylib.control.feedforward.MotorFeedforward;
 import com.stuypulse.stuylib.network.SmartNumber;

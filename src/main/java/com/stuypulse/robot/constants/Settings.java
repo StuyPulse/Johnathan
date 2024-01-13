@@ -16,43 +16,52 @@ import com.stuypulse.stuylib.network.SmartNumber;
  */
 public interface Settings {
     public interface FlyWheelShooter {
+
+        SmartNumber PODIUM_RPM = new SmartNumber("FlywheelShooter/Podium RPM", 0);
+
         public interface PID {
-            SmartNumber kP = new SmartNumber("Shooter kP", 0);
-            SmartNumber kI = new SmartNumber("Shooter kI", 0);
-            SmartNumber kD = new SmartNumber("Shooter kD", 0);
+            SmartNumber kP = new SmartNumber("FlywheelShooter kP", 0);
+            SmartNumber kI = new SmartNumber("FlywheelShooter kI", 0);
+            SmartNumber kD = new SmartNumber("FlywheelShooter kD", 0);
         }
 
         public interface FeedForward {
-            SmartNumber kS = new SmartNumber("Shooter kS", 0);
-            SmartNumber kV = new SmartNumber("Shooter kV", 0);
-            SmartNumber kA = new SmartNumber("Shooter kA", 0);
+            SmartNumber kS = new SmartNumber("FlywheelShooter kS", 0);
+            SmartNumber kV = new SmartNumber("FlywheelShooter kV", 0);
+            SmartNumber kA = new SmartNumber("FlywheelShooter kA", 0);
         }
     }
 
     public interface TwoWheelShooter {
+
+        SmartNumber PODIUM_RPM = new SmartNumber("TwoWheelShooter/Podium RPM", 0);
+
         public interface PID {
-            SmartNumber kP = new SmartNumber("Shooter kP", 0);
-            SmartNumber kI = new SmartNumber("Shooter kI", 0);
-            SmartNumber kD = new SmartNumber("Shooter kD", 0);
+            SmartNumber kP = new SmartNumber("TwoWheelShooter kP", 0);
+            SmartNumber kI = new SmartNumber("TwoWheelShooter kI", 0);
+            SmartNumber kD = new SmartNumber("TwoWheelShooter kD", 0);
         }
 
         public interface FeedForward {
-            SmartNumber kS = new SmartNumber("Shooter kS", 0);
-            SmartNumber kV = new SmartNumber("Shooter kV", 0);
-            SmartNumber kA = new SmartNumber("Shooter kA", 0);
+            SmartNumber kS = new SmartNumber("TwoWheelShooter kS", 0);
+            SmartNumber kV = new SmartNumber("TwoWheelShooter kV", 0);
+            SmartNumber kA = new SmartNumber("TwoWheelShooter kA", 0);
         }
     }
     public interface HorizontalShooter{
+
+        SmartNumber PODIUM_RPM = new SmartNumber("HorizontalShooter/Podium RPM", 0);
+
         public interface PID {
-            SmartNumber kP = new SmartNumber("Shooter kP", 0);
-            SmartNumber kI = new SmartNumber("Shooter kI", 0);
-            SmartNumber kD = new SmartNumber("Shooter kD", 0);
+            SmartNumber kP = new SmartNumber("HorizontalShooter kP", 0);
+            SmartNumber kI = new SmartNumber("HorizontalShooter kI", 0);
+            SmartNumber kD = new SmartNumber("HorizontalShooter kD", 0);
         }
 
         public interface FeedForward {
-            SmartNumber kS = new SmartNumber("Shooter kS", 0);
-            SmartNumber kV = new SmartNumber("Shooter kV", 0);
-            SmartNumber kA = new SmartNumber("Shooter kA", 0);
+            SmartNumber kS = new SmartNumber("HorizontalShooter kS", 0);
+            SmartNumber kV = new SmartNumber("HorizontalShooter kV", 0);
+            SmartNumber kA = new SmartNumber("HorizontalShooter kA", 0);
     }
     }
 }
