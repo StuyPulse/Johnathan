@@ -28,6 +28,8 @@ public interface Motors {
         CANSparkMaxConfig FLYWHEEL_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
         CANSparkMaxConfig TWO_WHEEL_LEFT_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
         CANSparkMaxConfig TWO_WHEEL_RIGHT_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast); //check inverted later
+        CANSparkMaxConfig HORIZONTAL_TOP_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast);
+        CANSparkMaxConfig HORIZONTAL_BOTTOM_SHOOTER = new CANSparkMaxConfig(false, IdleMode.kCoast);
 
     }
 

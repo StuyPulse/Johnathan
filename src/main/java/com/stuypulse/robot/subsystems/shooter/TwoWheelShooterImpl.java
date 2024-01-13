@@ -47,9 +47,19 @@ public class TwoWheelShooterImpl extends TwoWheelShooter {
     public void stop() {
         setTargetRPM(0,0);
     }
+
+    @Override
+    protected void setLeftMotorVoltageImpl(double voltage) {
+        leftWheel.setVoltage(voltage);
+    }
+
+    @Override
+    protected void setRightMotorVoltageImpl (double voltage) {
+        rightWheel.setVoltage(voltage);
+    }
     
     @Override
-    public void periodic() {
+    public void periodicallyCalled() {
  
         SmartDashboard.putNumber("Left Shooter/RPM", getLeftShooterRPM());
         SmartDashboard.putNumber("Right Shooter/RPM", getRightShooterRPM());
@@ -58,10 +68,6 @@ public class TwoWheelShooterImpl extends TwoWheelShooter {
         SmartDashboard.putNumber("Left Shooter/Voltage", leftWheel.getBusVoltage());
         SmartDashboard.putNumber("Right Shooter/Voltage", rightWheel.getBusVoltage());
         
-        leftController.update(getLeftTargetRPM(), getLeftShooterRPM());
-        rightController.update(getRightTargetRPM(), getRightShooterRPM());
-        leftWheel.setVoltage(leftController.getOutput());
-        rightWheel.setVoltage(rightController.getOutput());
 
     }
 }

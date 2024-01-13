@@ -17,5 +17,7 @@ public interface Ports {
         int FLYWHEEL_MOTOR = 0; 
         int TWO_WHEEL_LEFT_MOTOR = 1;
         int TWO_WHEEL_RIGHT_MOTOR = 2;
+        int HORIZONTAL_TOP_SHOOTER = 3;
+        int HORIZONTAL_BOTTOM_SHOOTER = 4;
     }
 }

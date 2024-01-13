@@ -42,4 +42,17 @@ public interface Settings {
             SmartNumber kA = new SmartNumber("Shooter kA", 0);
         }
     }
+    public interface HorizontalShooter{
+        public interface PID {
+            SmartNumber kP = new SmartNumber("Shooter kP", 0);
+            SmartNumber kI = new SmartNumber("Shooter kI", 0);
+            SmartNumber kD = new SmartNumber("Shooter kD", 0);
+        }
+
+        public interface FeedForward {
+            SmartNumber kS = new SmartNumber("Shooter kS", 0);
+            SmartNumber kV = new SmartNumber("Shooter kV", 0);
+            SmartNumber kA = new SmartNumber("Shooter kA", 0);
+    }
+    }
 }
