@@ -12,4 +12,10 @@ public interface Ports {
         int OPERATOR = 1;
         int DEBUGGER = 2;
     }
+
+    public interface Shooter { //TO DO get ports
+        int FLYWHEEL_MOTOR = 0; 
+        int TWO_WHEEL_LEFT_MOTOR = 1;
+        int TWO_WHEEL_RIGHT_MOTOR = 2;
+    }
 }
