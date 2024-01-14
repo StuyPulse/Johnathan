@@ -7,25 +7,31 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class AbstractOdometry extends SubsystemBase {
+
     private static final AbstractOdometry instance;
 
-    static { 
+    static {
         instance = new Odometry();
     }
-    
+
     public static AbstractOdometry getInstance() {
         return instance;
     }
 
-    public abstract void reset(Pose2d pose);
+    protected AbstractOdometry() {}
+
     public abstract Field2d getField();
     public abstract Pose2d getPose();
 
-    public Rotation2d getRotation() {
+    public final Translation2d getTranslation() {
+        return getPose().getTranslation();
+    }
+
+    public final Rotation2d getRotation() {
         return getPose().getRotation();
     }
 
-    public Translation2d getTranslation() {
-        return getPose().getTranslation();
-    }
+    public abstract void setActive(boolean active);
+    public abstract void reset(Pose2d pose2d);
+    protected abstract void updateTelemetry();
 }
