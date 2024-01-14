@@ -5,11 +5,11 @@ import com.stuypulse.robot.subsystems.intake.*;
 
 public class IntakeStop extends Command {
 
-    private Intake intake;
+    private AbstractIntake intake;
 
     public IntakeStop() {
 
-        intake = Intake.getInstance();
+        intake = AbstractIntake.getInstance();
 
         addRequirements(intake);
     }

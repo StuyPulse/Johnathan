@@ -10,11 +10,11 @@ import com.stuypulse.robot.constants.Settings.Swerve.BackLeft;
 import com.stuypulse.robot.constants.Settings.Swerve.BackRight;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontLeft;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontRight;
-import com.stuypulse.robot.subsystems.odometry.Odometry;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.module.SimModule;
-import com.stuypulse.robot.subsystems.swerve.module.SwerveModule;
-import com.stuypulse.robot.subsystems.swerve.module.JimSwerveModule;
-import com.stuypulse.robot.subsystems.swerve.module.RetepSwerveModule;
+import com.stuypulse.robot.subsystems.swerve.module.AbstractModule;
+import com.stuypulse.robot.subsystems.swerve.module.JimModule;
+import com.stuypulse.robot.subsystems.swerve.module.RetepModule;
 import com.stuypulse.stuylib.math.Vector2D;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -38,14 +38,14 @@ public class SwerveDrive extends SubsystemBase {
     static {
         if (Robot.robotType == RobotType.OFFSEASON_BOT) {
             instance = new SwerveDrive(
-                new RetepSwerveModule(FrontRight.ID, FrontRight.MODULE_OFFSET, FrontRight.ABSOLUTE_OFFSET, Ports.Swerve.FrontRight.TURN, Ports.Swerve.FrontRight.DRIVE, Ports.Swerve.FrontRight.ENCODER),
-                new RetepSwerveModule(FrontLeft.ID, FrontLeft.MODULE_OFFSET, FrontLeft.ABSOLUTE_OFFSET, Ports.Swerve.FrontLeft.TURN, Ports.Swerve.FrontLeft.DRIVE, Ports.Swerve.FrontLeft.ENCODER),
-                new RetepSwerveModule(BackLeft.ID, BackLeft.MODULE_OFFSET, BackLeft.ABSOLUTE_OFFSET, Ports.Swerve.BackLeft.TURN, Ports.Swerve.BackLeft.DRIVE, Ports.Swerve.BackLeft.ENCODER),
-                new RetepSwerveModule(BackRight.ID, BackRight.MODULE_OFFSET, BackRight.ABSOLUTE_OFFSET, Ports.Swerve.BackRight.TURN, Ports.Swerve.BackRight.DRIVE, Ports.Swerve.BackRight.ENCODER)
+                new RetepModule(FrontRight.ID, FrontRight.MODULE_OFFSET, FrontRight.ABSOLUTE_OFFSET, Ports.Swerve.FrontRight.TURN, Ports.Swerve.FrontRight.DRIVE, Ports.Swerve.FrontRight.ENCODER),
+                new RetepModule(FrontLeft.ID, FrontLeft.MODULE_OFFSET, FrontLeft.ABSOLUTE_OFFSET, Ports.Swerve.FrontLeft.TURN, Ports.Swerve.FrontLeft.DRIVE, Ports.Swerve.FrontLeft.ENCODER),
+                new RetepModule(BackLeft.ID, BackLeft.MODULE_OFFSET, BackLeft.ABSOLUTE_OFFSET, Ports.Swerve.BackLeft.TURN, Ports.Swerve.BackLeft.DRIVE, Ports.Swerve.BackLeft.ENCODER),
+                new RetepModule(BackRight.ID, BackRight.MODULE_OFFSET, BackRight.ABSOLUTE_OFFSET, Ports.Swerve.BackRight.TURN, Ports.Swerve.BackRight.DRIVE, Ports.Swerve.BackRight.ENCODER)
             );
         }
         else if (Robot.robotType == RobotType.JIM) {
-            instance = JimSwerveModule.getModules();
+            instance = JimModule.getModules();
         }
         else {
             instance = new SwerveDrive(
@@ -61,12 +61,12 @@ public class SwerveDrive extends SubsystemBase {
         return instance;
     }
     
-    private final SwerveModule[] modules;  
+    private final AbstractModule[] modules;  
     private final SwerveDriveKinematics kinematics;
     private final AHRS gyro;
     private final FieldObject2d[] module2ds;
     
-    public SwerveDrive(SwerveModule... modules) {    
+    public SwerveDrive(AbstractModule... modules) {    
         this.modules = modules;
         kinematics = new SwerveDriveKinematics(getModuleOffsets());
         gyro = new AHRS(SPI.Port.kMXP);
@@ -151,7 +151,7 @@ public class SwerveDrive extends SubsystemBase {
 
     public void drive(Vector2D translation, double rotation) {
         ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-            translation.y, -translation.x, -rotation, Odometry.getInstance().getRotation());
+            translation.y, -translation.x, -rotation, AbstractOdometry.getInstance().getRotation());
 
         // straight spinning drift fix
         Pose2d robotVelocity = new Pose2d(
@@ -227,7 +227,7 @@ public class SwerveDrive extends SubsystemBase {
     
     @Override
     public void periodic() {
-        Odometry odometry = Odometry.getInstance();
+        AbstractOdometry odometry = AbstractOdometry.getInstance();
         Pose2d pose = odometry.getPose();
         Rotation2d angle = odometry.getRotation();
 

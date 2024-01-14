@@ -9,7 +9,7 @@ import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.constants.Ports;
-import com.stuypulse.robot.subsystems.odometry.Odometry;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
@@ -32,8 +32,8 @@ public class RobotContainer {
 
     // Subsystems
     public final SwerveDrive swerve = SwerveDrive.getInstance();
-    public final Odometry odometry = Odometry.getInstance();
-    public final Intake intake = Intake.getInstance();
+    public final AbstractOdometry odometry = AbstractOdometry.getInstance();
+    public final AbstractIntake intake = AbstractIntake.getInstance();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();

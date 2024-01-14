@@ -7,11 +7,11 @@ import com.stuypulse.robot.subsystems.intake.*;
 
 public class IntakeAcquire extends Command {
 
-    private Intake intake;
+    private AbstractIntake intake;
 
     public IntakeAcquire() {
 
-        intake = Intake.getInstance();
+        intake = AbstractIntake.getInstance();
 
         addRequirements(intake);
     }

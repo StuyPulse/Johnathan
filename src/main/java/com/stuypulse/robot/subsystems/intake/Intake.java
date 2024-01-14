@@ -1,31 +1,40 @@
 package com.stuypulse.robot.subsystems.intake;
 
-import com.stuypulse.robot.Robot;
-import com.stuypulse.robot.constants.Settings.RobotType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.stuypulse.robot.constants.Ports;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public abstract class Intake extends SubsystemBase {
+public class Intake extends AbstractIntake {
+    private final CANSparkMax topMotor;
+    private final RelativeEncoder topEncoder;
 
-    public static final Intake instance;
+    private final CANSparkMax bottomMotor;
+    private final RelativeEncoder bottomEncoder;
 
-    static {
-        if (Robot.robotType == RobotType.OFFSEASON_BOT)
-            instance = new IntakeImpl();
-        else
-            instance = new EmptyIntake();
+    protected Intake() {
+        topMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
+        topEncoder = topMotor.getEncoder();
+
+        bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
+        bottomEncoder = topMotor.getEncoder();
     }
-    
-    public static Intake getInstance() {
-        return instance;
-    }
-
-    public abstract void setSpeed(double topSpeed, double bottomSpeed);
-
-    public void childPeriodic() {};
 
     @Override
-    public void periodic() {
-        childPeriodic();
+    public void setSpeed(double topSpeed, double bottomSpeed) {
+        topMotor.set(topSpeed);
+        bottomMotor.set(bottomSpeed);
+    }
+
+
+    @Override
+    public void childPeriodic() {
+        SmartDashboard.putNumber("Intake/Top Motor Speed",topMotor.get());
+        SmartDashboard.putNumber("Intake/Bottom Motor Speed", bottomMotor.get());
+
+        SmartDashboard.putNumber("Intake/Top Motor RPM", topEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake/Bottom Motor RPM", bottomEncoder.getVelocity());
     }
 }

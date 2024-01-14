@@ -1,31 +1,79 @@
 package com.stuypulse.robot.subsystems.odometry;
 
+import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public abstract class Odometry extends SubsystemBase {
-    private static final Odometry instance;
+public class Odometry extends AbstractOdometry {
+    public final SwerveDriveOdometry odometry;
 
-    static { 
-        instance = new OdometryImpl();
+    public final Field2d field;
+    public final FieldObject2d odometryPose2d;
+
+    protected Odometry() {
+        SwerveDrive swerve = SwerveDrive.getInstance();
+        Pose2d startingPose = new Pose2d();
+
+        odometry = new SwerveDriveOdometry(
+            swerve.getKinematics(),
+            swerve.getGyroAngle(), 
+            swerve.getModulePositions(),
+            startingPose
+        );
+        
+        // Use if we need CV
+        // poseEstimator = new SwerveDrivePoseEstimator(
+        //     swerve.getKinematics(),
+        //     swerve.getGyroAngle(), 
+        //     swerve.getModulePositions(),
+        //     startingPose,
+        //     VecBuilder.fill(0.1, 0.1, 0.1),
+        //     AUTO_STDDEVS
+        //  );
+        field = new Field2d();
+
+        odometryPose2d = field.getObject("Odometry Pose2d");
+        // poseEstimatorPose2d = field.getObject("Pose Estimator Pose2d");
+        odometryPose2d.setPose(startingPose);
+
+        swerve.initModule2ds(field);
+        SmartDashboard.putData("Field", field);
+    }
+
+    @Override
+    public Field2d getField() {
+        return field;
+    }
+
+
+    @Override
+    public Pose2d getPose() {
+        return odometry.getPoseMeters();
+    }
+
+    @Override
+    public void reset(Pose2d pose) { 
+        SwerveDrive swerve = SwerveDrive.getInstance();
+
+        odometry.resetPosition(
+            swerve.getGyroAngle(),
+            swerve.getModulePositions(),
+            pose
+        );
     }
     
-    public static Odometry getInstance() {
-        return instance;
-    }
+    @Override
+    public void periodic() {
+        SwerveDrive swerve = SwerveDrive.getInstance();
+        odometry.update(swerve.getGyroAngle(), swerve.getModulePositions());
+        odometryPose2d.setPose(getPose());
 
-    public abstract void reset(Pose2d pose);
-    public abstract Field2d getField();
-    public abstract Pose2d getPose();
-
-    public Rotation2d getRotation() {
-        return getPose().getRotation();
-    }
-
-    public Translation2d getTranslation() {
-        return getPose().getTranslation();
+        SmartDashboard.putNumber("Odometry/Odometry Pose X", odometry.getPoseMeters().getX());
+        SmartDashboard.putNumber("Odometry/Odometry Pose Y", odometry.getPoseMeters().getY());
+        SmartDashboard.putNumber("Odometry/Odometry Rotation", odometry.getPoseMeters().getRotation().getDegrees()); 
     }
 }

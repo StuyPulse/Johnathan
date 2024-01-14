@@ -26,7 +26,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RetepSwerveModule extends SwerveModule {
+public class RetepModule extends AbstractModule {
 
     // data
     private final String id;
@@ -46,7 +46,7 @@ public class RetepSwerveModule extends SwerveModule {
     private final Controller driveController; 
     private final AngleController turnController;
    
-    public RetepSwerveModule(String id, Translation2d translationOffset, Rotation2d angleOffset, int turnID, int driveID, int encoderID) {
+    public RetepModule(String id, Translation2d translationOffset, Rotation2d angleOffset, int turnID, int driveID, int encoderID) {
         this.id = id;
         this.translationOffset = translationOffset; 
         this.angleOffset = angleOffset;
