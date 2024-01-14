@@ -6,7 +6,7 @@
 package com.stuypulse.robot.constants;
 
 
-import com.stuypulse.robot.util.CustomCamera;
+import com.stuypulse.robot.util.OV2311Camera;
 
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -31,8 +31,8 @@ public interface Cameras {
             POSITION = position;
         }
 
-        public CustomCamera getCamera() {
-            return new CustomCamera(NAME, POSITION);
+        public OV2311Camera getCamera() {
+            return new OV2311Camera(NAME, POSITION);
         }
     }
 }

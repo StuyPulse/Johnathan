@@ -11,26 +11,26 @@ import edu.wpi.first.math.geometry.Pose3d;
 
 public class VisionData {
 
-    public final long[] ids;
+    public final long[] tids;
     public final Pose3d cameraLocation;
     public Pose3d robotPose;
     public final double timestamp;
 
-    public double calculateDistanceToTag(Fiducial tag) {
-        return robotPose.getTranslation().getDistance(tag.getPose().getTranslation());
+    public double calculateDistanceToTag(Fiducial fiducial) {
+        return robotPose.getTranslation().getDistance(fiducial.getPose().getTranslation());
     }
 
-    private int getPrimaryID() {
-        if (ids.length == 0) return -1;
-        return (int) ids[0];
+    private int getPrimaryTID() {
+        if (tids.length == 0) return -1;
+        return (int) tids[0];
     }
 
-    public Fiducial getPrimaryTag() {
-        return Field.getFiducial(getPrimaryID());
+    public Fiducial getPrimaryFiducial() {
+        return Field.getFiducial(getPrimaryTID());
     }
 
-    public VisionData(long[] ids, Pose3d cameraLocation, Pose3d robotPose, double timestamp) {
-        this.ids = ids;
+    public VisionData(long[] tids, Pose3d cameraLocation, Pose3d robotPose, double timestamp) {
+        this.tids = tids;
         this.cameraLocation = cameraLocation;
         this.robotPose = robotPose;
         this.timestamp = timestamp;

@@ -24,12 +24,12 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.PubSubOption;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 
-public class CustomCamera {
+public class OV2311Camera {
 
     private final Field2d field;
 
-    private final String cameraName;
-    private final Pose3d cameraPose;
+    private final String name;
+    private final Pose3d offset;
 
     // Default Values
     private final int camera_id = 0;
@@ -51,13 +51,13 @@ public class CustomCamera {
     private double rawLatency;
     private long[] rawIdData;
 
-    public CustomCamera(String cameraName, Pose3d cameraPose) {
+    public OV2311Camera(String name, Pose3d offset) {
         this.field = AbstractOdometry.getInstance().getField();
 
-        this.cameraName = cameraName;
-        this.cameraPose = cameraPose;
+        this.name = name;
+        this.offset = offset;
 
-        NetworkTable table = NetworkTableInstance.getDefault().getTable(cameraName);
+        NetworkTable table = NetworkTableInstance.getDefault().getTable(this.name);
 
         NetworkTable configTable = table.getSubTable("config");
         configTable.getIntegerTopic("camera_id").publish().set(camera_id);
@@ -72,12 +72,12 @@ public class CustomCamera {
         layoutSub.set(Field.getFiducialLayoutAsDoubleArray(Field.FIDUCIALS));
         configTable.getDoubleArrayTopic("camera_offset").publish()
             .set(new double[] {
-                cameraPose.getX(),
-                cameraPose.getY(),
-                cameraPose.getZ(),
-                cameraPose.getRotation().getX(),
-                cameraPose.getRotation().getY(),
-                cameraPose.getRotation().getZ(),
+                offset.getX(),
+                offset.getY(),
+                offset.getZ(),
+                offset.getRotation().getX(),
+                offset.getRotation().getY(),
+                offset.getRotation().getZ(),
             });
         configTable.getDoubleArrayTopic("fiducial_poses").publish().set(Field.getFiducialPosesAsDoubleArray(Field.FIDUCIALS));
 
@@ -92,8 +92,8 @@ public class CustomCamera {
         tidSub = outputTable.getIntegerArrayTopic("tids").subscribe(new long[] {});
     }
 
-    public String getCameraName() {
-        return cameraName;
+    public String getName() {
+        return name;
     }
 
     private boolean hasData() {
@@ -109,22 +109,21 @@ public class CustomCamera {
 
     private Pose3d getRobotPose() {
         return poseFromArray(rawPoseData).transformBy(
-            new Transform3d(cameraPose.getTranslation(), cameraPose.getRotation()).inverse());
-
+            new Transform3d(offset.getTranslation(), offset.getRotation()).inverse());
     }
 
     public Optional<VisionData> getVisionData() {
         updateData();
 
         if (!hasData()) return Optional.empty();
-        field.getObject(cameraName).setPose(getRobotPose().toPose2d());
+        field.getObject(name).setPose(getRobotPose().toPose2d());
 
         double fpgaTime = latencySub.getLastChange() / 1_000_000.0;
         double timestamp = fpgaTime - Units.millisecondsToSeconds(rawLatency);
 
         LogPose3d.logPose3d("Vision/Robot Pose", getRobotPose());
 
-        return Optional.of(new VisionData(rawIdData, cameraPose, getRobotPose(), timestamp));
+        return Optional.of(new VisionData(rawIdData, offset, getRobotPose(), timestamp));
     }
 
     public void setLayout(Fiducial[] layout) {

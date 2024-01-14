@@ -13,7 +13,7 @@ import edu.wpi.first.math.geometry.Translation2d;
  *
  * Y = XA + B
  * Where Y is the dependent variable, X is the independent variable,
- * A is the slope of the line, and A is the y-intercept of the regression line
+ * A is the slope of the line, and B is the y-intercept of the regression line
  *
  * @author Ivan Chen <ivanchen07@gmail.com>
  */

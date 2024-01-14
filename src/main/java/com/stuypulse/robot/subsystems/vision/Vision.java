@@ -8,7 +8,7 @@ package com.stuypulse.robot.subsystems.vision;
 import com.stuypulse.robot.constants.Cameras;
 import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
-import com.stuypulse.robot.util.CustomCamera;
+import com.stuypulse.robot.util.OV2311Camera;
 import com.stuypulse.robot.util.Fiducial;
 import com.stuypulse.robot.util.VisionData;
 
@@ -20,12 +20,12 @@ import java.util.List;
 
 public class Vision extends AbstractVision {
 
-    private final CustomCamera[] cameras;
+    private final OV2311Camera[] cameras;
     private List<VisionData> outputs;
 
     protected Vision() {
 
-        cameras = new CustomCamera[Cameras.ROBOT_CAMERAS.length];
+        cameras = new OV2311Camera[Cameras.ROBOT_CAMERAS.length];
 
         for (int i = 0; i < Cameras.ROBOT_CAMERAS.length; i++) {
             cameras[i] = Cameras.ROBOT_CAMERAS[i].getCamera();
@@ -41,7 +41,7 @@ public class Vision extends AbstractVision {
 
     @Override
     public void setCameraLayouts(int[] tids) {
-        for (CustomCamera camera : cameras) {
+        for (OV2311Camera camera : cameras) {
             camera.setLayout(Field.getFiducialLayout(tids));
         }
     }
@@ -51,15 +51,14 @@ public class Vision extends AbstractVision {
 
         outputs = new ArrayList<>();
 
-        for (CustomCamera camera: cameras) {
+        for (OV2311Camera camera: cameras) {
             camera.getVisionData().ifPresent(data -> {
                 outputs.add(data);
 
-                Fiducial tag = data.getPrimaryTag();
+                Fiducial fiducial = data.getPrimaryFiducial();
+                AbstractOdometry.getInstance().getField().getObject("Fiducial").setPose(fiducial.getPose().toPose2d());
 
-                AbstractOdometry.getInstance().getField().getObject("Fiducial").setPose(tag.getPose().toPose2d());
-
-                String prefix = "Vision/" + camera.getCameraName();
+                String prefix = "Vision/" + camera.getName();
                 updateTelemetry(prefix, data);
             });
         }
@@ -71,7 +70,7 @@ public class Vision extends AbstractVision {
         SmartDashboard.putNumber(prefix + "/Pose Y", data.robotPose.getY());
         SmartDashboard.putNumber(prefix + "/Pose Z", data.robotPose.getZ());
 
-        SmartDashboard.putNumber(prefix + "/Distance to Tag", data.calculateDistanceToTag(data.getPrimaryTag()));
+        SmartDashboard.putNumber(prefix + "/Distance to Tag", data.calculateDistanceToTag(data.getPrimaryFiducial()));
 
         SmartDashboard.putNumber(prefix + "/Pose Rotation", Units.radiansToDegrees(data.robotPose.getRotation().getAngle()));
         SmartDashboard.putNumber(prefix + "/Timestamp", data.timestamp);

@@ -83,7 +83,7 @@ public class Odometry extends AbstractOdometry {
         estimator.update(swerve.getGyroAngle(), swerve.getModulePositions());
 
         if (VISION_ACTIVE.getAsBoolean()) {
-            for (VisionData result : AbstractVision.getInstance().getOutput()) {
+            for (VisionData dataEntry : AbstractVision.getInstance().getOutput()) {
 
                 // TODO: DYNAMIC STDDEVS
                 // Fiducial primaryTag = result.getPrimaryTag();
@@ -92,8 +92,8 @@ public class Odometry extends AbstractOdometry {
                 // SmartDashboard.putNumber("Odometry/Primary Tag/Distance", distance);
 
                 estimator.addVisionMeasurement(
-                    result.robotPose.toPose2d(),
-                    result.timestamp);
+                    dataEntry.robotPose.toPose2d(),
+                    dataEntry.timestamp);
             }
         }
 
