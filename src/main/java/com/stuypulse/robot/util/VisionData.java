@@ -26,7 +26,7 @@ public class VisionData {
     }
 
     public Fiducial getPrimaryTag() {
-        return Field.getTag(getPrimaryID());
+        return Field.getFiducial(getPrimaryID());
     }
 
     public VisionData(long[] ids, Pose3d cameraLocation, Pose3d robotPose, double timestamp) {

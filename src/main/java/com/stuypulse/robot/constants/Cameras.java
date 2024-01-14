@@ -12,17 +12,6 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.util.Units;
 
-
-
-/*-
- * File containing all of the configurations that different motors require.
- *
- * Such configurations include:
- *  - If it is Inverted
- *  - The Idle Mode of the Motor
- *  - The Current Limit
- *  - The Open Loop Ramp Rate
- */
 public interface Cameras {
 
     public static final CameraConfig DEFAULT_CAMERA = new CameraConfig("default",

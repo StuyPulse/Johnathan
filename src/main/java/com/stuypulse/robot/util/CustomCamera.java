@@ -69,7 +69,7 @@ public class CustomCamera {
         configTable.getDoubleTopic("camera_brightness").publish().set(camera_brightness);
         configTable.getDoubleTopic("fiducial_size").publish().set(Field.FIDUCIAL_SIZE);
         layoutSub = configTable.getDoubleArrayTopic("fiducial_layout").publish();
-        layoutSub.set(Field.getTagLayout(Field.FIDUCIALS));
+        layoutSub.set(Field.getFiducialLayoutAsDoubleArray(Field.FIDUCIALS));
         configTable.getDoubleArrayTopic("camera_offset").publish()
             .set(new double[] {
                 cameraPose.getX(),
@@ -79,7 +79,7 @@ public class CustomCamera {
                 cameraPose.getRotation().getY(),
                 cameraPose.getRotation().getZ(),
             });
-        configTable.getDoubleArrayTopic("fiducial_poses").publish().set(Field.getTagPoses(Field.FIDUCIALS));
+        configTable.getDoubleArrayTopic("fiducial_poses").publish().set(Field.getFiducialPosesAsDoubleArray(Field.FIDUCIALS));
 
         NetworkTable outputTable = table.getSubTable("output");
         latencySub = outputTable.getDoubleTopic("latency").subscribe(0);
@@ -128,7 +128,7 @@ public class CustomCamera {
     }
 
     public void setLayout(Fiducial[] layout) {
-        layoutSub.set(Field.getTagLayout(layout));
+        layoutSub.set(Field.getFiducialLayoutAsDoubleArray(layout));
     }
 
     private void updateData() {

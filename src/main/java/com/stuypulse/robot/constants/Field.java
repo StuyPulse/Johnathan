@@ -24,8 +24,28 @@ public interface Field {
     public static final double FIDUCIAL_SIZE = 0.15716;
 
     Fiducial FIDUCIALS[] = {
+
+        // Simplified Lab Testing Layout
         new Fiducial(1,new Pose3d(new Translation3d(WIDTH / 2, HEIGHT / 2, Units.inchesToMeters(30)), new Rotation3d(Units.degreesToRadians(0),Units.degreesToRadians(0),Units.degreesToRadians(0)))),
         new Fiducial(3,new Pose3d(new Translation3d(WIDTH / 2, HEIGHT / 2 - Units.inchesToMeters(44.25), Units.inchesToMeters(30)), new Rotation3d(Units.degreesToRadians(0),Units.degreesToRadians(0),Units.degreesToRadians(0)))),
+        
+        // 2024 Field Fiducial Layout
+        // new Fiducial(1,  new Pose3d(new Translation3d(Units.inchesToMeters(593.68), Units.inchesToMeters(9.68), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(120)))),
+        // new Fiducial(2,  new Pose3d(new Translation3d(Units.inchesToMeters(637.21), Units.inchesToMeters(34.79), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(120)))),
+        // new Fiducial(3,  new Pose3d(new Translation3d(Units.inchesToMeters(652.73), Units.inchesToMeters(196.17), Units.inchesToMeters(57.13)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(180)))),
+        // new Fiducial(4,  new Pose3d(new Translation3d(Units.inchesToMeters(652.73), Units.inchesToMeters(218.42), Units.inchesToMeters(57.13)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(180)))),
+        // new Fiducial(5,  new Pose3d(new Translation3d(Units.inchesToMeters(578.77), Units.inchesToMeters(323.0), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(270)))),
+        // new Fiducial(6,  new Pose3d(new Translation3d(Units.inchesToMeters(72.5), Units.inchesToMeters(323.0), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(270)))),
+        // new Fiducial(7,  new Pose3d(new Translation3d(Units.inchesToMeters(-1.5), Units.inchesToMeters(218.42), Units.inchesToMeters(57.13)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(0)))),
+        // new Fiducial(8,  new Pose3d(new Translation3d(Units.inchesToMeters(-1.5), Units.inchesToMeters(196.17), Units.inchesToMeters(57.13)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(0)))),
+        // new Fiducial(9,  new Pose3d(new Translation3d(Units.inchesToMeters(14.02), Units.inchesToMeters(34.79), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(60)))),
+        // new Fiducial(10, new Pose3d(new Translation3d(Units.inchesToMeters(57.54), Units.inchesToMeters(9.68), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(60)))),
+        // new Fiducial(11, new Pose3d(new Translation3d(Units.inchesToMeters(468.69), Units.inchesToMeters(146.19), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(300)))),
+        // new Fiducial(12, new Pose3d(new Translation3d(Units.inchesToMeters(468.69), Units.inchesToMeters(177.10), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(60)))),
+        // new Fiducial(13, new Pose3d(new Translation3d(Units.inchesToMeters(441.74), Units.inchesToMeters(161.62), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(180)))),
+        // new Fiducial(14, new Pose3d(new Translation3d(Units.inchesToMeters(209.48), Units.inchesToMeters(161.62), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(0)))),
+        // new Fiducial(15, new Pose3d(new Translation3d(Units.inchesToMeters(182.73), Units.inchesToMeters(177.10), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(120)))),
+        // new Fiducial(16, new Pose3d(new Translation3d(Units.inchesToMeters(182.73), Units.inchesToMeters(146.19), Units.inchesToMeters(52.0)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(240)))),
     };
 
     public static Fiducial[] getFiducialLayout(int[] tids) {
@@ -35,19 +55,7 @@ public interface Field {
         return fiducials.toArray(fiducials_array);
     }
 
-    public static boolean isValidTag(int id) {
-        for (Fiducial fiducial : FIDUCIALS)
-            if (fiducial.getID() == id) return true;
-        return false;
-    }
-
-    public static Fiducial getTag(int id) {
-        for (Fiducial fiducial : FIDUCIALS)
-            if (fiducial.getID() == id) return fiducial;
-        return null;
-    }
-
-    public static double[] getTagLayout(Fiducial[] fiducials) {
+    public static double[] getFiducialLayoutAsDoubleArray(Fiducial[] fiducials) {
         double[] layout = new double[fiducials.length * 7];
 
         for (int i = 0; i < fiducials.length; i++) {
@@ -64,14 +72,20 @@ public interface Field {
         return layout;
     }
 
-    public static double[] getTagPoses(Fiducial[] fiducials) {
+    public static Fiducial getFiducial(int id) {
+        for (Fiducial fiducial : FIDUCIALS)
+            if (fiducial.getID() == id) return fiducial;
+        return null;
+    }
+
+    public static double[] getFiducialPosesAsDoubleArray(Fiducial[] fiducials) {
         double[] layout = new double[fiducials.length * 3];
 
         for (int i = 0; i < fiducials.length; i++) {
-            Fiducial tag = fiducials[i];
-            layout[i * 3 + 0] = tag.getPose().getTranslation().getX();
-            layout[i * 3 + 1] = tag.getPose().getTranslation().getY();
-            layout[i * 3 + 2] = Units.radiansToDegrees(tag.getPose().getRotation().getZ());
+            Fiducial fiducial = fiducials[i];
+            layout[i * 3 + 0] = fiducial.getPose().getTranslation().getX();
+            layout[i * 3 + 1] = fiducial.getPose().getTranslation().getY();
+            layout[i * 3 + 2] = Units.radiansToDegrees(fiducial.getPose().getRotation().getZ());
         }
 
         return layout;
@@ -80,5 +94,11 @@ public interface Field {
     public static Fiducial getFiducialFromID(int tid) {
         for (Fiducial fiducial : FIDUCIALS) if (fiducial.getID() == tid) return fiducial;
         return null;
+    }
+
+    public static boolean isValidFiducialID(int id) {
+        for (Fiducial fiducial : FIDUCIALS)
+            if (fiducial.getID() == id) return true;
+        return false;
     }
 }
