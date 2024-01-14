@@ -22,11 +22,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveFollowTrajectory extends FollowPathHolonomic {
 
-	public static HashMap<String, PathPlannerTrajectory> getSeparatedPaths(List<PathPlannerTrajectory> paths, String... names) {
+	public static HashMap<String, PathPlannerPath> getSeparatedPaths(List<PathPlannerPath> paths, String... names) {
 		if (paths.size() != names.length)
 			throw new IllegalArgumentException("Invalid number of path names given to FollowTrajectory.getSeparatedPaths");
 
-		HashMap<String, PathPlannerTrajectory> map = new HashMap<String, PathPlannerTrajectory>();
+		HashMap<String, PathPlannerPath> map = new HashMap<String, PathPlannerPath>();
 
 		for (int i = 0; i < names.length; i++) {
 			map.put(names[i], paths.get(i));

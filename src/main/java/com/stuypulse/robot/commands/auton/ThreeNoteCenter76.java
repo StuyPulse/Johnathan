@@ -13,15 +13,15 @@ import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class ThreeNote extends SequentialCommandGroup {
+public class ThreeNoteCenter76 extends SequentialCommandGroup {
     public static final PathConstraints CONSTRAINTS = new PathConstraints(0, 0, 0, 0);
-    List<PathPlannerPath> path = PathPlannerAuto.getPathGroupFromAutoFile("3 Note");
+    List<PathPlannerPath> path = PathPlannerAuto.getPathGroupFromAutoFile("3 Note Center (7, 6)");
 
     HashMap<String, PathPlannerPath> paths = SwerveDriveFollowTrajectory.getSeparatedPaths(
         path, "Intake second note", "Shoot second note", "Intake third note", "Shoot third note"
     );
 
-    public ThreeNote(TwoWheelShooter shooter) {
+    public ThreeNoteCenter76(TwoWheelShooter shooter) {
         // Shoot first note
         addCommands(
             new TwoWheelShooterPodiumShot(shooter)
