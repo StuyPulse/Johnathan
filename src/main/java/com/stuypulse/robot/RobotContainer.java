@@ -30,10 +30,9 @@ public class RobotContainer {
     public final Gamepad driver = new AutoGamepad(Ports.Gamepad.DRIVER);
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
 
+    // Subsystems
     public final SwerveDrive swerve = SwerveDrive.getInstance();
     public final Odometry odometry = Odometry.getInstance();
-    
-    // Subsystem
     public final Intake intake = Intake.getInstance();
 
     // Autons

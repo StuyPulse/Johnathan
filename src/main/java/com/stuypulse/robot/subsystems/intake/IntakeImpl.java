@@ -14,11 +14,11 @@ public class IntakeImpl extends Intake {
     private final CANSparkMax bottomMotor;
     private final RelativeEncoder bottomEncoder;
 
-    public IntakeImpl() {
+    protected IntakeImpl() {
         topMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
         topEncoder = topMotor.getEncoder();
 
-        bottomMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
+        bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
         bottomEncoder = topMotor.getEncoder();
     }
 
