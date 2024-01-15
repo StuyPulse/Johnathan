@@ -11,6 +11,7 @@ import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+import com.stuypulse.robot.subsystems.vision.AbstractVision;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
@@ -33,6 +34,7 @@ public class RobotContainer {
     // Subsystems
     public final SwerveDrive swerve = SwerveDrive.getInstance();
     public final AbstractOdometry odometry = AbstractOdometry.getInstance();
+    public final AbstractVision vision = AbstractVision.getInstance();
     public final AbstractIntake intake = AbstractIntake.getInstance();
 
     // Autons
