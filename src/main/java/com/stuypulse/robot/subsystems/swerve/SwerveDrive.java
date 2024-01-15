@@ -44,7 +44,7 @@ public class SwerveDrive extends SubsystemBase {
                 new RetepModule(BackRight.ID, BackRight.MODULE_OFFSET, BackRight.ABSOLUTE_OFFSET, Ports.Swerve.BackRight.TURN, Ports.Swerve.BackRight.DRIVE, Ports.Swerve.BackRight.ENCODER)
             );
         }
-        else if (Robot.robotType == RobotType.JON) {
+        else if (Robot.robotType == RobotType.JIM) {
             instance = JimModule.getModules();
         }
         else {
