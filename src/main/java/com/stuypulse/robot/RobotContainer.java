@@ -5,7 +5,10 @@
 
 package com.stuypulse.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
+import com.stuypulse.robot.commands.intake.IntakeAcquire;
+import com.stuypulse.robot.commands.shooter.HorizontalShooter.HorizontalShooterPodiumShot;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
@@ -38,6 +41,10 @@ public class RobotContainer {
 
     // Robot container
     public RobotContainer() {
+        // Named commands
+        NamedCommands.registerCommand("Run intake", new IntakeAcquire());
+        NamedCommands.registerCommand("Shoot note", new HorizontalShooterPodiumShot(shooter));
+
         configureDefaultCommands();
         configureButtonBindings();
         configureAutons();
