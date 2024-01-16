@@ -1,20 +1,26 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 2,
-      "y": 2
-    },
-    "rotation": 0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "3 Note Center (8, 7) Pt1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Run intake"
           }
         },
         {
@@ -24,15 +30,33 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "3 Note Center (8, 7) Pt3"
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Run intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "3 Note Center (8, 7) Pt4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
           }
         }
       ]
