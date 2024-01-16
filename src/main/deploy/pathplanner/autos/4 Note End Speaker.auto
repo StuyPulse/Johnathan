@@ -64,12 +64,6 @@
           "data": {
             "name": "Shoot note"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End 4"
-          }
         }
       ]
     }
