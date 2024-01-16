@@ -6,15 +6,39 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "2 Note"
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Run intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "3 Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Run intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
           }
         }
       ]

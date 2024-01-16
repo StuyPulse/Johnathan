@@ -37,7 +37,14 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot note"
+              }
+            }
+          ]
         }
       }
     },
@@ -47,7 +54,14 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Run intake"
+              }
+            }
+          ]
         }
       }
     },
@@ -57,7 +71,14 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot note"
+              }
+            }
+          ]
         }
       }
     }
