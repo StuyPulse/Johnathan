@@ -77,28 +77,30 @@ public class SwerveDrive extends SubsystemBase {
         kinematics = new SwerveDriveKinematics(getModuleOffsets());
         gyro = new AHRS(SPI.Port.kMXP);
         module2ds = new FieldObject2d[modules.length];
+    }
 
+    public void configureAutoBuilder() {
         AbstractOdometry odometry = AbstractOdometry.getInstance();
 
         AutoBuilder.configureHolonomic(
-                odometry::getPose, 
-                odometry::reset, 
-                this::getChassisSpeeds, 
-                this::setChassisSpeeds, 
-                new HolonomicPathFollowerConfig(
-                    Swerve.Motion.XY, 
-                    Swerve.Motion.THETA, 
-                    Swerve.MAX_MODULE_SPEED.get(), 
-                    Swerve.WIDTH, 
-                    new ReplanningConfig(true, true)), 
-                () -> {
-                    var alliance = DriverStation.getAlliance();
-                    if (alliance.isPresent()) {
-                        return alliance.get() == DriverStation.Alliance.Red;
-                    }
-                    return false;
-                }, 
-                instance
+            odometry::getPose,
+            odometry::reset,
+            this::getChassisSpeeds, 
+            this::setChassisSpeeds, 
+            new HolonomicPathFollowerConfig(
+                Swerve.Motion.XY, 
+                Swerve.Motion.THETA, 
+                Swerve.MAX_MODULE_SPEED.get(), 
+                Swerve.WIDTH, 
+                new ReplanningConfig(true, true)), 
+            () -> {
+                var alliance = DriverStation.getAlliance();
+                if (alliance.isPresent()) {
+                    return alliance.get() == DriverStation.Alliance.Red;
+                }
+                return false;
+            }, 
+            instance
         );
     }
 
