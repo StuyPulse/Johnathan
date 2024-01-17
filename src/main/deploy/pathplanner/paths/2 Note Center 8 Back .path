@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.281967377058862,
-        "y": 0.749493538930016
+        "x": 7.885445770891543,
+        "y": 0.7992223676755058
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.556589177984769,
-        "y": 0.7258192457467483
+        "x": 8.160067571817448,
+        "y": 0.7755480744922381
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 2.9
+        "x": 2.59,
+        "y": 3.15
       },
       "prevControl": {
-        "x": 3.8935895489479995,
-        "y": 1.7289163454218497
+        "x": 4.027471131865342,
+        "y": 2.042457161837401
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot note",
+      "name": "Shoot second note",
       "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
@@ -50,7 +50,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -42.72433603971423,
     "rotateFast": false
   },
   "reversed": false,
