@@ -8,7 +8,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         },
         {
@@ -20,13 +20,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Run intake"
+            "name": "IntakeAcquire"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         },
         {
@@ -38,13 +38,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Run intake"
+            "name": "IntakeAcquire"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         },
         {
@@ -56,13 +56,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Run intake"
+            "name": "IntakeAcquire"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         },
         {

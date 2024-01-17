@@ -6,6 +6,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot note"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Initial Score"
