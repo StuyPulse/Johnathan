@@ -3,37 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3931892586007395,
-        "y": 4.300319734898729
+        "x": 2.3214907013891413,
+        "y": 4.394966750312965
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.833108731032277,
-        "y": 4.274843836724711
+        "x": 2.462828093438925,
+        "y": 4.3533347157840145
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Initial Score"
     },
     {
       "anchor": {
-        "x": 2.260023024675679,
-        "y": 4.11628754738991
+        "x": 2.674834181513601,
+        "y": 4.247812411175418
       },
       "prevControl": {
-        "x": 1.843378826811743,
-        "y": 4.100841889320345
+        "x": 2.5557069510716404,
+        "y": 4.292569251991182
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Note 3"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot first note",
-      "waypointRelativePos": 0,
+      "name": "Intake Second Note",
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,41 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Shoot note"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Intake second note",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Run intake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot second note",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot note"
+                "name": "IntakeAcquire"
               }
             }
           ]
@@ -84,18 +50,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -13.952164315551999,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": null,
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
