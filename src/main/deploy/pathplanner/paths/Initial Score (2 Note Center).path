@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.164859011597086,
-        "y": 2.2953239629671147
+        "x": 1.138357084132141,
+        "y": 3.583515983009141
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.966199689696536,
-        "y": 2.5731220647068316
+        "x": 1.8420646159560696,
+        "y": 3.583515983009141
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
+        "x": 2.59,
         "y": 3.15
       },
       "prevControl": {
-        "x": 5.468044782243412,
-        "y": 0.15787108497294042
+        "x": 2.3307372260801067,
+        "y": 3.1876899712132754
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,25 +30,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "Shoot Second Note",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot note"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -57,11 +39,14 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -43.396015352184854,
+    "rotation": -44.02897806892084,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "2 Note Center 7",
-  "previewStartingState": null,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": -28.0,
+    "velocity": 0
+  },
   "useDefaultConstraints": false
 }
