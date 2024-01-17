@@ -5,6 +5,7 @@
 
 package com.stuypulse.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
@@ -38,7 +39,7 @@ public class RobotContainer {
     public final AbstractIntake intake = AbstractIntake.getInstance();
 
     // Autons
-    private static SendableChooser<Command> autonChooser = new SendableChooser<>();
+    private static SendableChooser<Command> autonChooser;
 
     // Robot container
 
@@ -83,8 +84,7 @@ public class RobotContainer {
     /**************/
 
     public void configureAutons() {
-        autonChooser.setDefaultOption("Do Nothing", new DoNothingAuton());
-        
+        autonChooser = AutoBuilder.buildAutoChooser();
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 
