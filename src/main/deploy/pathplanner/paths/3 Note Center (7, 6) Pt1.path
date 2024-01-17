@@ -32,22 +32,36 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot 1st note",
-      "waypointRelativePos": 0.1,
+      "name": "Shoot Starting Note",
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot note"
+              }
+            }
+          ]
         }
       }
     },
     {
-      "name": "Intake 2nd note",
-      "waypointRelativePos": 0.95,
+      "name": "Intake Note 7",
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Run intake"
+              }
+            }
+          ]
         }
       }
     }
@@ -64,7 +78,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "3 Note Center (7, 6)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

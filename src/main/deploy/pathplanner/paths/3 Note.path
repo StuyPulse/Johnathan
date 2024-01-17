@@ -3,51 +3,48 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.260023024675679,
-        "y": 4.11628754738991
+        "x": 2.674834181513601,
+        "y": 4.247812411175418
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5147226220378367,
-        "y": 4.125729663496364
+        "x": 2.392688210785648,
+        "y": 4.339441346293407
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Note 3"
     },
     {
       "anchor": {
-        "x": 2.260023024675679,
-        "y": 5.52
+        "x": 2.5021045047670456,
+        "y": 5.554029513006942
       },
       "prevControl": {
-        "x": 1.674611826075504,
-        "y": 4.8600614069746655
+        "x": 1.9166933061668705,
+        "y": 4.894090919981608
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Note 2"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake 3rd note",
-      "waypointRelativePos": 0.75,
+      "name": "Intake third note",
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
-        }
-      }
-    },
-    {
-      "name": "Shoot 3rd note",
-      "waypointRelativePos": 1.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeAcquire"
+              }
+            }
+          ]
         }
       }
     }

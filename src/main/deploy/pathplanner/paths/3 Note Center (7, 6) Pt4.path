@@ -48,12 +48,19 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot 3rd note",
+      "name": "Shoot Note 7",
       "waypointRelativePos": 2.0,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot note"
+              }
+            }
+          ]
         }
       }
     }
@@ -70,7 +77,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "3 Note Center (7, 6)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
