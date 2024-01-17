@@ -46,10 +46,17 @@ public class RobotContainer {
     public RobotContainer() {
         configureDefaultCommands();
         configureButtonBindings();
+        configureNamedCommands();
 
         swerve.configureAutoBuilder();
         configureAutons();
     }
+
+    /**********************/
+    /*** NAMED COMMANDS ***/
+    /**********************/
+
+    private void configureNamedCommands() {}
 
     /****************/
     /*** DEFAULTS ***/
