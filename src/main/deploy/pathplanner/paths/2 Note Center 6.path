@@ -49,21 +49,18 @@
   "eventMarkers": [
     {
       "name": "Intake second note",
-      "waypointRelativePos": 1.95,
+      "waypointRelativePos": 1.55,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
-        }
-      }
-    },
-    {
-      "name": "Shoot first note",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeAcquire"
+              }
+            }
+          ]
         }
       }
     }
