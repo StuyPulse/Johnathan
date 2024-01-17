@@ -18,12 +18,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "2 Note Center 6 Back"
