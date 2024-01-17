@@ -19,7 +19,7 @@ public class Intake extends AbstractIntake {
         topEncoder = topMotor.getEncoder();
 
         bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
-        bottomEncoder = topMotor.getEncoder();
+        bottomEncoder = bottomMotor.getEncoder();
     }
 
     @Override
