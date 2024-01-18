@@ -40,7 +40,6 @@ public interface Ports {
     }
     
     public interface Intake {
-        public int TOP_MOTOR = 20;
-        public int BOTTOM_MOTOR = 21;
+        public int MOTOR = 21;
     }
 }

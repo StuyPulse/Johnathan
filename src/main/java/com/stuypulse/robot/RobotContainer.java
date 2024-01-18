@@ -66,11 +66,11 @@ public class RobotContainer {
         driver.getDPadLeft().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
         driver.getDPadRight().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(90)));
         
-        operator.getRightTriggerButton()
+        driver.getRightTriggerButton()
             .whileTrue(new IntakeAcquire())
             .onFalse(new IntakeStop());
 
-        operator.getLeftTriggerButton()
+        driver.getLeftTriggerButton()
             .whileTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
     }

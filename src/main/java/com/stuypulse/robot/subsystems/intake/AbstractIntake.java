@@ -20,7 +20,7 @@ public abstract class AbstractIntake extends SubsystemBase {
         return instance;
     }
 
-    public abstract void setSpeed(double topSpeed, double bottomSpeed);
+    public abstract void setSpeed(double speed);
 
     public void childPeriodic() {};
 
