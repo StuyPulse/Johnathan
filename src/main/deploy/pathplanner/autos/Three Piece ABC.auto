@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4141380958814436,
-      "y": 6.8
+      "x": 1.41,
+      "y": 4.3
     },
-    "rotation": 35.0
+    "rotation": 0.0
   },
   "command": {
     "type": "sequential",
@@ -14,19 +14,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start To A (ABC)"
+            "pathName": "Start To C (ABC)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "A To B (ABC)"
+            "pathName": "C To B (ABC)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "B To C (ABC)"
+            "pathName": "B To A (ABC)"
           }
         }
       ]
