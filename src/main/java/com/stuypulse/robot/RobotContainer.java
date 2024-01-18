@@ -9,8 +9,9 @@ import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.constants.Ports;
-import com.stuypulse.robot.subsystems.odometry.Odometry;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+import com.stuypulse.robot.subsystems.vision.AbstractVision;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
@@ -38,14 +39,14 @@ public class RobotContainer {
     public final Gamepad driver = new AutoGamepad(Ports.Gamepad.DRIVER);
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
 
-    public final SwerveDrive swerve = SwerveDrive.getInstance();
-    public final Odometry odometry = Odometry.getInstance();
-    
     // Subsystems
+    public final SwerveDrive swerve = SwerveDrive.getInstance();
+    public final AbstractOdometry odometry = AbstractOdometry.getInstance();
+    public final AbstractVision vision = AbstractVision.getInstance();
+    public final AbstractIntake intake = AbstractIntake.getInstance();
     // public final FlywheelShooter shooter = new FlywheelShooterImpl();
     // public final TwoWheelShooter shooter = new TwoWheelShooterImpl();
     public final HorizontalShooter shooter = new HorizontalShooterImpl();
-    public final Intake intake = Intake.getInstance();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -63,7 +64,6 @@ public class RobotContainer {
 
     private void configureDefaultCommands() {
         swerve.setDefaultCommand(new SwerveDriveDrive(driver));
-        intake.setDefaultCommand(new IntakeStop());
     }
 
     /***************/
@@ -76,11 +76,11 @@ public class RobotContainer {
         driver.getDPadLeft().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
         driver.getDPadRight().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(90)));
         
-        operator.getRightTriggerButton()
+        driver.getRightTriggerButton()
             .whileTrue(new IntakeAcquire())
             .onFalse(new IntakeStop());
 
-        operator.getLeftTriggerButton()
+        driver.getLeftTriggerButton()
             .whileTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
     }

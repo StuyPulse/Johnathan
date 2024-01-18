@@ -58,8 +58,8 @@ public interface Settings {
             SmartNumber kI = new SmartNumber("Swerve/Turn/kI", 0.0);
             SmartNumber kD = new SmartNumber("Swerve/Turn/kD", 0.15);
 
-            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 0.0);
-            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 0.0);
+            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 1);
+            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 1);
         }
 
         public interface Drive {
@@ -153,11 +153,8 @@ public interface Settings {
     }
 
     public interface Intake {
-        SmartNumber ACQUIRE_SPEED_TOP = new SmartNumber("Intake/Acquire Speed Top", 1);
-        SmartNumber ACQUIRE_SPEED_BOTTOM = new SmartNumber("Intake/Acquire Speed Bottom", 1);
-
-        SmartNumber DEACQUIRE_SPEED_TOP = new SmartNumber("Intake/Deacquire Speed Top", -1);
-        SmartNumber DEACQUIRE_SPEED_BOTTOM = new SmartNumber("Intake/Deacquire Speed Bottom", -1);
+        SmartNumber ACQUIRE_SPEED = new SmartNumber("Intake/Acquire Speed Bottom", 1);
+        SmartNumber DEACQUIRE_SPEED = new SmartNumber("Intake/Deacquire Speed Bottom", -1);
     }
 
     public interface FlyWheelShooter {

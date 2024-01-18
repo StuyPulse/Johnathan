@@ -7,11 +7,11 @@ import com.stuypulse.robot.subsystems.intake.*;
 
 public class IntakeDeacquire extends Command {
 
-    private Intake intake;
+    private AbstractIntake intake;
 
     public IntakeDeacquire() {
 
-        intake = Intake.getInstance();
+        intake = AbstractIntake.getInstance();
 
         addRequirements(intake);
     }
@@ -19,8 +19,7 @@ public class IntakeDeacquire extends Command {
     @Override
     public void initialize() {
         intake.setSpeed(
-           Settings.Intake.DEACQUIRE_SPEED_TOP.get(), 
-           Settings.Intake.DEACQUIRE_SPEED_BOTTOM.get()
+           Settings.Intake.DEACQUIRE_SPEED.get()
         );
     }
 

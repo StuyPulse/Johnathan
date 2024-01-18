@@ -1,31 +1,31 @@
 package com.stuypulse.robot.subsystems.intake;
 
-import com.stuypulse.robot.Robot;
-import com.stuypulse.robot.constants.Settings.RobotType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.stuypulse.robot.constants.Ports;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public abstract class Intake extends SubsystemBase {
+public class Intake extends AbstractIntake {
 
-    public static final Intake instance;
+    private final CANSparkMax motor;
+    private final RelativeEncoder encoder;
 
-    static {
-        if (Robot.robotType == RobotType.OFFSEASON_BOT)
-            instance = new IntakeImpl();
-        else
-            instance = new EmptyIntake();
+    protected Intake() {
+        motor = new CANSparkMax(Ports.Intake.MOTOR, MotorType.kBrushless);
+        encoder = motor.getEncoder();
     }
-    
-    public static Intake getInstance() {
-        return instance;
-    }
-
-    public abstract void setSpeed(double topSpeed, double bottomSpeed);
-
-    public void childPeriodic() {};
 
     @Override
-    public void periodic() {
-        childPeriodic();
+    public void setSpeed(double speed) {
+        motor.set(speed);
+    }
+
+
+    @Override
+    public void childPeriodic() {
+        SmartDashboard.putNumber("Intake/Motor Speed", motor.get());
+        SmartDashboard.putNumber("Intake/Motor RPM", encoder.getVelocity());
     }
 }

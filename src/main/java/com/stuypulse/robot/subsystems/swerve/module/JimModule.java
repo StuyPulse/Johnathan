@@ -1,5 +1,5 @@
-/************************ PROJECT JIM *************************/
-/* Copyright (c) 2023 StuyPulse Robotics. All rights reserved.*/
+/************************ PROJECT JON *************************/
+/* Copyright (c) 2024 StuyPulse Robotics. All rights reserved.*/
 /* This work is licensed under the terms of the MIT license.  */
 /**************************************************************/
 
@@ -36,7 +36,7 @@ import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 
 
-public class JimSwerveModule extends SwerveModule {
+public class JimModule extends AbstractModule {
 
     private static final double WIDTH = Units.inchesToMeters(26.504);
     private static final double LENGTH = Units.inchesToMeters(20.508);
@@ -110,10 +110,10 @@ public class JimSwerveModule extends SwerveModule {
 
     public static SwerveDrive getModules() {
         return new SwerveDrive(
-            new JimSwerveModule(FrontRight.ID, FrontRight.MODULE_OFFSET, 11, FrontRight.ABSOLUTE_OFFSET, 10),
-            new JimSwerveModule(FrontLeft.ID, FrontLeft.MODULE_OFFSET, 13, FrontLeft.ABSOLUTE_OFFSET, 12),
-            new JimSwerveModule(BackLeft.ID, BackLeft.MODULE_OFFSET, 15, BackLeft.ABSOLUTE_OFFSET, 14),
-            new JimSwerveModule(BackRight.ID, BackRight.MODULE_OFFSET, 17, BackRight.ABSOLUTE_OFFSET, 16)
+            new JimModule(FrontRight.ID, FrontRight.MODULE_OFFSET, 11, FrontRight.ABSOLUTE_OFFSET, 10),
+            new JimModule(FrontLeft.ID, FrontLeft.MODULE_OFFSET, 13, FrontLeft.ABSOLUTE_OFFSET, 12),
+            new JimModule(BackLeft.ID, BackLeft.MODULE_OFFSET, 15, BackLeft.ABSOLUTE_OFFSET, 14),
+            new JimModule(BackRight.ID, BackRight.MODULE_OFFSET, 17, BackRight.ABSOLUTE_OFFSET, 16)
         );
     }
 
@@ -136,7 +136,7 @@ public class JimSwerveModule extends SwerveModule {
     private Controller driveController;
     private AngleController turnController;
 
-    public JimSwerveModule(String id, Translation2d location, int turnCANId, Rotation2d angleOffset, int driveCANId) {
+    public JimModule(String id, Translation2d location, int turnCANId, Rotation2d angleOffset, int driveCANId) {
 
         // module data
         this.id = id;

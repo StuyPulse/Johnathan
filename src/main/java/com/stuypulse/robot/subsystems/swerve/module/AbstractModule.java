@@ -4,7 +4,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public abstract class SwerveModule extends SubsystemBase {
+public abstract class AbstractModule extends SubsystemBase {
 
     public abstract String getID();
     public abstract Translation2d getOffset();

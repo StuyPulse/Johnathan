@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.simulation.LinearSystemSim;
 import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SimModule extends SwerveModule {
+public class SimModule extends AbstractModule {
 
     private static LinearSystem<N2, N1, N2> identifyVelocityPositionSystem(double kV, double kA) {
         if (kV <= 0.0) {
