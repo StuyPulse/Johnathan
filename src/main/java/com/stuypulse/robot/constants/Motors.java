@@ -8,6 +8,8 @@ package com.stuypulse.robot.constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkMax;
 
 import static com.revrobotics.CANSparkMax.IdleMode;
@@ -22,6 +24,15 @@ import static com.revrobotics.CANSparkMax.IdleMode;
  *  - The Open Loop Ramp Rate
  */
 public interface Motors {
+
+    int kDisableStatusFrame = 65535;
+
+    public static void disableStatusFrames(CANSparkMax motor, int... ids) {
+        for (int id : ids) {
+            motor.setPeriodicFramePeriod(PeriodicFrame.fromId(id), kDisableStatusFrame);
+        }
+    }
+
     /** Classes to store all of the values a motor needs */
 
     public interface Shooter {
