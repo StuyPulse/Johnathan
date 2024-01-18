@@ -19,8 +19,7 @@ public class IntakeAcquire extends Command {
     @Override
     public void initialize() {
         intake.setSpeed(
-            Settings.Intake.ACQUIRE_SPEED_TOP.get(),
-            Settings.Intake.ACQUIRE_SPEED_BOTTOM.get()
+            Settings.Intake.ACQUIRE_SPEED.get()
         );
     }
 

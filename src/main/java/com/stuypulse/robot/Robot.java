@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
 
         state = MatchState.DISABLE;
         SmartDashboard.putString("Match State", state.name());
+        SmartDashboard.putString("Robot Type", robotType.name());
     }
 
     @Override

@@ -8,33 +8,24 @@ import com.stuypulse.robot.constants.Ports;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends AbstractIntake {
-    private final CANSparkMax topMotor;
-    private final RelativeEncoder topEncoder;
 
-    private final CANSparkMax bottomMotor;
-    private final RelativeEncoder bottomEncoder;
+    private final CANSparkMax motor;
+    private final RelativeEncoder encoder;
 
     protected Intake() {
-        topMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
-        topEncoder = topMotor.getEncoder();
-
-        bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
-        bottomEncoder = topMotor.getEncoder();
+        motor = new CANSparkMax(Ports.Intake.MOTOR, MotorType.kBrushless);
+        encoder = motor.getEncoder();
     }
 
     @Override
-    public void setSpeed(double topSpeed, double bottomSpeed) {
-        topMotor.set(topSpeed);
-        bottomMotor.set(bottomSpeed);
+    public void setSpeed(double speed) {
+        motor.set(speed);
     }
 
 
     @Override
     public void childPeriodic() {
-        SmartDashboard.putNumber("Intake/Top Motor Speed",topMotor.get());
-        SmartDashboard.putNumber("Intake/Bottom Motor Speed", bottomMotor.get());
-
-        SmartDashboard.putNumber("Intake/Top Motor RPM", topEncoder.getVelocity());
-        SmartDashboard.putNumber("Intake/Bottom Motor RPM", bottomEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake/Motor Speed", motor.get());
+        SmartDashboard.putNumber("Intake/Motor RPM", encoder.getVelocity());
     }
 }
