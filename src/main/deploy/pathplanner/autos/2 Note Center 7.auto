@@ -6,21 +6,21 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Initial Score (2 Note Center)"
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "2 Note Center 7"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Run intake"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Shoot note"
+            "name": "ShooterShoot"
           }
         }
       ]

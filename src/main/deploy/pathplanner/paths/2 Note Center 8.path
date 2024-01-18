@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.1266462475863597,
-        "y": 3.9231302428368044
+        "x": 2.59,
+        "y": 3.15
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3914165945307624,
-        "y": 2.9862633191742836
+        "x": 3.854770346944403,
+        "y": 2.213133076337479
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.281967377058862,
-        "y": 0.749493538930016
+        "x": 7.885445770891543,
+        "y": 0.8189562532971225
       },
       "prevControl": {
-        "x": 7.602738857403534,
-        "y": 0.8080477216589235
+        "x": 7.2062172512362155,
+        "y": 0.87751043602603
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot note",
+      "name": "Shoot first note",
       "waypointRelativePos": 0,
       "command": {
         "type": "parallel",
@@ -42,12 +42,19 @@
       }
     },
     {
-      "name": "Intake note",
-      "waypointRelativePos": 1.0,
+      "name": "Intake second note",
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeAcquire"
+              }
+            }
+          ]
         }
       }
     }
