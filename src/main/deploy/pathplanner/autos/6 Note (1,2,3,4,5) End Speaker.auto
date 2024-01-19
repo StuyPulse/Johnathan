@@ -74,7 +74,49 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4 Note End 4"
+            "pathName": "5 Note Pt. 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeAcquire"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": " 5 Note End Speaker"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "6 Note Pt. 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeAcquire"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "6 Note Pt. 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
           }
         }
       ]
