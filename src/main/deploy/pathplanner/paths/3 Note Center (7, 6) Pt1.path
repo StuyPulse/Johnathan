@@ -32,25 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot Starting Note",
-      "waypointRelativePos": 0.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot note"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "Intake Note 7",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.9,
       "command": {
         "type": "parallel",
         "data": {
@@ -58,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Run intake"
+                "name": "IntakeAcquire"
               }
             }
           ]
