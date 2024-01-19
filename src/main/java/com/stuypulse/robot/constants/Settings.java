@@ -145,6 +145,14 @@ public interface Settings {
                 SmartNumber I = new SmartNumber("Driver Settings/Gyro Feedback/kI", 0.0);
                 SmartNumber D = new SmartNumber("Driver Settings/Gyro Feedback/kD", 0.1);
             }
+
+            public interface NoteAlignment {
+                SmartNumber ANGLE_DEADBAND = new SmartNumber("Driver Settings/Note Alignment/Angle Deadband", 1);
+
+                SmartNumber P = new SmartNumber("Driver Settings/Note Alignment/kP", 3.0);
+                SmartNumber I = new SmartNumber("Driver Settings/Note Alignment/kI", 0.0);
+                SmartNumber D = new SmartNumber("Driver Settings/Note Alignment/kD", 0.0);
+            }
         }
 
     }
@@ -202,6 +210,7 @@ public interface Settings {
 
     public interface NoteDetection {
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Note Detection/Debounce Time", 0.15);
+        SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
         SmartNumber TARGET_NOTE_DISTANCE = new SmartNumber("Note Detection/Target Note Distance", 0.5);
 
         SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.08);
