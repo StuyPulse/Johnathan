@@ -20,12 +20,6 @@
         {
           "type": "named",
           "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "ShooterShoot"
           }
         },
@@ -38,12 +32,6 @@
         {
           "type": "named",
           "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "ShooterShoot"
           }
         },
@@ -51,12 +39,6 @@
           "type": "path",
           "data": {
             "pathName": "4 Note End Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
           }
         },
         {
