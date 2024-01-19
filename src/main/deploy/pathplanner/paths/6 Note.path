@@ -43,8 +43,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake Note 5",
-      "waypointRelativePos": 0.8,
+      "name": "Intake Sixth Note",
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
@@ -72,7 +72,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "6 Note",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

@@ -10,7 +10,9 @@
     "3 Note (5, 1)",
     "3 Note Center (7, 6)",
     "3 Note Center (8, 7)",
-    "4 Note (End Speaker + End 4)"
+    "4 Note (End Speaker + End 4)",
+    "5 Note",
+    "6 Note"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,

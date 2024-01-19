@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2234294142773756,
-        "y": 7.0
+        "x": 2.45,
+        "y": 6.29
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.098645680886225,
-        "y": 5.820285763253409
+        "x": 4.393969643859401,
+        "y": 6.476092609817173
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Initial Score 3 Note (4-5, 1)"
     },
     {
       "anchor": {
@@ -38,7 +38,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake Note 5",
+      "name": "Intake Second Note",
       "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
@@ -48,23 +48,6 @@
               "type": "named",
               "data": {
                 "name": "IntakeAcquire"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot Note",
-      "waypointRelativePos": 0.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot note"
               }
             }
           ]
