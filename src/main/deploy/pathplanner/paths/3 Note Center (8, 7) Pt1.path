@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 7.744394136478873,
-        "y": 1.0
+        "x": 7.848666424864946,
+        "y": 0.9485777602083012
       },
       "prevControl": {
-        "x": 6.93406416515882,
-        "y": 1.4691384044650047
+        "x": 7.110883722480711,
+        "y": 1.276481183490184
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,11 +43,18 @@
     },
     {
       "name": "Intake second note",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.7,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeAcquire"
+              }
+            }
+          ]
         }
       }
     }
@@ -60,7 +67,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -30.529705899934235,
+    "rotation": -19.230672375661204,
     "rotateFast": false
   },
   "reversed": false,

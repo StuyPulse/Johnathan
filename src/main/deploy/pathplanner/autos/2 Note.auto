@@ -28,36 +28,6 @@
           "data": {
             "name": "ShooterShoot"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "3 Note"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End 4"
-          }
         }
       ]
     }

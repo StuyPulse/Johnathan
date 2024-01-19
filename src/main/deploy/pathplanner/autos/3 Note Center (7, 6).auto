@@ -24,12 +24,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "3 Note Center (7, 6) Pt2"
@@ -45,12 +39,6 @@
           "type": "path",
           "data": {
             "pathName": "3 Note Center (7, 6) Pt3"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
           }
         },
         {
