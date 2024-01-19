@@ -50,7 +50,7 @@
     },
     {
       "name": "Intake Note 7",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {

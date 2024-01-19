@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note 4",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {

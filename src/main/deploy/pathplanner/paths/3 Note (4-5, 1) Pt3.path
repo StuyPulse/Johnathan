@@ -39,7 +39,7 @@
   "eventMarkers": [
     {
       "name": "Intake and Shoot Note 1",
-      "waypointRelativePos": 0.9,
+      "waypointRelativePos": 0.7,
       "command": {
         "type": "parallel",
         "data": {
