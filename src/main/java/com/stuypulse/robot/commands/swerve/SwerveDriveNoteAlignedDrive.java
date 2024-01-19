@@ -3,7 +3,7 @@ package com.stuypulse.robot.commands.swerve;
 import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.constants.Settings.Driver.Turn;
-import com.stuypulse.robot.constants.Settings .Driver.Turn.GyroFeedback;
+import com.stuypulse.robot.constants.Settings.Driver.Turn.NoteAlignment;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.control.angle.AngleController;
@@ -18,6 +18,8 @@ import com.stuypulse.stuylib.streams.vectors.filters.VDeadZone;
 import com.stuypulse.stuylib.streams.vectors.filters.VLowPassFilter;
 import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveNoteAlignedDrive extends Command {
@@ -28,13 +30,9 @@ public class SwerveDriveNoteAlignedDrive extends Command {
     private VStream speed; 
     private IStream turn;
 
-    private final Gamepad driver;
-
     private AngleController alignController;
 
     public SwerveDriveNoteAlignedDrive(Gamepad driver) {
-        this.driver = driver;
-
         swerve = SwerveDrive.getInstance();
         noteVision = AbstractNoteVision.getInstance();
 
@@ -56,7 +54,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
                 new LowPassFilter(Turn.RC)
             );
 
-        alignController = new AnglePIDController(GyroFeedback.P, GyroFeedback.I, GyroFeedback.D);
+        alignController = new AnglePIDController(NoteAlignment.P, NoteAlignment.I, NoteAlignment.D);
         
         addRequirements(swerve);
     }
@@ -65,19 +63,19 @@ public class SwerveDriveNoteAlignedDrive extends Command {
     public void execute() {
         double angularVel = turn.get();
 
-        if (noteVision.hasNoteData()) {
+        if (noteVision.hasNoteData() && Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteAlignment.ANGLE_DEADBAND.get()) {
             angularVel = -alignController.update(
                 Angle.kZero,
                 Angle.fromRotation2d(noteVision.getRotationToNote())
             );
         }
+        
+        // robot relative
+        swerve.setChassisSpeeds(new ChassisSpeeds(speed.get().x, speed.get().y, angularVel));
+        // field relative
+        // swerve.drive(speed.get(), angularVel);
 
-        if(driver.getRawStartButton() || driver.getRawSelectButton()) {
-            swerve.setXMode();
-        }
-        else {
-            swerve.drive(speed.get(), angularVel);
-        }
+        SmartDashboard.putNumber("Note Vision/Output", alignController.getOutput());
 
     }
 }
