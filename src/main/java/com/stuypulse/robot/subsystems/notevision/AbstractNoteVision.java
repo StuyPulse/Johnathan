@@ -21,6 +21,8 @@ public abstract class AbstractNoteVision extends SubsystemBase {
     public static AbstractNoteVision getInstance() {
         return instance;
     }
+    
+    public abstract boolean hasNoteData();
 
     public abstract double getDistanceToNote();
     public abstract Rotation2d getRotationToNote();

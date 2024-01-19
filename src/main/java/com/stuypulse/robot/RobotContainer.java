@@ -7,6 +7,7 @@ package com.stuypulse.robot;
 
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
+import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
@@ -75,6 +76,9 @@ public class RobotContainer {
         driver.getLeftTriggerButton()
             .whileTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
+
+        driver.getRightBumper()
+            .whileTrue(new SwerveDriveNoteAlignedDrive(driver));
     }
 
     /**************/

@@ -45,6 +45,16 @@ public class NoteVision extends AbstractNoteVision {
     }
 
     @Override
+    public boolean hasNoteData() {
+        for (Limelight limelight : limelights) {
+            if (limelight.hasNoteData())
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public double getDistanceToNote() {
         for (Limelight limelight : limelights) {
             if(limelight.hasNoteData()) {
