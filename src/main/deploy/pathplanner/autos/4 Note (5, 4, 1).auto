@@ -24,12 +24,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "3 Note (5, 1) Pt2"
@@ -48,12 +42,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "3 Note (4, 1) Pt2"
@@ -69,12 +57,6 @@
           "type": "path",
           "data": {
             "pathName": "3 Note (4-5, 1) Pt3"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeAcquire"
           }
         },
         {
