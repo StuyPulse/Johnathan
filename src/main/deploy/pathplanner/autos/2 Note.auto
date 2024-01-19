@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": null,
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Initial Score"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2 Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
