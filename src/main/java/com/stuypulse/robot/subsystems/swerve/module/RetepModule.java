@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.Robot.MatchState;
+import com.stuypulse.robot.constants.Motors;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.constants.Settings.Swerve.Drive;
 import com.stuypulse.robot.constants.Settings.Swerve.Encoder;
@@ -72,6 +73,9 @@ public class RetepModule extends AbstractModule {
             .setOutputFilter(x -> -x);
 
         targetState = new SwerveModuleState();
+        
+        Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
+        Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     }
 
     public Translation2d getOffset() {
