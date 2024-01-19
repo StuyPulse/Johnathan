@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 8.290831218253917,
-        "y": 5.771197106303988
+        "x": 7.9774856268685435,
+        "y": 5.843707436344972
       },
       "prevControl": {
-        "x": 6.525341895191635,
-        "y": 6.640044321458116
+        "x": 6.211996303806261,
+        "y": 6.7125546514991
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,7 +39,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note 5",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {
@@ -47,7 +47,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Run intake"
+                "name": "IntakeAcquire"
               }
             }
           ]

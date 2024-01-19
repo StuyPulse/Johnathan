@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 2.5021045047670456,
-        "y": 5.554029513006942
+        "y": 5.55
       },
       "prevControl": {
         "x": 1.9166933061668705,
-        "y": 4.894090919981608
+        "y": 4.890061406974666
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,6 +45,16 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "name": "Shoot note",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
         }
       }
     }
