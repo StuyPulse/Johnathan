@@ -20,6 +20,7 @@ import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.intake.*;
+import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
@@ -40,6 +41,7 @@ public class RobotContainer {
     public final AbstractOdometry odometry = AbstractOdometry.getInstance();
     public final AbstractVision vision = AbstractVision.getInstance();
     public final AbstractIntake intake = AbstractIntake.getInstance();
+    public final AbstractNoteVision noteVision = AbstractNoteVision.getInstance();
 
     // Autons
     private static SendableChooser<Command> autonChooser;
