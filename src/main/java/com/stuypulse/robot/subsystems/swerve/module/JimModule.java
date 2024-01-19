@@ -175,8 +175,8 @@ public class JimModule extends AbstractModule {
 
         targetState = new SwerveModuleState();
 
-        new CANSparkMaxConfig(false, IdleMode.kBrake, 60, 0).configure(turnMotor);
-        new CANSparkMaxConfig(false, IdleMode.kBrake, 20, 0).configure(turnMotor);
+        Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
+        Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     }
 
     @Override

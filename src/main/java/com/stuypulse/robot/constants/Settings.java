@@ -159,4 +159,31 @@ public interface Settings {
         SmartNumber DEACQUIRE_SPEED_TOP = new SmartNumber("Intake/Deacquire Speed Top", -1);
         SmartNumber DEACQUIRE_SPEED_BOTTOM = new SmartNumber("Intake/Deacquire Speed Bottom", -1);
     }
+
+    public interface Alignment {
+
+        SmartNumber DEBOUNCE_TIME = new SmartNumber("Alignment/Debounce Time", 0.15);
+        SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.1);
+        SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.1);
+        SmartNumber ANGLE_TOLERANCE = new SmartNumber("Alignment/Angle Tolerance", 5);
+
+
+        public interface Translation {
+            SmartNumber P = new SmartNumber("Alignment/Translation/kP", 2.5);
+            SmartNumber I = new SmartNumber("Alignment/Translation/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Translation/kD", 0.0);
+        }
+
+        public interface Rotation {
+            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 1);
+            SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
+        }
+
+        public interface Gyro {
+            SmartNumber P = new SmartNumber("Alignment/Gyro/kP", 12);
+            SmartNumber I = new SmartNumber("Alignment/Gyro/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Gyro/kD", 0.1);
+        }
+    }
 }
