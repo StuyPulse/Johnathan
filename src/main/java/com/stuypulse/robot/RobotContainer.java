@@ -9,6 +9,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
+import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
+import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
@@ -84,8 +86,12 @@ public class RobotContainer {
         driver.getLeftTriggerButton()
             .whileTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
+        
+        driver.getLeftButton().whileTrue(new SwerveDriveToPose(new Pose2d(4, 5.5, new Rotation2d())));
+        driver.getRightButton().whileTrue(new SwerveDriveToPose(new Pose2d(1.5, 5.5, new Rotation2d())));
 
-        driver.getRightButton().whileTrue(new SwerveDriveToPose(new Pose2d(3, 5.5, new Rotation2d())));
+        driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
+        driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
     }
 
     /**************/

@@ -170,10 +170,17 @@ public interface Settings {
             SmartNumber I = new SmartNumber("Alignment/Translation/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Translation/kD", 0.0);
         }
+
         public interface Rotation {
             SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 1);
             SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
+        }
+
+        public interface Gyro {
+            SmartNumber P = new SmartNumber("Alignment/Gyro/kP", 12);
+            SmartNumber I = new SmartNumber("Alignment/Gyro/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Gyro/kD", 0.1);
         }
     }
 }
