@@ -28,18 +28,18 @@ public class Odometry extends AbstractOdometry {
         SwerveDrive swerve = SwerveDrive.getInstance();
 
         this.estimator =
-            new SwerveDrivePoseEstimator(
+        new SwerveDrivePoseEstimator(
                 swerve.getKinematics(),
                 swerve.getGyroAngle(),
                 swerve.getModulePositions(),
                 new Pose2d());
 
         this.odometry =
-            new SwerveDriveOdometry(
-                swerve.getKinematics(),
-                swerve.getGyroAngle(),
-                swerve.getModulePositions(),
-                new Pose2d());
+                new SwerveDriveOdometry(
+                        swerve.getKinematics(),
+                        swerve.getGyroAngle(),
+                        swerve.getModulePositions(),
+                        new Pose2d());
 
         this.field = new Field2d();
         this.odometryPose2D = field.getObject("Odometry Pose");

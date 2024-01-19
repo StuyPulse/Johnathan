@@ -1,10 +1,6 @@
 package com.stuypulse.robot.subsystems.swerve;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.constants.Settings;
@@ -15,7 +11,6 @@ import com.stuypulse.robot.constants.Settings.Swerve.BackRight;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontLeft;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontRight;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
-import com.stuypulse.robot.subsystems.odometry.Odometry;
 import com.stuypulse.robot.subsystems.swerve.module.SimModule;
 import com.stuypulse.robot.subsystems.swerve.module.AbstractModule;
 import com.stuypulse.robot.subsystems.swerve.module.JimModule;
@@ -30,7 +25,6 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
@@ -77,31 +71,6 @@ public class SwerveDrive extends SubsystemBase {
         kinematics = new SwerveDriveKinematics(getModuleOffsets());
         gyro = new AHRS(SPI.Port.kMXP);
         module2ds = new FieldObject2d[modules.length];
-    }
-
-    public void configureAutoBuilder() {
-        AbstractOdometry odometry = AbstractOdometry.getInstance();
-
-        AutoBuilder.configureHolonomic(
-            odometry::getPose,
-            odometry::reset,
-            this::getChassisSpeeds, 
-            this::setChassisSpeeds, 
-            new HolonomicPathFollowerConfig(
-                Swerve.Motion.XY, 
-                Swerve.Motion.THETA, 
-                Swerve.MAX_MODULE_SPEED.get(), 
-                Swerve.WIDTH, 
-                new ReplanningConfig(true, true)), 
-            () -> {
-                var alliance = DriverStation.getAlliance();
-                if (alliance.isPresent()) {
-                    return alliance.get() == DriverStation.Alliance.Red;
-                }
-                return false;
-            }, 
-            instance
-        );
     }
 
     public void initModule2ds(Field2d field) {
