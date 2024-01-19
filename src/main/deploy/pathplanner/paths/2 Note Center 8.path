@@ -32,17 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot first note",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": []
-        }
-      }
-    },
-    {
-      "name": "Intake second note",
+      "name": "Intake Second Note",
       "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",

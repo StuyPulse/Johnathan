@@ -32,7 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake third note",
+      "name": "Intake Third Note",
       "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",

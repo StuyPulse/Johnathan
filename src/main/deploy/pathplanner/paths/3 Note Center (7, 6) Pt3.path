@@ -48,8 +48,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake Note 6",
-      "waypointRelativePos": 2.0,
+      "name": "Intake Third Note",
+      "waypointRelativePos": 1.6,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,7 +57,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Run intake"
+                "name": "IntakeAcquire"
               }
             }
           ]
