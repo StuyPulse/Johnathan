@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.pathplanner.lib.commands.FollowPathHolonomic;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 import com.pathplanner.lib.util.ReplanningConfig;
 import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Swerve.Motion;
+import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 // import com.stuypulse.robot.subsystems.odometry.Odometry;
 // import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.math.Vector2D;
@@ -42,13 +44,12 @@ public class SwerveDriveFollowTrajectory extends FollowPathHolonomic {
 
 	private FieldObject2d trajectory;
 
-	public SwerveDriveFollowTrajectory(PathPlannerPath path) {
-
+	public SwerveDriveFollowTrajectory(PathPlannerAuto auto) {
 		super(
-			path,
-			// Odometry.getInstance()::getPose,
-			// SwerveDrive.getInstance()::getChassisSpeeds,
-			// SwerveDrive.getInstance()::setChassisSpeeds,
+			auto,
+			Odometry.getInstance()::getPose,
+			SwerveDrive.getInstance()::getChassisSpeeds,
+			SwerveDrive.getInstance()::setChassisSpeeds,
 			Motion.XY,
 			Motion.THETA,
 			Settings.Swerve.MAX_MODULE_SPEED.get(),
@@ -61,7 +62,7 @@ public class SwerveDriveFollowTrajectory extends FollowPathHolonomic {
 				}
 				return false;
 			},
-			// SwerveDrive.getInstance()
+			SwerveDrive.getInstance()
 		);
 
 		robotRelative = false;
