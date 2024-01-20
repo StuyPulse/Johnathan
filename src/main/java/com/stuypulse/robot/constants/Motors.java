@@ -34,7 +34,7 @@ public interface Motors {
 
     public interface Swerve {
         public CANSparkMaxConfig DRIVE_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
-        public CANSparkMaxConfig TURN_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
+        public CANSparkMaxConfig TURN_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60, Settings.Swerve.MAX_MODULE_TURN.get() / Settings.Swerve.Turn.kV.get());
     }
 
     /** Classes to store all of the values a motor needs */
@@ -57,7 +57,7 @@ public interface Motors {
         }
 
         public CANSparkMaxConfig(boolean inverted, IdleMode idleMode, int currentLimitAmps) {
-            this(inverted, idleMode, currentLimitAmps, 0.0);
+            this(inverted, idleMode, currentLimitAmps, 0.2);
         }
 
         public CANSparkMaxConfig(boolean inverted, IdleMode idleMode) {
