@@ -9,23 +9,35 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends AbstractIntake {
 
-    private final CANSparkMax motor;
-    private final RelativeEncoder encoder;
+    private final CANSparkMax topMotor;
+    private final RelativeEncoder topEncoder;
+
+    private final CANSparkMax bottomMotor;
+    private final RelativeEncoder bottomEncoder;
 
     protected Intake() {
-        motor = new CANSparkMax(Ports.Intake.MOTOR, MotorType.kBrushless);
-        encoder = motor.getEncoder();
+        topMotor = new CANSparkMax(Ports.Intake.TOP_MOTOR, MotorType.kBrushless);
+        topEncoder = topMotor.getEncoder();
+
+        bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
+        bottomEncoder = bottomMotor.getEncoder();
     }
 
     @Override
-    public void setSpeed(double speed) {
-        motor.set(speed);
+    public void setSpeed(double topSpeed, double bottomSpeed) {
+        topMotor.set(topSpeed);
+        bottomMotor.set(bottomSpeed);
     }
-
 
     @Override
     public void childPeriodic() {
-        SmartDashboard.putNumber("Intake/Motor Speed", motor.get());
-        SmartDashboard.putNumber("Intake/Motor RPM", encoder.getVelocity());
+        SmartDashboard.putNumber("Intake/Top Motor Speed",topMotor.get());
+        SmartDashboard.putNumber("Intake/Bottom Motor Speed", bottomMotor.get());
+
+        SmartDashboard.putNumber("Intake/Top Motor RPM", topEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake/Bottom Motor RPM", bottomEncoder.getVelocity());
+
+        SmartDashboard.putNumber("Intake/Top Motor Current", topMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Intake/Bottom Motor Current", bottomMotor.getOutputCurrent());
     }
 }
