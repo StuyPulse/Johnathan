@@ -18,6 +18,9 @@ public class RichieMode implements LEDInstruction {
 
     @Override
     public void setLED(AddressableLEDBuffer ledsBuffer) {
+        for (int i = 0; i < ledsBuffer.getLength(); i++) {
+            ledsBuffer.setRGB(i, 0, 0, 0);
+        }
         if(stopwatch.getTime() > 0.25) {
             ledsBuffer.setRGB(index, color.getRed(), color.getGreen(), color.getBlue());
             ledsBuffer.setRGB(prevIndex, 0, 0, 0);

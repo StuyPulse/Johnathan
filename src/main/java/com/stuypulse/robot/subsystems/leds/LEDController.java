@@ -61,7 +61,7 @@ public class LEDController extends SubsystemBase {
     @Override
     public void periodic() {
         if (Robot.getMatchState() == MatchState.TELEOP) {
-            forceSetLED(getDefaultColor());
+            //forceSetLED(getDefaultColor());
         }
     }
 }

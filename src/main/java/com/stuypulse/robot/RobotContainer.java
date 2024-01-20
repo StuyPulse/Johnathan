@@ -96,10 +96,10 @@ public class RobotContainer {
         driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
         */
 
-        driver.getTopButton().onTrue(new LEDSet(LEDColor.RAINBOW));
-        driver.getBottomButton().onTrue(new LEDSet(LEDColor.RICHIE));
-        driver.getRightButton().onTrue(new LEDSet(LEDColor.BANGLADESH));
-        driver.getLeftButton().onTrue(new LEDSet(LEDColor.PULSE_RED_BLUE));
+        driver.getTopButton().whileTrue(new LEDSet(LEDColor.RAINBOW));
+        driver.getBottomButton().whileTrue(new LEDSet(LEDColor.RICHIE));
+        driver.getRightButton().whileTrue(new LEDSet(LEDColor.BANGLADESH));
+        driver.getLeftButton().whileTrue(new LEDSet(LEDColor.PULSE_RED_BLUE));
         
         driver.getDPadUp().onTrue(new LEDSet(LEDColor.RED));
         driver.getDPadDown().onTrue(new LEDSet(LEDColor.OFF));
