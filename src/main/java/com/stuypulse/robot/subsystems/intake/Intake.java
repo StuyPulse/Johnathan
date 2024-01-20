@@ -30,7 +30,7 @@ public class Intake extends AbstractIntake {
     @Override
     public void setSpeed(double topSpeed, double bottomSpeed) {
         topMotor.set(topSpeed);
-        bottomMotor.set(bottomSpeed);
+        bottomMotor.set(-bottomSpeed);
     }
 
     @Override
