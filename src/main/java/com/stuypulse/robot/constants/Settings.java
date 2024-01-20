@@ -12,7 +12,9 @@ import com.stuypulse.stuylib.network.SmartNumber;
 
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 /*-
@@ -164,7 +166,9 @@ public interface Settings {
 
         int[] PORTS = {5800, 5801, 5802, 5803, 5804, 5805};
         Pose3d [] POSITIONS = new Pose3d[] {
-            new Pose3d() // TODO: determine these values when Limelight is put on
+            new Pose3d(
+                new Translation3d(Units.inchesToMeters(-3), 0, Units.inchesToMeters(13.75)),
+                new Rotation3d(0, Math.toRadians(8), Math.toRadians(2)))
         };
     }
 
@@ -177,19 +181,19 @@ public interface Settings {
         SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
         SmartNumber TARGET_NOTE_DISTANCE = new SmartNumber("Note Detection/Target Note Distance", 0.5);
 
-        SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.08);
-        SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", 0.1);
+        SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.2);
+        SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", Units.inchesToMeters(2));
         SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
 
         public interface Translation {
-            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 1.0);
+            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 4.0);
             SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
-            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
         }
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.0);
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.5);
             SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
-            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.1);
         }
     }
 

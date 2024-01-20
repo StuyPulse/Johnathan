@@ -81,27 +81,15 @@ public class Limelight {
     }
 
     public double getXAngle() {
-        if(!hasNoteData()) {
-            return Double.NaN;
-        }
-
-        return xAngle.get() + Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getZ());
+        return xAngle.get() - Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getZ());
     }
 
     public double getYAngle() {
-        if(!hasNoteData()) {
-            return Double.NaN;
-        }
-
-        return tyData + Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getY());
+        return tyData - Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getY());
     }
 
     public double getDistanceToNote() {
-        if(!hasNoteData()) {
-            return Double.NaN;
-        }
-
         Rotation2d yRotation =  Rotation2d.fromDegrees(getYAngle());
-        return POSITIONS[limelightId].getZ() / yRotation.getTan() + POSITIONS[limelightId].getX();
+        return POSITIONS[limelightId].getZ() / -yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
     }
 }

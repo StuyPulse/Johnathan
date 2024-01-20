@@ -63,7 +63,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
     public void execute() {
         double angularVel = turn.get();
 
-        if (noteVision.hasNoteData() && Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteDetection.THRESHOLD_ANGLE.get()) {
+        if (Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteDetection.THRESHOLD_ANGLE.get()) {
             angularVel = -alignController.update(
                 Angle.kZero,
                 Angle.fromRotation2d(noteVision.getRotationToNote())
@@ -71,9 +71,10 @@ public class SwerveDriveNoteAlignedDrive extends Command {
         }
         
         // robot relative
-        swerve.setChassisSpeeds(new ChassisSpeeds(speed.get().x, speed.get().y, angularVel));
+        // swerve.setChassisSpeeds(new ChassisSpeeds(-speed.get().y, speed.get().x, -angularVel));
+        swerve.drive(speed.get(), angularVel);
 
-        SmartDashboard.putNumber("Note Vision/Output", alignController.getOutput());
+        SmartDashboard.putNumber("Note Detection/Angle Output", alignController.getOutput());
 
     }
 }

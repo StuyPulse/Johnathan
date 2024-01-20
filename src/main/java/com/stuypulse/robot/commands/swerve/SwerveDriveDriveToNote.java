@@ -7,6 +7,7 @@ package com.stuypulse.robot.commands.swerve;
 
 import static com.stuypulse.robot.constants.Settings.NoteDetection.*;
 
+import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.util.HolonomicController;
@@ -40,7 +41,7 @@ public class SwerveDriveDriveToNote extends Command {
             new AnglePIDController(Rotation.P, Rotation.I, Rotation.D)
         );
 
-        SmartDashboard.putData("Vision/Controller", controller);
+        SmartDashboard.putData("Note Detection/Controller", controller);
 
         aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(DEBOUNCE_TIME));
 
@@ -53,14 +54,20 @@ public class SwerveDriveDriveToNote extends Command {
 
     @Override
     public void execute() {
-        double noteDistance  = vision.getDistanceToNote();
+        double noteDistance  = vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
         Rotation2d noteRotation = vision.getRotationToNote();
 
-        Pose2d targetPose = new Pose2d(TARGET_NOTE_DISTANCE.get(), 0, new Rotation2d());
+        // origin is center of intake facing forwards
+        Pose2d targetPose = new Pose2d(0, 0, new Rotation2d());
         Pose2d currentPose = new Pose2d(noteDistance * noteRotation.getCos(), noteDistance * noteRotation.getSin(), noteRotation);
 
+        if (!vision.hasNoteData()) {
+            currentPose = new Pose2d(targetPose.getTranslation(), currentPose.getRotation());
+        }
+
         swerve.setChassisSpeeds(controller.update(targetPose, currentPose));
-        SmartDashboard.putBoolean("Vision/Is Aligned", aligned.get());
+
+        SmartDashboard.putBoolean("Note Detection/Is Aligned", aligned.get());
     }
 
     @Override

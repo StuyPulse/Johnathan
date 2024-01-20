@@ -56,33 +56,37 @@ public class NoteVision extends AbstractNoteVision {
 
     @Override
     public double getDistanceToNote() {
+        double distance = 0;
+
         for (Limelight limelight : limelights) {
             if (limelight.hasNoteData()) {
-                return limelight.getDistanceToNote();
+                distance +=  limelight.getDistanceToNote();
             }
         }
 
-        return Double.NaN;
+        return distance / limelights.length;
     }
 
     @Override
     public Rotation2d getRotationToNote() {
+        double degrees = 0;
+
         for (Limelight limelight : limelights) {
-            if (limelight.hasNoteData()) {
-                return Rotation2d.fromDegrees(limelight.getXAngle());
-            }
+            degrees += limelight.getXAngle();
         }
-        return Rotation2d.fromDegrees(Double.NaN);
+
+        return Rotation2d.fromDegrees(degrees / limelights.length);
     }
 
     @Override
-    public void periodic(){
+    public void periodic() {
         for (int i = 0; i < limelights.length; ++i) {
             limelights[i].updateData();
         }
 
         if (hasNoteData()) {
             SmartDashboard.putNumber("Note Detection/X Angle", getRotationToNote().getDegrees());
+            SmartDashboard.putNumber("Note Detection/Y Angle", limelights[0].getYAngle());
             SmartDashboard.putNumber("Note Detection/Note Distance", getDistanceToNote());
         }
     }
