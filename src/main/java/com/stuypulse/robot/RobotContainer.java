@@ -11,6 +11,7 @@ import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
 import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
 import com.stuypulse.robot.constants.Field;
+import com.stuypulse.robot.constants.LEDColor;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
@@ -18,7 +19,7 @@ import com.stuypulse.robot.subsystems.vision.AbstractVision;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
-import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.commands.leds.LEDSet;
 import com.stuypulse.robot.subsystems.intake.*;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
@@ -74,6 +75,7 @@ public class RobotContainer {
     /***************/
 
     private void configureButtonBindings() {
+        /*
         driver.getDPadUp().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(180)));
         driver.getDPadDown().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(0)));
         driver.getDPadLeft().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
@@ -92,7 +94,19 @@ public class RobotContainer {
 
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
         driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
+        */
+
+        driver.getTopButton().onTrue(new LEDSet(LEDColor.RAINBOW));
+        driver.getBottomButton().onTrue(new LEDSet(LEDColor.RICHIE));
+        driver.getRightButton().onTrue(new LEDSet(LEDColor.BANGLADESH));
+        driver.getLeftButton().onTrue(new LEDSet(LEDColor.PULSE_RED_BLUE));
+        
+        driver.getDPadUp().onTrue(new LEDSet(LEDColor.RED));
+        driver.getDPadDown().onTrue(new LEDSet(LEDColor.OFF));
+        driver.getDPadRight().onTrue(new LEDSet(LEDColor.BLUE));
+        driver.getDPadLeft().onTrue(new LEDSet(LEDColor.GREEN));
     }
+    
 
     /**************/
     /*** AUTONS ***/

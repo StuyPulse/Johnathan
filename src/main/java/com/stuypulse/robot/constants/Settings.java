@@ -186,4 +186,10 @@ public interface Settings {
             SmartNumber D = new SmartNumber("Alignment/Gyro/kD", 0.1);
         }
     }
+
+    public interface LED {
+        int LED_LENGTH = 55;
+        SmartNumber MANUAL_UPDATE_TIME = new SmartNumber("LED/LED Manual Update Time", .75);
+        SmartNumber BLINK_TIME = new SmartNumber("LED/LED Blink Time", .5);
+    }
 }

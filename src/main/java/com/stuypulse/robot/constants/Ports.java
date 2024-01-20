@@ -43,4 +43,8 @@ public interface Ports {
         public int BOTTOM_MOTOR = 20;
         public int TOP_MOTOR = 21;
     }
+
+    public interface LEDController {
+        public int PORT = 0;
+    }
 }
