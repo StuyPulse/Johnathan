@@ -193,13 +193,6 @@ public interface Settings {
         }
     }
 
-    public interface NoteAlignment {
-
-        SmartNumber P = new SmartNumber("Driver Settings/Note Alignment/kP", 3.0);
-        SmartNumber I = new SmartNumber("Driver Settings/Note Alignment/kI", 0.0);
-        SmartNumber D = new SmartNumber("Driver Settings/Note Alignment/kD", 0.0);
-    }
-
     public interface Alignment {
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Alignment/Debounce Time", 0.15);
         SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.1);
