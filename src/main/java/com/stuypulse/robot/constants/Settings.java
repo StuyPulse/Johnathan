@@ -24,7 +24,7 @@ import edu.wpi.first.math.util.Units;
 public interface Settings {
     public enum RobotType {
         JIM("03262B9F"),           // DeviceCode=0x7AAE@EDITOR=vi@PWD=/@TERM=dumb@DeviceDesc=roboRIO 2.0@SHLVL=3@TargetClass=cRIO@serialnum=03262B9F@PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/frc/bin:/usr/local/natinst/bin@FPGADeviceCode=0x7AAF@_=/usr/local/frc/JRE/bin/java
-        OFFSEASON_BOT("0305a69d"), // DeviceCode=0x76F2@PWD=/usr/local/natinst/labview@DeviceDesc=roboRIO@SHLVL=2@TargetClass=cRIO@serialnum=0305a69d@FPGADeviceCode=0x77A9@_=/sbin/start-stop-daemon@
+        OFFSEASON_BOT("0305A69D"), // DeviceCode=0x76F2@PWD=/usr/local/natinst/labview@DeviceDesc=roboRIO@SHLVL=2@TargetClass=cRIO@serialnum=0305a69d@FPGADeviceCode=0x77A9@_=/sbin/start-stop-daemon@
         SIM("");
 
         public final String serialNum;
@@ -35,7 +35,7 @@ public interface Settings {
 
         public static RobotType fromString(String serialNum) {
             for (RobotType robot : RobotType.values()) {
-                if (robot.serialNum.equals(serialNum)) {
+                if (robot.serialNum.equals(serialNum.toUpperCase())) {
                     return robot;
                 }
             }
@@ -118,7 +118,7 @@ public interface Settings {
             }
         }
 	}
-    
+
     public interface Driver {
         public interface Drive {
             SmartNumber DEADBAND = new SmartNumber("Driver Settings/Drive/Deadband", 0.03);
@@ -145,16 +145,7 @@ public interface Settings {
                 SmartNumber I = new SmartNumber("Driver Settings/Gyro Feedback/kI", 0.0);
                 SmartNumber D = new SmartNumber("Driver Settings/Gyro Feedback/kD", 0.1);
             }
-
-            public interface NoteAlignment {
-                SmartNumber ANGLE_DEADBAND = new SmartNumber("Driver Settings/Note Alignment/Angle Deadband", 1);
-
-                SmartNumber P = new SmartNumber("Driver Settings/Note Alignment/kP", 3.0);
-                SmartNumber I = new SmartNumber("Driver Settings/Note Alignment/kI", 0.0);
-                SmartNumber D = new SmartNumber("Driver Settings/Note Alignment/kD", 0.0);
-            }
         }
-
     }
 
     public interface Intake {
@@ -188,17 +179,50 @@ public interface Settings {
 
         SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.08);
         SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", 0.1);
-        SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 0.1);
+        SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
 
         public interface Translation {
-            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 1);
-            SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0);
-            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0);
+            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 1.0);
+            SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.0);
         }
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 1);
-            SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0);
-            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0);
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.0);
+            SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.0);
+        }
+    }
+
+    public interface NoteAlignment {
+
+        SmartNumber P = new SmartNumber("Driver Settings/Note Alignment/kP", 3.0);
+        SmartNumber I = new SmartNumber("Driver Settings/Note Alignment/kI", 0.0);
+        SmartNumber D = new SmartNumber("Driver Settings/Note Alignment/kD", 0.0);
+    }
+
+    public interface Alignment {
+        SmartNumber DEBOUNCE_TIME = new SmartNumber("Alignment/Debounce Time", 0.15);
+        SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.1);
+        SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.1);
+        SmartNumber ANGLE_TOLERANCE = new SmartNumber("Alignment/Angle Tolerance", 5);
+
+
+        public interface Translation {
+            SmartNumber P = new SmartNumber("Alignment/Translation/kP", 2.5);
+            SmartNumber I = new SmartNumber("Alignment/Translation/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Translation/kD", 0.0);
+        }
+
+        public interface Rotation {
+            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 1);
+            SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
+        }
+
+        public interface Gyro {
+            SmartNumber P = new SmartNumber("Alignment/Gyro/kP", 12);
+            SmartNumber I = new SmartNumber("Alignment/Gyro/kI", 0);
+            SmartNumber D = new SmartNumber("Alignment/Gyro/kD", 0.1);
         }
     }
 }

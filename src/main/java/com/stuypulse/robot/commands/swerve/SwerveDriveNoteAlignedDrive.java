@@ -1,9 +1,9 @@
 package com.stuypulse.robot.commands.swerve;
 
 import com.stuypulse.robot.constants.Settings;
+import com.stuypulse.robot.constants.Settings.NoteDetection;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.constants.Settings.Driver.Turn;
-import com.stuypulse.robot.constants.Settings.Driver.Turn.NoteAlignment;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.control.angle.AngleController;
@@ -54,7 +54,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
                 new LowPassFilter(Turn.RC)
             );
 
-        alignController = new AnglePIDController(NoteAlignment.P, NoteAlignment.I, NoteAlignment.D);
+        alignController = new AnglePIDController(NoteDetection.Rotation.P, NoteDetection.Rotation.I, NoteDetection.Rotation.D);
         
         addRequirements(swerve);
     }
@@ -63,7 +63,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
     public void execute() {
         double angularVel = turn.get();
 
-        if (noteVision.hasNoteData() && Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteAlignment.ANGLE_DEADBAND.get()) {
+        if (noteVision.hasNoteData() && Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteDetection.THRESHOLD_ANGLE.get()) {
             angularVel = -alignController.update(
                 Angle.kZero,
                 Angle.fromRotation2d(noteVision.getRotationToNote())
@@ -72,8 +72,6 @@ public class SwerveDriveNoteAlignedDrive extends Command {
         
         // robot relative
         swerve.setChassisSpeeds(new ChassisSpeeds(speed.get().x, speed.get().y, angularVel));
-        // field relative
-        // swerve.drive(speed.get(), angularVel);
 
         SmartDashboard.putNumber("Note Vision/Output", alignController.getOutput());
 
