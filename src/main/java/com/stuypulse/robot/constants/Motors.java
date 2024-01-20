@@ -32,6 +32,11 @@ public interface Motors {
         }
     }
 
+    public interface Intake {
+        public CANSparkMaxConfig TOP_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
+        public CANSparkMaxConfig BOTTOM_CONFIG = new CANSparkMaxConfig(true, IdleMode.kBrake, 60);
+    }
+
     public interface Swerve {
         public CANSparkMaxConfig DRIVE_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
         public CANSparkMaxConfig TURN_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
