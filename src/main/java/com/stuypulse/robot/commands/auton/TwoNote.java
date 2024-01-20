@@ -1,32 +1,32 @@
 package com.stuypulse.robot.commands.auton;
 
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
-import com.stuypulse.robot.commands.intake.IntakeAcquire;
-import com.stuypulse.robot.commands.shooter.TwoWheelShooter.TwoWheelShooterPodiumShot;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.stuypulse.robot.commands.swerve.SwerveDriveFollowTrajectory;
-import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class TwoNote extends SequentialCommandGroup {
-    public static final PathConstraints CONSTRAINTS = new PathConstraints(0, 0, 0, 0);
+    // public static final PathConstraints CONSTRAINTS = new PathConstraints(0, 0, 0, 0);
+    PathPlannerAuto auto = new PathPlannerAuto("2 Note");
 
-    public TwoNote(TwoWheelShooter shooter) {
-        // Shoot first note
+    public TwoNote() {
         addCommands(
-            new TwoWheelShooterPodiumShot(shooter)
+            new SwerveDriveFollowTrajectory(auto)
         );
+        // // Shoot first note
+        // addCommands(
+        //     new TwoWheelShooterPodiumShot(shooter)
+        // );
         
-        // Move to + intake second note
-        addCommands(
-            new SwerveDriveFollowTrajectory(PathPlannerPath.fromPathFile("2 Note")).robotRelative(),
-            new IntakeAcquire()
-        ); 
+        // // Move to + intake second note
+        // addCommands(
+        //     new SwerveDriveFollowTrajectory(PathPlannerPath.fromPathFile("2 Note")).robotRelative(),
+        //     new IntakeAcquire()
+        // ); 
         
-        //Shoot second note
-        addCommands(
-            new TwoWheelShooterPodiumShot(shooter)
-        );
+        // //Shoot second note
+        // addCommands(
+        //     new TwoWheelShooterPodiumShot(shooter)
+        // );
     }
 }

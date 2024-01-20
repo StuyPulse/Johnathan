@@ -2,7 +2,6 @@ package com.stuypulse.robot.commands.auton;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.stuypulse.robot.commands.swerve.SwerveDriveFollowTrajectory;
-import com.stuypulse.robot.subsystems.shooter.TwoWheelShooter.TwoWheelShooter;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 

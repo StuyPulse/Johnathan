@@ -2,7 +2,6 @@ package com.stuypulse.robot.subsystems.odometry;
 
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.subsystems.vision.AbstractVision;
-import com.stuypulse.robot.util.Fiducial;
 import com.stuypulse.robot.util.VisionData;
 import com.stuypulse.stuylib.network.SmartBoolean;
 

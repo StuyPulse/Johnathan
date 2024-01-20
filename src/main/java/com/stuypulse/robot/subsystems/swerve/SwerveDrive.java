@@ -43,11 +43,9 @@ public class SwerveDrive extends SubsystemBase {
                 new RetepModule(BackLeft.ID, BackLeft.MODULE_OFFSET, BackLeft.ABSOLUTE_OFFSET, Ports.Swerve.BackLeft.TURN, Ports.Swerve.BackLeft.DRIVE, Ports.Swerve.BackLeft.ENCODER),
                 new RetepModule(BackRight.ID, BackRight.MODULE_OFFSET, BackRight.ABSOLUTE_OFFSET, Ports.Swerve.BackRight.TURN, Ports.Swerve.BackRight.DRIVE, Ports.Swerve.BackRight.ENCODER)
             );
-        }
-        else if (Robot.robotType == RobotType.JIM) {
+        } else if (Robot.robotType == RobotType.JIM) {
             instance = JimModule.getModules();
-        }
-        else {
+        } else {
             instance = new SwerveDrive(
                 new SimModule(FrontRight.ID, FrontRight.MODULE_OFFSET),
                 new SimModule(FrontLeft.ID, FrontLeft.MODULE_OFFSET),
