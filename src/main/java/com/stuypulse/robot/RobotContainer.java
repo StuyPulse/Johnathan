@@ -6,6 +6,7 @@
 package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.path.PathConstraints;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
@@ -27,6 +28,7 @@ import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -49,11 +51,10 @@ public class RobotContainer {
     // Robot container
 
     public RobotContainer() {
+        swerve.configureAutoBuilder();
         configureDefaultCommands();
         configureButtonBindings();
         configureNamedCommands();
-
-        swerve.configureAutoBuilder();
         configureAutons();
     }
 
@@ -96,6 +97,7 @@ public class RobotContainer {
         // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
         driver.getLeftButton().whileTrue(new SwerveDriveToScore());
         driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
+        driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
     }
 
     /**************/
