@@ -19,7 +19,6 @@ import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -81,7 +80,7 @@ public class SwerveDriveDriveToScore extends Command {
         updateTarget();
         controller.update(target, AbstractOdometry.getInstance().getPose());
 
-        if (distance > Units.inchesToMeters(TAKEOVER_DISTANCE_IN.get())) {
+        if (distance > Units.inchesToMeters(TAKEOVER_DISTANCE_IN.get() + TARGET_DISTANCE_IN.get())) {
             swerve.drive(xyStream.get(), controller.getOutput().omegaRadiansPerSecond);
         } else {
             swerve.setChassisSpeeds(controller.getOutput());
