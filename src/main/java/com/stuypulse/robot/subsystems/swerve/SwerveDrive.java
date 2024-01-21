@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.constants.Ports;
@@ -102,6 +103,8 @@ public class SwerveDrive extends SubsystemBase {
             }, 
             instance
         );
+
+        PathPlannerLogging.setLogActivePathCallback((poses) -> AbstractOdometry.getInstance().getField().getObject("path").setPoses(poses));
     }
 
     public void initModule2ds(Field2d field) {
