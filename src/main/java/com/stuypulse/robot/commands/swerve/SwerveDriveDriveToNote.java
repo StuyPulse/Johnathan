@@ -10,16 +10,7 @@ import static com.stuypulse.robot.constants.Settings.NoteDetection.*;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
-import com.stuypulse.robot.util.HolonomicController;
-import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
-import com.stuypulse.stuylib.control.feedback.PIDController;
-import com.stuypulse.stuylib.streams.booleans.BStream;
-import com.stuypulse.stuylib.streams.booleans.filters.BDebounceRC;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -46,7 +37,7 @@ public class SwerveDriveDriveToNote extends Command {
             return;
         }
 
-        swerve.setChassisSpeeds(new ChassisSpeeds(-DRIVE_SPEED.get(), 0, 0));
+        swerve.setChassisSpeeds(new ChassisSpeeds(DRIVE_SPEED.get(), 0, 0));
     }
 
     @Override
