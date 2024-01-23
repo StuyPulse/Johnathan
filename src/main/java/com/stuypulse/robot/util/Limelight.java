@@ -62,7 +62,7 @@ public class Limelight {
         xAngle = IStream.create(() -> txData)
             .filtered(new LowPassFilter(NoteDetection.X_ANGLE_RC));
         noteData = BStream.create(() -> tvEntry.get() == 1)
-            .filtered(new BDebounceRC.Both(NoteDetection.DEBOUNCE_TIME));
+            .filtered(new BDebounceRC.Rising(NoteDetection.DEBOUNCE_TIME));
     }
 
     public String getTableName() {
@@ -81,7 +81,7 @@ public class Limelight {
     }
 
     public double getXAngle() {
-        return xAngle.get() - Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getZ());
+        return -xAngle.get() + Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getZ());
     }
 
     public double getYAngle() {
@@ -90,6 +90,6 @@ public class Limelight {
 
     public double getDistanceToNote() {
         Rotation2d yRotation =  Rotation2d.fromDegrees(getYAngle());
-        return POSITIONS[limelightId].getZ() / yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
+        return POSITIONS[limelightId].getZ() / -yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
     }
 }

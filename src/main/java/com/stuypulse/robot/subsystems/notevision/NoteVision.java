@@ -51,6 +51,8 @@ public class NoteVision extends AbstractNoteVision {
         }
 
         note = AbstractOdometry.getInstance().getField().getObject("Note");
+
+        notePose = new Translation2d();
     }
 
     @Override
@@ -65,6 +67,10 @@ public class NoteVision extends AbstractNoteVision {
 
     @Override
     public Translation2d getEstimatedNotePose() {
+        return notePose;
+    }
+
+    public void updateNotePose() {
         Translation2d sum = new Translation2d();
 
         for (Limelight limelight : limelights) {
@@ -72,25 +78,16 @@ public class NoteVision extends AbstractNoteVision {
 
             Translation2d limelightToNote = new Translation2d(limelight.getDistanceToNote(), Rotation2d.fromDegrees(limelight.getXAngle()));
 
-            SmartDashboard.putNumber("limelight to note/x", limelightToNote.getX());
-            SmartDashboard.putNumber("limelight to note/y", limelightToNote.getY());
-
             Translation2d robotToNote = limelightToNote
                 .minus(limelight.robotRelativePose.getTranslation().toTranslation2d())
                 .rotateBy(limelight.robotRelativePose.getRotation().toRotation2d());
-            
-            SmartDashboard.putNumber("robot to note/x", robotToNote.getX());
-            SmartDashboard.putNumber("robot to note/y", robotToNote.getY());
 
-            Translation2d fieldToNote = robotToNote.plus(odometry.getTranslation());
-            
-            SmartDashboard.putNumber("field to note/x", fieldToNote.getX());
-            SmartDashboard.putNumber("field to note/y", fieldToNote.getY());
+            Translation2d fieldToNote = robotToNote.rotateBy(odometry.getRotation()).plus(odometry.getTranslation());
 
             sum = sum.plus(fieldToNote);
         }
 
-        return sum.div(limelights.length);
+        notePose = sum.div(limelights.length);
     }
 
     @Override
@@ -104,8 +101,11 @@ public class NoteVision extends AbstractNoteVision {
         note.setPose(new Pose2d(notePose, new Rotation2d()));
 
         if (hasNoteData()) {
+            updateNotePose();
+
             SmartDashboard.putNumber("Note Detection/X Angle", limelights[0].getXAngle());
             SmartDashboard.putNumber("Note Detection/Y Angle", limelights[0].getYAngle());
+            SmartDashboard.putNumber("Note Detection/Distance", limelights[0].getDistanceToNote());
             SmartDashboard.putNumber("Note Detection/Estimated X", notePose.getX());
             SmartDashboard.putNumber("Note Detection/Estimated Y", notePose.getY());
         }

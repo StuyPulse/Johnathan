@@ -164,7 +164,7 @@ public interface Settings {
         Pose3d [] POSITIONS = new Pose3d[] {
             new Pose3d(
                 new Translation3d(Units.inchesToMeters(3), 0, Units.inchesToMeters(13.75)),
-                new Rotation3d(0, Math.toRadians(8), Math.toRadians(182)))
+                new Rotation3d(0, Math.toRadians(8), Math.toRadians(2)))
         };
     }
 
@@ -187,9 +187,9 @@ public interface Settings {
             SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
         }
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.5);
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 1);
             SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
-            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.1);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.0);
         }
     }
 
