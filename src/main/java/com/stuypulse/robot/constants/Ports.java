@@ -14,25 +14,25 @@ public interface Ports {
     }
 
     public interface Swerve {
-        public interface FrontRight {
+        public interface BackLeft {
             int DRIVE = 10;
             int TURN = 11;
             int ENCODER = 2;
         }
 
-        public interface FrontLeft {
+        public interface BackRight {
             int DRIVE = 12;
             int TURN = 13;
             int ENCODER = 1;
         }
         
-        public interface BackLeft {
+        public interface FrontRight {
             int DRIVE = 14;
             int TURN = 15;
             int ENCODER = 4;
         }
         
-        public interface BackRight {
+        public interface FrontLeft {
             int DRIVE = 16;
             int TURN = 17;
             int ENCODER = 3;
