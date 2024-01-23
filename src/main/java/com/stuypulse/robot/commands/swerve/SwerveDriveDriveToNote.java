@@ -18,6 +18,7 @@ import com.stuypulse.stuylib.streams.booleans.filters.BDebounceRC;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -54,12 +55,14 @@ public class SwerveDriveDriveToNote extends Command {
 
     @Override
     public void execute() {
-        double noteDistance  = vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
-        Rotation2d noteRotation = vision.getRotationToNote();
+        double noteDistanceToIntake  = vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
+        Rotation2d rotationToNote = vision.getRotationToNote();
+
+        Translation2d noteRelativeTranslation = new Translation2d(noteDistanceToIntake, rotationToNote);
 
         // origin is center of intake facing forwards
         Pose2d targetPose = new Pose2d(0, 0, new Rotation2d());
-        Pose2d currentPose = new Pose2d(noteDistance * noteRotation.getCos(), noteDistance * noteRotation.getSin(), noteRotation);
+        Pose2d currentPose = new Pose2d(noteRelativeTranslation, rotationToNote);
 
         if (!vision.hasNoteData()) {
             currentPose = new Pose2d(targetPose.getTranslation(), currentPose.getRotation());

@@ -8,6 +8,7 @@ package com.stuypulse.robot.util;
 import static com.stuypulse.robot.constants.Settings.Limelight.LIMELIGHTS;
 import static com.stuypulse.robot.constants.Settings.Limelight.POSITIONS;
 
+import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Settings.NoteDetection;
 import com.stuypulse.stuylib.network.SmartNumber;
 import com.stuypulse.stuylib.streams.booleans.BStream;
@@ -88,8 +89,9 @@ public class Limelight {
         return tyData - Units.radiansToDegrees(POSITIONS[limelightId].getRotation().getY());
     }
 
+    // limelight targets far end of note, so have to subtract half of note length
     public double getDistanceToNote() {
         Rotation2d yRotation =  Rotation2d.fromDegrees(getYAngle());
-        return POSITIONS[limelightId].getZ() / -yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
+        return POSITIONS[limelightId].getZ() / -yRotation.getTan() + POSITIONS[limelightId].getX() - Field.NOTE_LENGTH / 2.0;
     }
 }
