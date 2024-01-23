@@ -20,61 +20,37 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveDriveToNote extends Command {
 
-    // Subsystems
     private final SwerveDrive swerve;
     private final AbstractNoteVision vision;
 
-    // Holonomic control
-    private final HolonomicController controller;
-    private final BStream aligned;
-
-    public SwerveDriveDriveToNote(){
+    public SwerveDriveDriveToNote() {
         this.swerve = SwerveDrive.getInstance();
         this.vision = AbstractNoteVision.getInstance();
-
-        controller = new HolonomicController(
-            new PIDController(Translation.P,Translation.I,Translation.D),
-            new PIDController(Translation.P, Translation.I, Translation.D),
-            new AnglePIDController(Rotation.P, Rotation.I, Rotation.D)
-        );
-
-        SmartDashboard.putData("Note Detection/Controller", controller);
-
-        aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(DEBOUNCE_TIME));
 
         addRequirements(swerve);
     }
 
-    private boolean isAligned() {
-        return controller.isDone(THRESHOLD_X.get(), THRESHOLD_Y.get(), THRESHOLD_ANGLE.get());
+    private double getDistanceToIntake() {
+        return vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
     }
 
     @Override
     public void execute() {
-        double noteDistanceToIntake  = vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
-        Rotation2d rotationToNote = vision.getRotationToNote();
-
-        Translation2d noteRelativeTranslation = new Translation2d(noteDistanceToIntake, rotationToNote);
-
-        // origin is center of intake facing forwards
-        Pose2d targetPose = new Pose2d(0, 0, new Rotation2d());
-        Pose2d currentPose = new Pose2d(noteRelativeTranslation, rotationToNote);
-
         if (!vision.hasNoteData()) {
-            currentPose = new Pose2d(targetPose.getTranslation(), currentPose.getRotation());
+            swerve.stop();
+            return;
         }
 
-        swerve.setChassisSpeeds(controller.update(targetPose, currentPose));
-
-        SmartDashboard.putBoolean("Note Detection/Is Aligned", aligned.get());
+        swerve.setChassisSpeeds(new ChassisSpeeds(-DRIVE_SPEED.get(), 0, 0));
     }
 
     @Override
     public boolean isFinished() {
-        return aligned.get();
+        return Math.abs(getDistanceToIntake()) < THRESHOLD_X.get();
     }
 }

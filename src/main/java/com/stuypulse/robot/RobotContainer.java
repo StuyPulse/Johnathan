@@ -7,6 +7,7 @@ package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
+import com.stuypulse.robot.commands.swerve.SwerveDrivePointToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
@@ -99,9 +100,15 @@ public class RobotContainer {
         driver.getRightBumper()
             .whileTrue(new SwerveDriveNoteAlignedDrive(driver));
 
+        // driver.getLeftBumper()
+        //     .whileTrue(new SwerveDriveDriveToNote())
+        //     .whileTrue(new IntakeAcquire())
+        //     .onFalse(new IntakeStop());
         driver.getLeftBumper()
-            .whileTrue(new SwerveDriveDriveToNote())
             .whileTrue(new IntakeAcquire())
+            .whileTrue(
+                new SwerveDrivePointToNote().andThen(
+                new SwerveDriveDriveToNote()))
             .onFalse(new IntakeStop());
     }
 

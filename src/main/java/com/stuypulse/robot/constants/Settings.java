@@ -185,6 +185,8 @@ public interface Settings {
         SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", Units.inchesToMeters(2));
         SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
 
+        SmartNumber DRIVE_SPEED = new SmartNumber("Note Detection/Drive Speed", 1);        
+
         public interface Translation {
             SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 4.0);
             SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
