@@ -5,6 +5,7 @@ import com.stuypulse.robot.constants.Settings.NoteDetection;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.constants.Settings.Driver.Turn;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.control.angle.AngleController;
 import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
@@ -18,14 +19,18 @@ import com.stuypulse.stuylib.streams.vectors.filters.VDeadZone;
 import com.stuypulse.stuylib.streams.vectors.filters.VLowPassFilter;
 import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveNoteAlignedDrive extends Command {
        
-    private SwerveDrive swerve;
-    private AbstractNoteVision noteVision;
+    private final SwerveDrive swerve;
+    private final AbstractOdometry odometry;
+    private final AbstractNoteVision noteVision;
     
     private VStream speed; 
     private IStream turn;
@@ -34,6 +39,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
 
     public SwerveDriveNoteAlignedDrive(Gamepad driver) {
         swerve = SwerveDrive.getInstance();
+        odometry = AbstractOdometry.getInstance();
         noteVision = AbstractNoteVision.getInstance();
 
         speed = VStream.create(driver::getLeftStick)
@@ -61,14 +67,15 @@ public class SwerveDriveNoteAlignedDrive extends Command {
 
    @Override
     public void execute() {
-        double angularVel = turn.get();
+        Translation2d targetTranslation = odometry.getTranslation().plus(
+            new Translation2d(Units.inchesToMeters(18), 0).rotateBy(odometry.getRotation()));
 
-        if (Math.abs(noteVision.getRotationToNote().getDegrees()) > NoteDetection.THRESHOLD_ANGLE.get()) {
-            angularVel = -alignController.update(
-                Angle.kZero,
-                Angle.fromRotation2d(noteVision.getRotationToNote())
-            );
-        }
+        Rotation2d targetRotation = noteVision.getEstimatedNotePose().minus(targetTranslation).getAngle();
+
+        double angularVel = -alignController.update(
+            Angle.fromRotation2d(targetRotation),
+            Angle.fromRotation2d(odometry.getRotation())
+        );
         
         // robot relative
         // swerve.setChassisSpeeds(new ChassisSpeeds(-speed.get().y, speed.get().x, -angularVel));

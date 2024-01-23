@@ -33,7 +33,6 @@ public class Limelight {
     private final IntegerEntry tvEntry;
 
     private int limelightId;
-    private final Pose3d robotRelativePose;
 
     private double txData;
     private double tyData;
@@ -41,6 +40,7 @@ public class Limelight {
     private IStream xAngle;
     private BStream noteData;
 
+    public final Pose3d robotRelativePose;
 
     public Limelight(String tableName, Pose3d robotRelativePose) {
         this.tableName = tableName;
@@ -90,6 +90,6 @@ public class Limelight {
 
     public double getDistanceToNote() {
         Rotation2d yRotation =  Rotation2d.fromDegrees(getYAngle());
-        return POSITIONS[limelightId].getZ() / -yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
+        return POSITIONS[limelightId].getZ() / yRotation.getTan() + POSITIONS[limelightId].getX() - Units.inchesToMeters(14.0 / 2.0);
     }
 }

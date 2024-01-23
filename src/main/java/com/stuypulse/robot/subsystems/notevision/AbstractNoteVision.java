@@ -5,8 +5,7 @@
 
 package com.stuypulse.robot.subsystems.notevision;
 
-
-import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class AbstractNoteVision extends SubsystemBase {
@@ -24,7 +23,6 @@ public abstract class AbstractNoteVision extends SubsystemBase {
     
     public abstract boolean hasNoteData();
 
-    public abstract double getDistanceToNote();
-    public abstract Rotation2d getRotationToNote();
+    public abstract Translation2d getEstimatedNotePose();
 
 }

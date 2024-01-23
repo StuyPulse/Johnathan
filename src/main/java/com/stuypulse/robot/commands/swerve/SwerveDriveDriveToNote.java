@@ -9,6 +9,7 @@ import static com.stuypulse.robot.constants.Settings.NoteDetection.*;
 
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.util.HolonomicController;
 import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
@@ -18,6 +19,8 @@ import com.stuypulse.stuylib.streams.booleans.filters.BDebounceRC;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -25,6 +28,7 @@ public class SwerveDriveDriveToNote extends Command {
 
     // Subsystems
     private final SwerveDrive swerve;
+    private final AbstractOdometry odometry;
     private final AbstractNoteVision vision;
 
     // Holonomic control
@@ -33,6 +37,7 @@ public class SwerveDriveDriveToNote extends Command {
 
     public SwerveDriveDriveToNote(){
         this.swerve = SwerveDrive.getInstance();
+        this.odometry = AbstractOdometry.getInstance();
         this.vision = AbstractNoteVision.getInstance();
 
         controller = new HolonomicController(
@@ -54,18 +59,18 @@ public class SwerveDriveDriveToNote extends Command {
 
     @Override
     public void execute() {
-        double noteDistance  = vision.getDistanceToNote() - Swerve.LENGTH / 2.0;
-        Rotation2d noteRotation = vision.getRotationToNote();
+        Translation2d targetTranslation = odometry.getTranslation().plus(
+            new Translation2d(Units.inchesToMeters(18), 0).rotateBy(odometry.getRotation()));
 
-        // origin is center of intake facing forwards
-        Pose2d targetPose = new Pose2d(0, 0, new Rotation2d());
-        Pose2d currentPose = new Pose2d(noteDistance * noteRotation.getCos(), noteDistance * noteRotation.getSin(), noteRotation);
+        Rotation2d targetRotation = vision.getEstimatedNotePose().minus(targetTranslation).getAngle();
+
+        Pose2d targetPose = new Pose2d(targetTranslation, targetRotation);
 
         if (!vision.hasNoteData()) {
-            currentPose = new Pose2d(targetPose.getTranslation(), currentPose.getRotation());
+            swerve.setChassisSpeeds(controller.update(targetPose, new Pose2d(targetTranslation, odometry.getRotation())));
         }
 
-        swerve.setChassisSpeeds(controller.update(targetPose, currentPose));
+        swerve.setChassisSpeeds(controller.update(targetPose, odometry.getPose()));
 
         SmartDashboard.putBoolean("Note Detection/Is Aligned", aligned.get());
     }
