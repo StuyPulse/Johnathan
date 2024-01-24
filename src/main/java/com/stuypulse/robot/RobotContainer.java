@@ -6,6 +6,7 @@
 package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathConstraints;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
@@ -62,7 +63,9 @@ public class RobotContainer {
     /*** NAMED COMMANDS ***/
     /**********************/
 
-    private void configureNamedCommands() {}
+    private void configureNamedCommands() {
+        NamedCommands.registerCommand("intake acquire", new IntakeAcquire());
+    }
 
     /****************/
     /*** DEFAULTS ***/
@@ -83,11 +86,11 @@ public class RobotContainer {
         driver.getDPadRight().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
         
         driver.getRightTriggerButton()
-            .whileTrue(new IntakeAcquire())
+            .onTrue(new IntakeAcquire())
             .onFalse(new IntakeStop());
 
         driver.getLeftTriggerButton()
-            .whileTrue(new IntakeDeacquire())
+            .onFalse(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
         // driver.getLeftButton().whileTrue(new SwerveDriveToPose(new Pose2d(4, 5.5, new Rotation2d())));
