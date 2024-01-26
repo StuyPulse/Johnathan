@@ -5,6 +5,8 @@
 
 package com.stuypulse.robot;
 
+import com.pathplanner.lib.pathfinding.LocalADStar;
+import com.pathplanner.lib.pathfinding.Pathfinding;
 import com.stuypulse.robot.constants.Settings.RobotType;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -50,6 +52,8 @@ public class Robot extends TimedRobot {
         state = MatchState.DISABLE;
         SmartDashboard.putString("Match State", state.name());
         SmartDashboard.putString("Robot Type", robotType.name());
+
+        Pathfinding.setPathfinder(new LocalADStar());
     }
 
     @Override

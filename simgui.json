@@ -1,0 +1,100 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Autonomous": "String Chooser",
+      "/SmartDashboard/Field": "Field2d"
+    },
+    "windows": {
+      "/SmartDashboard/Autonomous": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Field": {
+        "Back Left-2d": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.4000000059604645,
+          "selectable": false,
+          "weight": 2.0,
+          "width": 0.4000000059604645
+        },
+        "Back Right-2d": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.4000000059604645,
+          "weight": 2.0,
+          "width": 0.4000000059604645
+        },
+        "Estimator Pose": {
+          "arrowColor": [
+            0.0,
+            0.029412031173706055,
+            1.0,
+            255.0
+          ],
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.6600000262260437,
+          "weight": 2.0,
+          "width": 0.6600000262260437
+        },
+        "Front Left-2d": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.4000000059604645,
+          "weight": 2.0,
+          "width": 0.4000000059604645
+        },
+        "Front Right-2d": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.4000000059604645,
+          "weight": 2.0,
+          "width": 0.4000000059604645
+        },
+        "Odometry Pose": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.6600000262260437,
+          "weight": 2.0,
+          "width": 0.6600000262260437
+        },
+        "Robot": {
+          "arrowSize": 25,
+          "arrows": false,
+          "style": "Hidden"
+        },
+        "Target Pose": {
+          "arrowSize": 25,
+          "arrowWeight": 2.0,
+          "length": 0.6600000262260437,
+          "selectable": false,
+          "style": "Box/Image",
+          "weight": 2.0,
+          "width": 0.6600000262260437
+        },
+        "bottom": 544,
+        "builtin": "2024 Crescendo",
+        "height": 8.013679504394531,
+        "left": 46,
+        "path": {
+          "arrows": false,
+          "selectable": false,
+          "style": "Line",
+          "weight": 2.0
+        },
+        "right": 1088,
+        "top": 36,
+        "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  }
+}

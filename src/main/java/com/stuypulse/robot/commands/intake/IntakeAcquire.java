@@ -1,11 +1,11 @@
 package com.stuypulse.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.subsystems.intake.*;
 
-public class IntakeAcquire extends Command {
+public class IntakeAcquire extends InstantCommand {
 
     private AbstractIntake intake;
 
@@ -23,5 +23,4 @@ public class IntakeAcquire extends Command {
             Settings.Intake.ACQUIRE_SPEED_BOTTOM.get()
         );
     }
-
 }
