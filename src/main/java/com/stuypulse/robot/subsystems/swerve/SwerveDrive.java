@@ -92,7 +92,7 @@ public class SwerveDrive extends SubsystemBase {
                 Swerve.Motion.XY, 
                 Swerve.Motion.THETA, 
                 Swerve.MAX_MODULE_SPEED.get(), 
-                Swerve.WIDTH, 
+                Math.hypot(Swerve.LENGTH, Swerve.WIDTH), 
                 new ReplanningConfig(true, true)), 
             () -> {
                 var alliance = DriverStation.getAlliance();
@@ -100,7 +100,7 @@ public class SwerveDrive extends SubsystemBase {
                     return alliance.get() == DriverStation.Alliance.Red;
                 }
                 return false;
-            }, 
+            },
             instance
         );
 
