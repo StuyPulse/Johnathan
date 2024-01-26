@@ -50,31 +50,29 @@ public interface Settings {
         double LENGTH = Units.inchesToMeters(26);
 
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
-		SmartNumber MAX_MODULE_SPEED = new SmartNumber("Swerve/Maximum module speed (m per s)", 5.06);
-		SmartNumber MAX_MODULE_TURN = new SmartNumber("Swerve/Maximum module turn (rad per s)", 6.28);
+		double MAX_MODULE_SPEED = 5.88;
 
         public interface Turn {
-            SmartNumber kP = new SmartNumber("Swerve/Turn/kP", 6.0);
-            SmartNumber kI = new SmartNumber("Swerve/Turn/kI", 0.0);
-            SmartNumber kD = new SmartNumber("Swerve/Turn/kD", 0.15);
+            double kP = 6.0;
+            double kI = 0.0;
+            double kD = 0.15;
 
-            SmartNumber kS = new SmartNumber("Swerve/Turn/kS", 0.44076);
-            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 0.0056191);
-            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 0.00042985);
+            double kS = 0.44076;
+            double kV = 0.0056191;
+            double kA = 0.00042985;
         }
 
         public interface Drive {
-            SmartNumber kP = new SmartNumber("Swerve/Drive/kP", 0.00019162);
-            SmartNumber kI = new SmartNumber("Swerve/Drive/kI", 0.0);
-            SmartNumber kD = new SmartNumber("Swerve/Drive/kD", 0.0);
+            double kP = 0.00019162;
+            double kI = 0.0;
+            double kD = 0.0;
 
-            SmartNumber kS = new SmartNumber("Swerve/Drive/kS", 0.36493);
-            SmartNumber kV = new SmartNumber("Swerve/Drive/kV", 2.448);
-            SmartNumber kA = new SmartNumber("Swerve/Drive/kA", 0.16408);
+            double kS = 0.36493;
+            double kV = 2.448;
+            double kA = 0.16408;
         }
 
         public interface Motion {
-            
             PIDConstants XY = new PIDConstants(0.7, 0, 0.02);
             PIDConstants THETA = new PIDConstants(10, 0, 0.1);
         }
@@ -122,7 +120,7 @@ public interface Settings {
             SmartNumber RC = new SmartNumber("Driver Settings/Drive/RC", 0.01);
             SmartNumber POWER = new SmartNumber("Driver Settings/Drive/Power", 2);
 
-            SmartNumber MAX_TELEOP_SPEED = new SmartNumber("Driver Settings/Drive/Max Speed", Swerve.MAX_MODULE_SPEED.get());
+            SmartNumber MAX_TELEOP_SPEED = new SmartNumber("Driver Settings/Drive/Max Speed", Swerve.MAX_MODULE_SPEED);
             SmartNumber MAX_TELEOP_ACCEL = new SmartNumber("Driver Settings/Drive/Max Accleration", 15);
         }
 

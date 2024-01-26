@@ -3,7 +3,6 @@ package com.stuypulse.robot.subsystems.swerve;
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 import com.stuypulse.robot.Robot;
@@ -16,7 +15,6 @@ import com.stuypulse.robot.constants.Settings.Swerve.BackRight;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontLeft;
 import com.stuypulse.robot.constants.Settings.Swerve.FrontRight;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
-import com.stuypulse.robot.subsystems.odometry.Odometry;
 import com.stuypulse.robot.subsystems.swerve.module.SimModule;
 import com.stuypulse.robot.subsystems.swerve.module.AbstractModule;
 import com.stuypulse.robot.subsystems.swerve.module.JimModule;
@@ -91,7 +89,7 @@ public class SwerveDrive extends SubsystemBase {
             new HolonomicPathFollowerConfig(
                 Swerve.Motion.XY, 
                 Swerve.Motion.THETA, 
-                Swerve.MAX_MODULE_SPEED.get(), 
+                Swerve.MAX_MODULE_SPEED, 
                 Math.hypot(Swerve.LENGTH, Swerve.WIDTH), 
                 new ReplanningConfig(true, true)), 
             () -> {
@@ -172,7 +170,7 @@ public class SwerveDrive extends SubsystemBase {
             );
         }
 
-        SwerveDriveKinematics.desaturateWheelSpeeds(states, Swerve.MAX_MODULE_SPEED.get());
+        SwerveDriveKinematics.desaturateWheelSpeeds(states, Swerve.MAX_MODULE_SPEED);
 
         for (int i = 0; i < modules.length; i++) {
             modules[i].setTargetState(filterModuleState(states[i]));
