@@ -1,6 +1,7 @@
 package com.stuypulse.robot.subsystems.swerve.module;
 
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -40,7 +41,7 @@ public class RetepModule extends AbstractModule {
     private final CANcoder turnEncoder;
 
     // drive
-    private final CANSparkMax driveMotor;
+    private final CANSparkFlex driveMotor;
     private final RelativeEncoder driveEncoder; 
     
     // controllers
@@ -53,7 +54,7 @@ public class RetepModule extends AbstractModule {
         this.angleOffset = angleOffset;
         
         turnMotor = new CANSparkMax(turnID, MotorType.kBrushless);
-        driveMotor = new CANSparkMax(driveID, MotorType.kBrushless);
+        driveMotor = new CANSparkFlex(driveID, MotorType.kBrushless);
 
         turnMotor.setIdleMode(IdleMode.kBrake);
         driveMotor.setIdleMode(IdleMode.kBrake);

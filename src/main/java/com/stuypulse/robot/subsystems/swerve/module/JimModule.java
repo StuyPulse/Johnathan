@@ -175,7 +175,7 @@ public class JimModule extends AbstractModule {
 
         targetState = new SwerveModuleState();
 
-        Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
+        Motors.Swerve.JIM_DRIVE_CONFIG.configure(driveMotor);
         Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     }
 
