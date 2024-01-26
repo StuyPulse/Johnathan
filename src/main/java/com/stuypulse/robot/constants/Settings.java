@@ -58,18 +58,19 @@ public interface Settings {
             SmartNumber kI = new SmartNumber("Swerve/Turn/kI", 0.0);
             SmartNumber kD = new SmartNumber("Swerve/Turn/kD", 0.15);
 
-            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 0.25);
-            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 0.007);
+            SmartNumber kS = new SmartNumber("Swerve/Turn/kS", 0.44076);
+            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 0.0056191);
+            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 0.00042985);
         }
 
         public interface Drive {
-            SmartNumber kP = new SmartNumber("Swerve/Drive/kP", 0.018327);
+            SmartNumber kP = new SmartNumber("Swerve/Drive/kP", 0.00019162);
             SmartNumber kI = new SmartNumber("Swerve/Drive/kI", 0.0);
             SmartNumber kD = new SmartNumber("Swerve/Drive/kD", 0.0);
 
-            SmartNumber kS = new SmartNumber("Swerve/Drive/kS", 0.098993);
-            SmartNumber kV = new SmartNumber("Swerve/Drive/kV", 2.4495);
-            SmartNumber kA = new SmartNumber("Swerve/Drive/kA", 0.089872);
+            SmartNumber kS = new SmartNumber("Swerve/Drive/kS", 0.36493);
+            SmartNumber kV = new SmartNumber("Swerve/Drive/kV", 2.448);
+            SmartNumber kA = new SmartNumber("Swerve/Drive/kA", 0.16408);
         }
 
         public interface Motion {

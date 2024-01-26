@@ -15,10 +15,10 @@ import edu.wpi.first.math.util.Units;
 public interface Cameras {
 
     public static final CameraConfig DEFAULT_CAMERA = new CameraConfig("default",
-            new Pose3d(-Units.inchesToMeters(12.5),
-                       -Units.inchesToMeters(11.5),
-                       +Units.inchesToMeters(8.5),
-                       new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(-34), Units.degreesToRadians(180))));
+            new Pose3d(-Units.inchesToMeters(12),
+                       -Units.inchesToMeters(0),
+                       +Units.inchesToMeters(5),
+                       new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(-30), Units.degreesToRadians(180))));
 
     public static final CameraConfig[] ROBOT_CAMERAS = new CameraConfig[]{DEFAULT_CAMERA};
 
