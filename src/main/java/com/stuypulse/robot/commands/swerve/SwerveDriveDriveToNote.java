@@ -7,9 +7,13 @@ package com.stuypulse.robot.commands.swerve;
 
 import static com.stuypulse.robot.constants.Settings.NoteDetection.*;
 
+import com.stuypulse.robot.constants.Settings.Alignment;
+import com.stuypulse.robot.constants.Settings.NoteDetection;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+import com.stuypulse.stuylib.control.Controller;
+import com.stuypulse.stuylib.control.feedback.PIDController;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,9 +23,13 @@ public class SwerveDriveDriveToNote extends Command {
     private final SwerveDrive swerve;
     private final AbstractNoteVision vision;
 
+    private final Controller distanceController;
+
     public SwerveDriveDriveToNote() {
         this.swerve = SwerveDrive.getInstance();
         this.vision = AbstractNoteVision.getInstance();
+
+        distanceController = new PIDController(Alignment.Translation.P, Alignment.Translation.I, Alignment.Translation.D);
 
         addRequirements(swerve);
     }
@@ -37,7 +45,7 @@ public class SwerveDriveDriveToNote extends Command {
             return;
         }
 
-        swerve.setChassisSpeeds(new ChassisSpeeds(DRIVE_SPEED.get(), 0, 0));
+        swerve.setChassisSpeeds(new ChassisSpeeds(distanceController.update(AbstractNoteVision.getInstance().getDistanceToNote(), 0), 0, 0));
     }
 
     @Override
