@@ -13,6 +13,7 @@ import com.stuypulse.robot.commands.swerve.SwerveDrivePointToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
+import com.stuypulse.robot.commands.swerve.SwerveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
@@ -68,6 +69,8 @@ public class RobotContainer {
 
     private void configureNamedCommands() {
         NamedCommands.registerCommand("intake acquire", new IntakeAcquire());
+        NamedCommands.registerCommand("intake stop", new IntakeStop());
+        NamedCommands.registerCommand("align then intake note", new SwerveDrivePointToNote().andThen(new SwerveDriveDriveToNote()));
     }
 
     /****************/
@@ -105,10 +108,6 @@ public class RobotContainer {
         driver.getRightBumper()
             .whileTrue(new SwerveDriveNoteAlignedDrive(driver));
 
-        // driver.getLeftBumper()
-        //     .whileTrue(new SwerveDriveDriveToNote())
-        //     .whileTrue(new IntakeAcquire())
-        //     .onFalse(new IntakeStop());
         driver.getLeftBumper()
             .whileTrue(new IntakeAcquire())
             .whileTrue(
