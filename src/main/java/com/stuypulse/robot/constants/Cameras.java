@@ -14,7 +14,7 @@ import edu.wpi.first.math.util.Units;
 
 public interface Cameras {
 
-    public static final CameraConfig DEFAULT_CAMERA = new CameraConfig("default",
+    public static final CameraConfig DEFAULT_CAMERA = new CameraConfig("samera1",
             new Pose3d(-Units.inchesToMeters(12),
                        -Units.inchesToMeters(0),
                        +Units.inchesToMeters(5),

@@ -93,14 +93,14 @@ public class RobotContainer {
             .onFalse(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
-        // driver.getLeftButton().whileTrue(new SwerveDriveToPose(new Pose2d(4, 5.5, new Rotation2d())));
+        driver.getBottomButton().whileTrue(new SwerveDriveToPose(new Pose2d(2, 5.5, new Rotation2d(Units.degreesToRadians(180)))));
         // driver.getRightButton().whileTrue(new SwerveDriveToPose(new Pose2d(1.5, 5.5, new Rotation2d())));
 
-        // driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
+        driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
         // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
         driver.getLeftButton().whileTrue(new SwerveDriveToScore());
         driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
-        driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
+        // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
     }
 
     /**************/
