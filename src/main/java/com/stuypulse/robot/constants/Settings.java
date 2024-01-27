@@ -68,12 +68,12 @@ public interface Settings {
             double kD = 0.0;
 
             double kS = 0.17313;
-            double kV = 1.7573;
+            double kV = 1.7573 + 0.1;
             double kA = 0.19554 + 0.1;
         }
 
         public interface Motion {
-            PIDConstants XY = new PIDConstants(0.7, 0, 0.02);
+            PIDConstants XY = new PIDConstants(1, 0, 0.02);
             PIDConstants THETA = new PIDConstants(10, 0, 0.1);
         }
         
