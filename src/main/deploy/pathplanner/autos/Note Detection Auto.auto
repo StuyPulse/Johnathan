@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.3455940714383683,
+      "y": 5.488281020327646
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note Detection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intake acquire"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "align then intake note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intake stop"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
