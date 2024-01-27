@@ -180,7 +180,7 @@ public interface Settings {
         SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", Units.inchesToMeters(2));
         SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
 
-        SmartNumber DRIVE_SPEED = new SmartNumber("Note Detection/Drive Speed", 1);        
+        SmartNumber DRIVE_SPEED = new SmartNumber("Note Detection/Drive Speed", 2);        
 
         public interface Translation {
             SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 4.0);
@@ -188,7 +188,7 @@ public interface Settings {
             SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
         }
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.5);
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 4.0);
             SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
             SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.1);
         }
