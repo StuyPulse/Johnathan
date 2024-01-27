@@ -51,6 +51,7 @@ public interface Settings {
 	public interface Swerve {
         double WIDTH = Units.inchesToMeters(26);
         double LENGTH = Units.inchesToMeters(26);
+        double CENTER_TO_INTAKE_FRONT = Units.inchesToMeters(18);
 
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
 		SmartNumber MAX_MODULE_SPEED = new SmartNumber("Swerve/Maximum module speed (m per s)", 5.06);

@@ -29,7 +29,7 @@ public class NoteVision extends AbstractNoteVision {
 
     private Translation2d notePose;
 
-    private FieldObject2d note;
+    private FieldObject2d note2d;
 
     protected NoteVision() {
         // reference to all limelights on robot
@@ -50,7 +50,7 @@ public class NoteVision extends AbstractNoteVision {
             }
         }
 
-        note = AbstractOdometry.getInstance().getField().getObject("Note");
+        note2d = AbstractOdometry.getInstance().getField().getObject("Note");
 
         notePose = new Translation2d();
     }
@@ -94,11 +94,9 @@ public class NoteVision extends AbstractNoteVision {
     public void periodic() {
         for (int i = 0; i < limelights.length; ++i) {
             limelights[i].updateData();
-
-            notePose = getEstimatedNotePose();
         }
 
-        note.setPose(new Pose2d(notePose, new Rotation2d()));
+        note2d.setPose(new Pose2d(notePose, new Rotation2d()));
 
         if (hasNoteData()) {
             updateNotePose();
