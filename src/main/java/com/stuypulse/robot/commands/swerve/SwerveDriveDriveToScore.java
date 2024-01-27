@@ -68,6 +68,7 @@ public class SwerveDriveDriveToScore extends Command {
         Vector2D targetPos = speakerPos.add(robotPos.sub(speakerPos).normalize().mul(Units.inchesToMeters(TARGET_DISTANCE_IN.get())));
         this.target = new Pose2d(targetPos.x, targetPos.y, new Rotation2d(Math.atan2(targetPos.y - robot.getY(), targetPos.x - robot.getX())));
         this.distance = targetPos.sub(robotPos).magnitude();
+        
     }
 
     @Override

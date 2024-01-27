@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.41,
+      "x": 1.5,
       "y": 4.3
     },
     "rotation": 0.0
@@ -11,12 +11,6 @@
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": "intake acquire"
-          }
-        },
         {
           "type": "path",
           "data": {

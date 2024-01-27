@@ -46,8 +46,8 @@ public interface Settings {
     double DT = 0.02;
 
 	public interface Swerve {
-        double WIDTH = Units.inchesToMeters(26);
-        double LENGTH = Units.inchesToMeters(26);
+        double WIDTH = Units.inchesToMeters(21);
+        double LENGTH = Units.inchesToMeters(21);
 
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
 		double MAX_MODULE_SPEED = 5.88;
@@ -63,13 +63,13 @@ public interface Settings {
         }
 
         public interface Drive {
-            double kP = 0.00019162;
+            double kP = 0.002794;
             double kI = 0.0;
             double kD = 0.0;
 
-            double kS = 0.36493;
-            double kV = 2.448;
-            double kA = 0.16408;
+            double kS = 0.17313;
+            double kV = 1.7573;
+            double kA = 0.19554 + 0.1;
         }
 
         public interface Motion {

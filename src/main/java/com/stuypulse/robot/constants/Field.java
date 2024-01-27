@@ -100,7 +100,7 @@ public interface Field {
     }
 
     Pose2d SPEAKER_POSES[] = {
-        getFiducial(8).getPose().toPose2d(), // BLUE
+        getFiducial(7).getPose().toPose2d(), // BLUE
         getFiducial(4).getPose().toPose2d(), // RED
     };
 

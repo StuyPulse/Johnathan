@@ -80,7 +80,7 @@ public class SwerveDrive extends SubsystemBase {
 
     public void configureAutoBuilder() {
         AbstractOdometry odometry = AbstractOdometry.getInstance();
-
+        
         AutoBuilder.configureHolonomic(
             odometry::getPose,
             odometry::reset,
@@ -178,6 +178,10 @@ public class SwerveDrive extends SubsystemBase {
     }
 
     public void setChassisSpeeds(ChassisSpeeds speeds) {
+        SmartDashboard.putNumber("Swerve/X Target Chassis Speed", speeds.vxMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Y Target Chassis Speed", speeds.vyMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Omega Target Chassis Speed", speeds.omegaRadiansPerSecond);
+
         setModuleStates(kinematics.toSwerveModuleStates(speeds));
     }
 
@@ -279,6 +283,14 @@ public class SwerveDrive extends SubsystemBase {
         SmartDashboard.putNumber("Swerve/X Acceleration (Gs)", gyro.getWorldLinearAccelX());
         SmartDashboard.putNumber("Swerve/Y Acceleration (Gs)", gyro.getWorldLinearAccelY());
         SmartDashboard.putNumber("Swerve/Z Acceleration (Gs)", gyro.getWorldLinearAccelZ());
+
+        SmartDashboard.putNumber("Swerve/X Chassis Speed", getChassisSpeeds().vxMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Y Chassis Speed", getChassisSpeeds().vyMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Omega Chassis Speed", getChassisSpeeds().omegaRadiansPerSecond);
+
+        SmartDashboard.putNumber("Swerve/X Chassis Speed", getChassisSpeeds().vxMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Y Chassis Speed", getChassisSpeeds().vyMetersPerSecond);
+        SmartDashboard.putNumber("Swerve/Omega Chassis Speed", getChassisSpeeds().omegaRadiansPerSecond);
     }
 
     @Override

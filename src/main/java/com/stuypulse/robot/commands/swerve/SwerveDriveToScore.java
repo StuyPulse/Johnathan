@@ -46,7 +46,10 @@ public class SwerveDriveToScore extends Command {
         Vector2D speakerPos = new Vector2D(speaker.getX(), speaker.getY());
         Vector2D robotPos = new Vector2D(robot.getX(), robot.getY());
         Vector2D targetPos = speakerPos.add(robotPos.sub(speakerPos).normalize().mul(Units.inchesToMeters(TARGET_DISTANCE_IN.get())));
-        this.target = new Pose2d(targetPos.x, targetPos.y, new Rotation2d(Math.atan2(targetPos.y - robot.getY(), targetPos.x - robot.getX())));
+        // this.target = new Pose2d(targetPos.x, targetPos.y, new Rotation2d(Math.atan2(targetPos.y - robot.getY(), targetPos.x - robot.getX())));
+        Rotation2d targetAngle = targetPos.getTranslation2d().minus(robotPos.getTranslation2d()).getAngle().plus(Rotation2d.fromDegrees(180));
+        this.target = new Pose2d(targetPos.x, targetPos.y, targetAngle);
+                SmartDashboard.putNumber("Vision/To Score/Target Angle", targetAngle.getDegrees());
     }
 
     @Override
@@ -54,6 +57,7 @@ public class SwerveDriveToScore extends Command {
         controller.update(target, AbstractOdometry.getInstance().getPose());
         swerve.setChassisSpeeds(controller.getOutput());
         targetPose2d.setPose(target);
+
     }
 
     @Override
