@@ -23,6 +23,8 @@ public interface Field {
     double WIDTH = 16.54;
     double HEIGHT = 8.02;
 
+    double NOTE_LENGTH = Units.inchesToMeters(14.0);
+
     public static final double FIDUCIAL_SIZE = 0.15716;
 
     Fiducial FIDUCIALS[] = {
