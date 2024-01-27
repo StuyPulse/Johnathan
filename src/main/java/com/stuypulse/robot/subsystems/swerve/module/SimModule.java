@@ -2,6 +2,7 @@ package com.stuypulse.robot.subsystems.swerve.module;
 
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.constants.Settings;
+import com.stuypulse.robot.constants.Settings.Driver;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.constants.Settings.Swerve.Drive;
 import com.stuypulse.robot.constants.Settings.Swerve.Turn;
@@ -65,10 +66,10 @@ public class SimModule extends AbstractModule {
             .add(new MotorFeedforward(Drive.kS, Drive.kV, Drive.kA).velocity());
 
         turnController = new AnglePIDController(Turn.kP, Turn.kI, Turn.kD)
-            .setSetpointFilter(new ARateLimit(Swerve.MAX_MODULE_TURN));
+            .setSetpointFilter(new ARateLimit(Driver.Turn.MAX_TELEOP_TURNING));
 
-        driveSim = new LinearSystemSim<>(identifyVelocityPositionSystem(Drive.kV.get(), Drive.kA.get()));
-        turnSim = new LinearSystemSim<N2, N1, N1>(LinearSystemId.identifyPositionSystem(Turn.kV.get(), Turn.kA.get()));
+        driveSim = new LinearSystemSim<>(identifyVelocityPositionSystem(Drive.kV, Drive.kA));
+        turnSim = new LinearSystemSim<N2, N1, N1>(LinearSystemId.identifyPositionSystem(Turn.kV, Turn.kA));
 
         targetState = new SwerveModuleState();
     }

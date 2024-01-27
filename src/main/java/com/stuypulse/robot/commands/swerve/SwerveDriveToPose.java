@@ -10,9 +10,7 @@ import com.stuypulse.stuylib.control.feedback.PIDController;
 import com.stuypulse.stuylib.streams.booleans.BStream;
 import com.stuypulse.stuylib.streams.booleans.filters.BDebounceRC;
 
-import com.stuypulse.robot.constants.Settings.Alignment;
-import com.stuypulse.robot.constants.Settings.Alignment.Rotation;
-import com.stuypulse.robot.constants.Settings.Alignment.Translation;
+import static com.stuypulse.robot.constants.Settings.Alignment.*;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.util.HolonomicController;
@@ -45,14 +43,14 @@ public class SwerveDriveToPose extends Command {
 
         SmartDashboard.putData("Alignment/Controller", controller);
 
-        aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(Alignment.DEBOUNCE_TIME));
+        aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(DEBOUNCE_TIME));
 
         targetPose2d = AbstractOdometry.getInstance().getField().getObject("Target Pose");
         addRequirements(swerve);
     }
 
     private boolean isAligned() {
-        return controller.isDone(Alignment.X_TOLERANCE.get(), Alignment.Y_TOLERANCE.get(), Alignment.ANGLE_TOLERANCE.get());
+        return controller.isDone(X_TOLERANCE.get(), Y_TOLERANCE.get(), ANGLE_TOLERANCE.get());
     }
 
     @Override

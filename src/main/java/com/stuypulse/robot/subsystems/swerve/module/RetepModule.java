@@ -1,6 +1,7 @@
 package com.stuypulse.robot.subsystems.swerve.module;
 
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -8,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.Robot.MatchState;
 import com.stuypulse.robot.constants.Motors;
+import com.stuypulse.robot.constants.Settings.Driver;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.constants.Settings.Swerve.Drive;
 import com.stuypulse.robot.constants.Settings.Swerve.Encoder;
@@ -40,7 +42,7 @@ public class RetepModule extends AbstractModule {
     private final CANcoder turnEncoder;
 
     // drive
-    private final CANSparkMax driveMotor;
+    private final CANSparkFlex driveMotor;
     private final RelativeEncoder driveEncoder; 
     
     // controllers
@@ -53,7 +55,7 @@ public class RetepModule extends AbstractModule {
         this.angleOffset = angleOffset;
         
         turnMotor = new CANSparkMax(turnID, MotorType.kBrushless);
-        driveMotor = new CANSparkMax(driveID, MotorType.kBrushless);
+        driveMotor = new CANSparkFlex(driveID, MotorType.kBrushless);
 
         turnMotor.setIdleMode(IdleMode.kBrake);
         driveMotor.setIdleMode(IdleMode.kBrake);
@@ -69,7 +71,7 @@ public class RetepModule extends AbstractModule {
             .add(new MotorFeedforward(Drive.kS, Drive.kV, Drive.kA).velocity());
 
         turnController = new AnglePIDController(Turn.kP, Turn.kI, Turn.kD)
-            .setSetpointFilter(new ARateLimit(Swerve.MAX_MODULE_TURN))
+            .setSetpointFilter(new ARateLimit(Driver.Turn.MAX_TELEOP_TURNING))
             .setOutputFilter(x -> -x);
 
         targetState = new SwerveModuleState();
