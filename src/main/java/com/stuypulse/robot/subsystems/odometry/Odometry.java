@@ -99,6 +99,8 @@ public class Odometry extends AbstractOdometry {
 
         odometryPose2D.setPose(odometry.getPoseMeters());
         estimatorPose2D.setPose(estimator.getEstimatedPosition());
+
+        updateTelemetry();
     }
 
     @Override

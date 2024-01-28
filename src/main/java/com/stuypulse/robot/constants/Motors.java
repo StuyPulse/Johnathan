@@ -5,9 +5,6 @@
 
 package com.stuypulse.robot.constants;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.CANSparkFlex;
@@ -33,9 +30,14 @@ public interface Motors {
         }
     }
 
+    public interface Intake {
+        public CANSparkMaxConfig TOP_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
+        public CANSparkMaxConfig BOTTOM_CONFIG = new CANSparkMaxConfig(true, IdleMode.kBrake, 60);
+    }
+
     public interface Swerve {
-        public CANSparkMaxConfig JIM_DRIVE_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
         public CANSparkFlexConfig DRIVE_CONFIG = new CANSparkFlexConfig(false, IdleMode.kBrake, 60);
+        public CANSparkMaxConfig JIM_DRIVE_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
         public CANSparkMaxConfig TURN_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake, 60);
     }
 
@@ -72,9 +74,8 @@ public interface Motors {
             motor.setSmartCurrentLimit(CURRENT_LIMIT_AMPS);
             motor.setOpenLoopRampRate(OPEN_LOOP_RAMP_RATE);
             motor.burnFlash();
-         }
-          
-     }
+        }
+    }
 
     public static class CANSparkFlexConfig {
         public final boolean INVERTED;

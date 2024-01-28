@@ -3,6 +3,7 @@ package com.stuypulse.robot.subsystems.intake;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.stuypulse.robot.constants.Motors;
 import com.stuypulse.robot.constants.Ports;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,12 +22,15 @@ public class Intake extends AbstractIntake {
 
         bottomMotor = new CANSparkMax(Ports.Intake.BOTTOM_MOTOR, MotorType.kBrushless);
         bottomEncoder = bottomMotor.getEncoder();
+
+        Motors.Intake.TOP_CONFIG.configure(topMotor);
+        Motors.Intake.BOTTOM_CONFIG.configure(bottomMotor);
     }
 
     @Override
     public void setSpeed(double topSpeed, double bottomSpeed) {
         topMotor.set(topSpeed);
-        bottomMotor.set(bottomSpeed);
+        bottomMotor.set(-bottomSpeed);
     }
 
     @Override
