@@ -3,48 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6610575641103793,
-        "y": 3.2915091215641485
+        "x": 1.1613758933368123,
+        "y": 3.534963938258926
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0183368480639654,
-        "y": 3.739465984263165
+        "x": 7.734655943810105,
+        "y": 0.8180081840521911
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.744394136478873,
-        "y": 2.424809974168226
+        "x": 7.848666424864946,
+        "y": 0.9485777602083012
       },
       "prevControl": {
-        "x": 5.816401981215325,
-        "y": 0.4380536910617745
+        "x": 7.110883722480711,
+        "y": 1.276481183490184
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.0,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 0.0,
-      "rotationDegrees": -28.393019422172674,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake Third Note",
-      "waypointRelativePos": 0.8,
+      "name": "Intake Second Note",
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -68,11 +57,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 2.934572877951801,
+    "rotation": -19.230672375661204,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Note Center (8, 7)",
+  "folder": "3 Note Center (H, G)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

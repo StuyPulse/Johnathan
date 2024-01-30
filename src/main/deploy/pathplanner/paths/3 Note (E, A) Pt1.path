@@ -3,37 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.59,
-        "y": 3.15
+        "x": 2.45,
+        "y": 6.29
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.854770346944403,
-        "y": 2.213133076337479
+        "x": 4.393969643859401,
+        "y": 6.476092609817173
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Initial Score 3 Note (4-5, 1)"
     },
     {
       "anchor": {
-        "x": 7.885445770891543,
-        "y": 0.8189562532971225
+        "x": 7.9774856268685435,
+        "y": 5.843707436344972
       },
       "prevControl": {
-        "x": 7.2062172512362155,
-        "y": 0.87751043602603
+        "x": 6.211996303806261,
+        "y": 6.7125546514991
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": -15.592810939801673,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake Second Note",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,11 +63,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -19.799606341837684,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "2 Note Center 8",
+  "folder": "3 Note (E, A)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

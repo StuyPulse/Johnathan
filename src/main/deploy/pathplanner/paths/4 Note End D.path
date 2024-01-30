@@ -3,32 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.164859011597086,
-        "y": 2.2953239629671147
+        "x": 2.5,
+        "y": 6.69
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.966199689696536,
-        "y": 2.5731220647068316
+        "x": 2.7512539157284497,
+        "y": 6.813577788583229
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.5,
-        "y": 3.15
+        "x": 7.560791376212382,
+        "y": 7.402737796216334
       },
       "prevControl": {
-        "x": 5.468044782243412,
-        "y": 0.15787108497294042
+        "x": 7.2194524274445735,
+        "y": 7.327189769260191
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.0,
+      "rotationDegrees": 38.59798223150914,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,11 +45,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -43.396015352184854,
+    "rotation": -1.3687240473329847,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "2 Note Center 7",
+  "folder": "4 Note (End Speaker + End D)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

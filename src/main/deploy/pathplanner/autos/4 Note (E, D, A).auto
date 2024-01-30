@@ -8,7 +8,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Initial Score (2 Note Center)"
+            "pathName": "Initial Score 3 Note (D-E, A)"
           }
         },
         {
@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "3 Note Center (8, 7) Pt1"
+            "pathName": "3 Note (E, A) Pt1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "3 Note Center (8, 7) Pt2"
+            "pathName": "3 Note (E, A) Pt2"
           }
         },
         {
@@ -38,13 +38,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "3 Note Center (8, 7) Pt3"
+            "pathName": "3 Note (E, D, A)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "3 Note Center (8, 7) Pt4"
+            "pathName": "3 Note (D, A) Pt2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note (D-E, A) Pt3"
           }
         },
         {

@@ -8,48 +8,43 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.6293247577370926,
-        "y": 3.3179668640207294
+        "x": 2.0183368480639654,
+        "y": 3.739465984263165
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.097111684964111,
-        "y": 3.693827082098609
+        "x": 7.744394136478873,
+        "y": 2.424809974168226
       },
       "prevControl": {
-        "x": 3.593321080160679,
-        "y": 2.618197842877167
-      },
-      "nextControl": {
-        "x": 5.677209104006696,
-        "y": 4.10875835213448
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 7.813533915227601,
-        "y": 4.098792791023527
-      },
-      "prevControl": {
-        "x": 8.232218562585658,
-        "y": 4.110755209519471
+        "x": 5.816401981215325,
+        "y": 0.4380536910617745
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.0,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0.0,
+      "rotationDegrees": -28.393019422172674,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake Third Note",
-      "waypointRelativePos": 1.6,
+      "waypointRelativePos": 0.8,
       "command": {
         "type": "parallel",
         "data": {
@@ -73,11 +68,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -1.7127562306106001,
+    "rotation": 2.934572877951801,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Note Center (7, 6)",
+  "folder": "3 Note Center (H, G)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

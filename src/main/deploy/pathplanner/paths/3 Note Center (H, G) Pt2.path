@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.744394136478873,
-        "y": 2.424809974168226
+        "y": 1.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.092728599078075,
-        "y": 2.7837000265429
+        "x": 8.299471118517559,
+        "y": 0.6786396419662641
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.2915091215641485
       },
       "prevControl": {
-        "x": 6.410261741050422,
-        "y": 0.16554927534895622
+        "x": 3.1827465189114155,
+        "y": 2.927907728824032
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0,
-      "rotationDegrees": -29.744881296441672,
+      "rotationDegrees": -28.393019422172674,
       "rotateFast": false
     }
   ],
@@ -49,7 +49,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3 Note Center (7, 6)",
+  "folder": "3 Note Center (H, G)",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

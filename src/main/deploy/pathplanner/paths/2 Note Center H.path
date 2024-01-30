@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.95,
-        "y": 4.134249037728845
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 8.220921826459039,
-        "y": 3.986244895566715
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 5.354258240613484,
-        "y": 3.8645760601078973
-      },
-      "prevControl": {
-        "x": 7.520368886891621,
-        "y": 4.6374631210800885
-      },
-      "nextControl": {
-        "x": 4.103624541595206,
-        "y": 3.4183391120333146
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
         "x": 2.59,
         "y": 3.15
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.854770346944403,
+        "y": 2.213133076337479
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.885445770891543,
+        "y": 0.8189562532971225
+      },
       "prevControl": {
-        "x": 3.869600046892403,
-        "y": 2.5259373595670285
+        "x": 7.2062172512362155,
+        "y": 0.87751043602603
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,7 +30,25 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Second Note",
+      "waypointRelativePos": 0.75,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeAcquire"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -55,11 +57,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -43.7891984361501,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "2 Note Center 6",
+  "folder": "2 Note Center H",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

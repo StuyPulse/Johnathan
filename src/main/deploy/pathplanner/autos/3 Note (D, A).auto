@@ -8,7 +8,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Initial Score (2 Note Center)"
+            "pathName": "Initial Score 3 Note (D-E, A)"
           }
         },
         {
@@ -20,13 +20,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 Note Center 6"
+            "pathName": "3 Note (D, A) Pt1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "2 Note Center 6 Back"
+            "pathName": "3 Note (D, A) Pt2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note (D-E, A) Pt3"
           }
         },
         {

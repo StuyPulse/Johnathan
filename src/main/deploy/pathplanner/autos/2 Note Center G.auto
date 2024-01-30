@@ -8,7 +8,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Initial Score"
+            "pathName": "Initial Score (2 Note Center)"
           }
         },
         {
@@ -20,43 +20,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 Note"
+            "pathName": "2 Note Center G"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2 Note Center G Back"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "3 Note"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End 4"
           }
         }
       ]
