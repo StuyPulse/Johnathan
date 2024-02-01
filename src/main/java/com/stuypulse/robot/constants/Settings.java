@@ -52,8 +52,8 @@ public interface Settings {
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
 		double MAX_MODULE_SPEED = 5.88;
 
-        double NOTE_VELOCITY = Units.inchesToMeters(26);
-        SmartNumber VELOCITY_RC = new SmartNumber("Swerve/Velocity RC", 0.02);
+        double NOTE_VELOCITY = Units.inchesToMeters(12);
+        SmartNumber VELOCITY_RC = new SmartNumber("Swerve/Velocity RC", 0.01);
 
         public interface Turn {
             double kP = 6.0;
@@ -175,7 +175,7 @@ public interface Settings {
         }
 
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 1);
+            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 8);
             SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
         }

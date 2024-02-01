@@ -4,6 +4,7 @@ import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Alignment;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
+import com.stuypulse.robot.subsystems.odometry.Odometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.control.angle.AngleController;
 import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
@@ -18,14 +19,16 @@ import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveWhileShooting extends Command {
 
     private final SwerveDrive swerve;
+    private final AbstractOdometry odometry;
 
     private VStream speed;
-    private final AngleController gyroFeedback;
+    private final AngleController controller;
     private final Pose2d target;
 
    
@@ -33,6 +36,7 @@ public class SwerveDriveWhileShooting extends Command {
 
     public SwerveDriveWhileShooting(Pose2d target, Gamepad driver) {
         this.swerve = SwerveDrive.getInstance();
+        this.odometry = AbstractOdometry.getInstance();
 
         this.speed = VStream.create(driver::getLeftStick)
                 .filtered(
@@ -44,11 +48,14 @@ public class SwerveDriveWhileShooting extends Command {
                     new VLowPassFilter(Drive.RC)
                 );
         
-        this.gyroFeedback = new AnglePIDController(Alignment.Gyro.P.get(), Alignment.Gyro.I.get(), Alignment.Gyro.D.get());
+        this.controller = new AnglePIDController(Alignment.Rotation.P, Alignment.Rotation.I, Alignment.Rotation.D);
         this.target = target;
 
         this.robotSpeed = VStream.create(() -> chassisSpeedsVector())
-            .filtered(new VLowPassFilter(Settings.Swerve.VELOCITY_RC.get()));
+            .filtered(new VLowPassFilter(Settings.Swerve.VELOCITY_RC.get()))
+            .filtered(new VRateLimit(5));
+        
+        odometry.getField().getObject("Target").setPose(target);
 
         addRequirements(swerve);
     }
@@ -68,27 +75,33 @@ public class SwerveDriveWhileShooting extends Command {
 
     @Override
     public void execute() {
-        
-        
         Vector2D velNote = new Vector2D(new Translation2d(Settings.Swerve.NOTE_VELOCITY, swerve.getGyroAngle())) // field relative 
-            .sub(getVelocity()) // get the true note velocity 
-            .sub(getVelocity()); // shoot where we inteded to
+            .sub(getVelocity()); 
 
-       
+        Rotation2d correctionAngle = velNote.getAngle().getRotation2d().minus(odometry.getRotation());
+        Translation2d h = new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getRotation());
 
         Pose2d robotPose = AbstractOdometry.getInstance().getPose();
 
         Rotation2d target = new Rotation2d(
-                                robotPose.getX() - this.target.getX(), 
-                                robotPose.getY() - this.target.getY())
-                                .plus(velNote.getAngle().getRotation2d()); // pointing at where we want it to
+                                this.target.getX() - robotPose.getX(), 
+                                this.target.getY() - robotPose.getY())
+                                .plus(correctionAngle);
+
+                                //.minus(getVelocity().getAngle().getRotation2d()); // pointing at where we want it to
             
-        double angularVel = -gyroFeedback.update(
+        double angularVel = -controller.update(
                             Angle.fromRotation2d(target),
-                            Angle.fromRotation2d(swerve.getGyroAngle()));
+                            Angle.fromRotation2d(odometry.getRotation()));
 
         swerve.drive(speed.get(), angularVel);
 
-       
+        SmartDashboard.putNumber("preaim angle", velNote.getAngle().toDegrees());
+        SmartDashboard.putNumber("Swerve/notevx", h.getX());
+        SmartDashboard.putNumber("Swerve/notevy", h.getY());
+        SmartDashboard.putNumber("Swerve/target Angle", target.getDegrees());
+        SmartDashboard.putNumber("Swerve/angle setpoint", odometry.getRotation().getDegrees());
+        SmartDashboard.putNumber("Swerve/ velocity angle", velNote.getAngle().toDegrees());
+
     }
 }

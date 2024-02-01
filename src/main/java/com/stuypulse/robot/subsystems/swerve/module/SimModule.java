@@ -61,12 +61,13 @@ public class SimModule extends AbstractModule {
         this.id = id;
         this.translationOffset = translationOffset;         
 
-        driveController = new PIDController(Drive.kP, Drive.kI, Drive.kD)
+        driveController = new PIDController(0.1, 0, 0)
                 .setOutputFilter(x -> Robot.getMatchState() == Robot.MatchState.TELEOP ? 0 : x)
             .add(new MotorFeedforward(Drive.kS, Drive.kV, Drive.kA).velocity());
 
-        turnController = new AnglePIDController(Turn.kP, Turn.kI, Turn.kD)
-            .setSetpointFilter(new ARateLimit(Driver.Turn.MAX_TELEOP_TURNING));
+        turnController = new AnglePIDController(0.1, 0, 0)
+            .setSetpointFilter(new ARateLimit(Driver.Turn.MAX_TELEOP_TURNING))
+            .setOutputFilter(x -> x);
 
         driveSim = new LinearSystemSim<>(identifyVelocityPositionSystem(Drive.kV, Drive.kA));
         turnSim = new LinearSystemSim<N2, N1, N1>(LinearSystemId.identifyPositionSystem(Turn.kV, Turn.kA));

@@ -1,4 +1,11 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -6,11 +13,6 @@
       "/SmartDashboard/Field": "Field2d"
     },
     "windows": {
-      "/SmartDashboard/Autonomous": {
-        "window": {
-          "visible": true
-        }
-      },
       "/SmartDashboard/Field": {
         "Back Left-2d": {
           "arrowSize": 25,
@@ -75,18 +77,17 @@
           "weight": 2.0,
           "width": 0.6600000262260437
         },
-        "bottom": 544,
-        "builtin": "2024 Crescendo",
-        "height": 8.013679504394531,
-        "left": 46,
+        "bottom": 1476,
+        "height": 8.210550308227539,
+        "left": 150,
         "path": {
           "arrows": false,
           "selectable": false,
           "style": "Line",
           "weight": 2.0
         },
-        "right": 1088,
-        "top": 36,
+        "right": 2961,
+        "top": 79,
         "width": 16.541748046875,
         "window": {
           "visible": true
@@ -94,7 +95,74 @@
       }
     }
   },
+  "NetworkTables": {
+    "retained": {
+      "SmartDashboard": {
+        "open": true
+      }
+    },
+    "transitory": {
+      "SmartDashboard": {
+        "Swerve": {
+          "Modules": {
+            "open": true
+          },
+          "open": true
+        },
+        "open": true
+      }
+    }
+  },
   "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Server": {
+      "Subscribers": {
+        "open": true
+      },
+      "open": true
+    },
     "visible": true
+  },
+  "Plot": {
+    "Plot <0>": {
+      "plots": [
+        {
+          "axis": [
+            {
+              "autoFit": true
+            }
+          ],
+          "backgroundColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.8500000238418579
+          ],
+          "height": 397,
+          "series": [
+            {
+              "color": [
+                0.2980392277240753,
+                0.44705885648727417,
+                0.6901960968971252,
+                1.0
+              ],
+              "id": "NT:/SmartDashboard/Swerve/target Angle"
+            },
+            {
+              "color": [
+                0.8666667342185974,
+                0.5176470875740051,
+                0.32156863808631897,
+                1.0
+              ],
+              "id": "NT:/SmartDashboard/Swerve/angle setpoint"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

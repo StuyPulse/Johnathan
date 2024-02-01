@@ -13,6 +13,7 @@ import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToScore;
+import com.stuypulse.robot.commands.swerve.SwerveDriveWhileShooting;
 import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
 import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Ports;
@@ -72,7 +73,7 @@ public class RobotContainer {
     /****************/
 
     private void configureDefaultCommands() {
-        swerve.setDefaultCommand(new SwerveDriveDrive(driver));
+        swerve.setDefaultCommand(new SwerveDriveWhileShooting(new Pose2d(Field.WIDTH / 2, Field.HEIGHT / 2, new Rotation2d()), driver));
     }
 
     /***************/
