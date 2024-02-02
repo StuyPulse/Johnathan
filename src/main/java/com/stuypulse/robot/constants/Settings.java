@@ -48,6 +48,7 @@ public interface Settings {
 	public interface Swerve {
         double WIDTH = Units.inchesToMeters(21);
         double LENGTH = Units.inchesToMeters(21);
+        double CENTER_TO_INTAKE_FRONT = Units.inchesToMeters(18);
 
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.05);
 		double MAX_MODULE_SPEED = 5.88;
@@ -181,6 +182,29 @@ public interface Settings {
             SmartNumber P = new SmartNumber("Alignment/Gyro/kP", 12);
             SmartNumber I = new SmartNumber("Alignment/Gyro/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Gyro/kD", 0.1);
+        }
+    }
+
+    public interface NoteDetection {
+        SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
+        SmartNumber DEBOUNCE_TIME = new SmartNumber("Note Detection/Debounce Time", 0.15);
+
+        SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.2);
+        SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", Units.inchesToMeters(2));
+        SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
+
+        SmartNumber DRIVE_SPEED = new SmartNumber("Note Detection/Drive Speed", 1);        
+
+        public interface Translation {
+            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 4.0);
+            SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
+        }
+        
+        public interface Rotation {
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.5);
+            SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.1);
         }
     }
 }
