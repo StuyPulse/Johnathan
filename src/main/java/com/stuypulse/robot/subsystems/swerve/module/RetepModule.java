@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.Robot.MatchState;
 import com.stuypulse.robot.constants.Motors;
+import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Driver;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.constants.Settings.Swerve.Drive;
@@ -71,11 +72,10 @@ public class RetepModule extends AbstractModule {
             .add(new MotorFeedforward(Drive.kS, Drive.kV, Drive.kA).velocity());
 
         turnController = new AnglePIDController(Turn.kP, Turn.kI, Turn.kD)
-            .setSetpointFilter(new ARateLimit(Driver.Turn.MAX_TELEOP_TURNING))
             .setOutputFilter(x -> -x);
 
         targetState = new SwerveModuleState();
-        
+
         Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
         Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     }
@@ -111,15 +111,20 @@ public class RetepModule extends AbstractModule {
     @Override
     public void periodic() {
         turnController.update(
-            Angle.fromRotation2d(targetState.angle), 
+            Angle.fromRotation2d(targetState.angle),
             Angle.fromRotation2d(getAngle()));
         
-        turnMotor.setVoltage(turnController.getOutput());
-
-        driveMotor.setVoltage(driveController.update(
+        driveController.update(
             targetState.speedMetersPerSecond,
-            getVelocity())
-        );
+            getVelocity());
+
+        if (Math.abs(driveController.getSetpoint()) < Settings.Swerve.MODULE_VELOCITY_DEADBAND.get()) {
+            driveMotor.setVoltage(0);
+            turnMotor.setVoltage(0);
+        } else {
+            driveMotor.setVoltage(driveController.getOutput());
+            turnMotor.setVoltage(turnController.getOutput());
+        }
 
         SmartDashboard.putNumber("Swerve/Modules/" + id + "/Drive Voltage", driveController.getOutput());
         SmartDashboard.putNumber("Swerve/Modules/" + id + "/Turn Voltage", turnController.getOutput());

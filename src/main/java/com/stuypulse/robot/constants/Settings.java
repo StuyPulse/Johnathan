@@ -49,7 +49,7 @@ public interface Settings {
         double WIDTH = Units.inchesToMeters(21);
         double LENGTH = Units.inchesToMeters(21);
 
-		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
+		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.05);
 		double MAX_MODULE_SPEED = 5.88;
 
         public interface Turn {
