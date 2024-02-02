@@ -111,6 +111,7 @@ public class RobotContainer {
 
     public void configureAutons() {
         autonChooser = AutoBuilder.buildAutoChooser();
+        autonChooser.addOption("0 Auton", getAutonomousCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 
