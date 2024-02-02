@@ -6,9 +6,21 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "ShooterShoot"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Initial Score"
+            "pathName": "3 Note Center (H, G) Pt1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (H, G) Pt2"
           }
         },
         {
@@ -20,7 +32,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 Note"
+            "pathName": "3 Note Center (H, G) Pt3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Note Center (H, G) Pt4"
           }
         },
         {
@@ -32,31 +50,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "3 Note (C, B)"
+            "pathName": "2 Note Center F"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "2 Note Center F Back"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End Speaker"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 Note End D"
           }
         }
       ]
