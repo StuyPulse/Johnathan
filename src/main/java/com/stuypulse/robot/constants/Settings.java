@@ -49,60 +49,59 @@ public interface Settings {
     double DT = 0.02;
 
 	public interface Swerve {
-        double WIDTH = Units.inchesToMeters(26);
-        double LENGTH = Units.inchesToMeters(26);
+        double WIDTH = Units.inchesToMeters(21);
+        double LENGTH = Units.inchesToMeters(21);
         double CENTER_TO_INTAKE_FRONT = Units.inchesToMeters(18);
 
-		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
-		SmartNumber MAX_MODULE_SPEED = new SmartNumber("Swerve/Maximum module speed (m per s)", 5.06);
-		SmartNumber MAX_MODULE_TURN = new SmartNumber("Swerve/Maximum module turn (rad per s)", 6.28);
+		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.05);
+		double MAX_MODULE_SPEED = 5.88;
 
         public interface Turn {
-            SmartNumber kP = new SmartNumber("Swerve/Turn/kP", 6.0);
-            SmartNumber kI = new SmartNumber("Swerve/Turn/kI", 0.0);
-            SmartNumber kD = new SmartNumber("Swerve/Turn/kD", 0.15);
+            double kP = 6.0;
+            double kI = 0.0;
+            double kD = 0.15;
 
-            SmartNumber kV = new SmartNumber("Swerve/Turn/kV", 0.25);
-            SmartNumber kA = new SmartNumber("Swerve/Turn/kA", 0.007);
+            double kS = 0.44076;
+            double kV = 0.0056191;
+            double kA = 0.00042985;
         }
 
         public interface Drive {
-            SmartNumber kP = new SmartNumber("Swerve/Drive/kP", 0.018327);
-            SmartNumber kI = new SmartNumber("Swerve/Drive/kI", 0.0);
-            SmartNumber kD = new SmartNumber("Swerve/Drive/kD", 0.0);
+            double kP = 0.002794;
+            double kI = 0.0;
+            double kD = 0.0;
 
-            SmartNumber kS = new SmartNumber("Swerve/Drive/kS", 0.098993);
-            SmartNumber kV = new SmartNumber("Swerve/Drive/kV", 2.4495);
-            SmartNumber kA = new SmartNumber("Swerve/Drive/kA", 0.089872);
+            double kS = 0.17313;
+            double kV = 1.7573 + 0.1;
+            double kA = 0.19554 + 0.1;
         }
 
         public interface Motion {
-            
-            PIDConstants XY = new PIDConstants(0.7, 0, 0.02);
+            PIDConstants XY = new PIDConstants(1, 0, 0.02);
             PIDConstants THETA = new PIDConstants(10, 0, 0.1);
         }
         
  		public interface FrontRight {
             String ID = "Front Right";
-            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(208.212891 + 180);
+            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(-153.632812 + 180);
             Translation2d MODULE_OFFSET = new Translation2d(WIDTH * +0.5, LENGTH * -0.5);
         }
 
         public interface FrontLeft {
             String ID = "Front Left";
-            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(154.511719 + 180);
+            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(147.919922 + 180);
             Translation2d MODULE_OFFSET = new Translation2d(WIDTH * +0.5, LENGTH * +0.5);
         }
 
         public interface BackLeft {
             String ID = "Back Left";
-            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(65.566406 + 180);
+            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(73.125 + 180);
             Translation2d MODULE_OFFSET = new Translation2d(WIDTH * -0.5, LENGTH * +0.5);
         }
 
         public interface BackRight {
             String ID = "Back Right";
-            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(47.197266 + 180);
+            Rotation2d ABSOLUTE_OFFSET = Rotation2d.fromDegrees(-2.02184 + 180);
             Translation2d MODULE_OFFSET = new Translation2d(WIDTH * -0.5, LENGTH * -0.5);
         }
 
@@ -125,7 +124,7 @@ public interface Settings {
             SmartNumber RC = new SmartNumber("Driver Settings/Drive/RC", 0.01);
             SmartNumber POWER = new SmartNumber("Driver Settings/Drive/Power", 2);
 
-            SmartNumber MAX_TELEOP_SPEED = new SmartNumber("Driver Settings/Drive/Max Speed", Swerve.MAX_MODULE_SPEED.get());
+            SmartNumber MAX_TELEOP_SPEED = new SmartNumber("Driver Settings/Drive/Max Speed", Swerve.MAX_MODULE_SPEED);
             SmartNumber MAX_TELEOP_ACCEL = new SmartNumber("Driver Settings/Drive/Max Accleration", 15);
         }
 
@@ -135,7 +134,7 @@ public interface Settings {
             SmartNumber RC = new SmartNumber("Driver Settings/Turn/RC", 0.1);
             SmartNumber POWER = new SmartNumber("Driver Settings/Turn/Power", 2);
 
-            SmartNumber MAX_TELEOP_TURNING = new SmartNumber("Driver Settings/Turn/Max Turning", 6.0);
+            SmartNumber MAX_TELEOP_TURNING = new SmartNumber("Driver Settings/Turn/Max Turning", 6.28);
 
             public interface GyroFeedback {
                 SmartBoolean GYRO_FEEDBACK_ENABLED = new SmartBoolean("Driver Settings/Gyro Feedback/Enabled", true);
@@ -200,6 +199,8 @@ public interface Settings {
         SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.1);
         SmartNumber ANGLE_TOLERANCE = new SmartNumber("Alignment/Angle Tolerance", 5);
 
+        SmartNumber TARGET_DISTANCE_IN = new SmartNumber("Alignment/Target Distance (in)", 110);
+        SmartNumber TAKEOVER_DISTANCE_IN = new SmartNumber("Alignment/Takeover Distance (in)", 50);
 
         public interface Translation {
             SmartNumber P = new SmartNumber("Alignment/Translation/kP", 2.5);

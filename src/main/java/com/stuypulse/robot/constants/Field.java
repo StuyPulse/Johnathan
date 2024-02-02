@@ -11,10 +11,12 @@ import java.util.ArrayList;
 
 import com.stuypulse.robot.util.Fiducial;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public interface Field {
 
@@ -24,11 +26,6 @@ public interface Field {
     public static final double FIDUCIAL_SIZE = 0.15716;
 
     Fiducial FIDUCIALS[] = {
-
-        // Simplified Lab Testing Layout
-        // new Fiducial(1,new Pose3d(new Translation3d(0, Units.inchesToMeters(218.42), Units.inchesToMeters(30)), new Rotation3d(Units.degreesToRadians(0),Units.degreesToRadians(0),Units.degreesToRadians(0)))),
-        // new Fiducial(3,new Pose3d(new Translation3d(0, Units.inchesToMeters(218.42) - Units.inchesToMeters(44.25), Units.inchesToMeters(30)), new Rotation3d(Units.degreesToRadians(0),Units.degreesToRadians(0),Units.degreesToRadians(0)))),
-        
         // 2024 Field Fiducial Layout
         new Fiducial(1,  new Pose3d(new Translation3d(Units.inchesToMeters(593.68), Units.inchesToMeters(9.68), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(120)))),
         new Fiducial(2,  new Pose3d(new Translation3d(Units.inchesToMeters(637.21), Units.inchesToMeters(34.79), Units.inchesToMeters(53.38)), new Rotation3d(Units.degreesToRadians(0), Units.degreesToRadians(0), Units.degreesToRadians(120)))),
@@ -100,5 +97,15 @@ public interface Field {
         for (Fiducial fiducial : FIDUCIALS)
             if (fiducial.getID() == id) return true;
         return false;
+    }
+
+    Pose2d SPEAKER_POSES[] = {
+        getFiducial(7).getPose().toPose2d(), // BLUE
+        getFiducial(4).getPose().toPose2d(), // RED
+    };
+
+    public static Pose2d getSpeakerPose() {
+        boolean isBlue = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Blue;
+        return SPEAKER_POSES[isBlue ? 0 : 1];
     }
 }

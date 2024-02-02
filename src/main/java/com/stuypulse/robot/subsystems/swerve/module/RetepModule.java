@@ -1,6 +1,7 @@
 package com.stuypulse.robot.subsystems.swerve.module;
 
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -8,6 +9,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.Robot;
 import com.stuypulse.robot.Robot.MatchState;
 import com.stuypulse.robot.constants.Motors;
+import com.stuypulse.robot.constants.Settings;
+import com.stuypulse.robot.constants.Settings.Driver;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.constants.Settings.Swerve.Drive;
 import com.stuypulse.robot.constants.Settings.Swerve.Encoder;
@@ -40,7 +43,7 @@ public class RetepModule extends AbstractModule {
     private final CANcoder turnEncoder;
 
     // drive
-    private final CANSparkMax driveMotor;
+    private final CANSparkFlex driveMotor;
     private final RelativeEncoder driveEncoder; 
     
     // controllers
@@ -53,7 +56,7 @@ public class RetepModule extends AbstractModule {
         this.angleOffset = angleOffset;
         
         turnMotor = new CANSparkMax(turnID, MotorType.kBrushless);
-        driveMotor = new CANSparkMax(driveID, MotorType.kBrushless);
+        driveMotor = new CANSparkFlex(driveID, MotorType.kBrushless);
 
         turnMotor.setIdleMode(IdleMode.kBrake);
         driveMotor.setIdleMode(IdleMode.kBrake);
@@ -69,11 +72,10 @@ public class RetepModule extends AbstractModule {
             .add(new MotorFeedforward(Drive.kS, Drive.kV, Drive.kA).velocity());
 
         turnController = new AnglePIDController(Turn.kP, Turn.kI, Turn.kD)
-            .setSetpointFilter(new ARateLimit(Swerve.MAX_MODULE_TURN))
             .setOutputFilter(x -> -x);
 
         targetState = new SwerveModuleState();
-        
+
         Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
         Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     }
@@ -109,15 +111,20 @@ public class RetepModule extends AbstractModule {
     @Override
     public void periodic() {
         turnController.update(
-            Angle.fromRotation2d(targetState.angle), 
+            Angle.fromRotation2d(targetState.angle),
             Angle.fromRotation2d(getAngle()));
         
-        turnMotor.setVoltage(turnController.getOutput());
-
-        driveMotor.setVoltage(driveController.update(
+        driveController.update(
             targetState.speedMetersPerSecond,
-            getVelocity())
-        );
+            getVelocity());
+
+        if (Math.abs(driveController.getSetpoint()) < Settings.Swerve.MODULE_VELOCITY_DEADBAND.get()) {
+            driveMotor.setVoltage(0);
+            turnMotor.setVoltage(0);
+        } else {
+            driveMotor.setVoltage(driveController.getOutput());
+            turnMotor.setVoltage(turnController.getOutput());
+        }
 
         SmartDashboard.putNumber("Swerve/Modules/" + id + "/Drive Voltage", driveController.getOutput());
         SmartDashboard.putNumber("Swerve/Modules/" + id + "/Turn Voltage", turnController.getOutput());
