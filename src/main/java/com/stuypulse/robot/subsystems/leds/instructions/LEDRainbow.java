@@ -1,11 +1,7 @@
-package com.stuypulse.robot.subsystems.leds;
+package com.stuypulse.robot.subsystems.leds.instructions;
 
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-/*-
- * Contains:
- *      - setLED() : sets LEDs to rainbow colors
- * @author Richie Xue
- */
+
 public class LEDRainbow implements LEDInstruction {
     private int m_rainbowFirstPixelHue = 0;
 

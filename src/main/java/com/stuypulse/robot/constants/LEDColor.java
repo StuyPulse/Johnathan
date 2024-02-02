@@ -1,16 +1,16 @@
 package com.stuypulse.robot.constants;
 
-import com.stuypulse.robot.subsystems.leds.LEDInstruction;
-import com.stuypulse.robot.subsystems.leds.LEDPulseColor;
-import com.stuypulse.robot.subsystems.leds.LEDRainbow;
-import com.stuypulse.robot.subsystems.leds.LEDSection;
-import com.stuypulse.robot.subsystems.leds.LEDSingleColor;
-import com.stuypulse.robot.subsystems.leds.RichieMode;
+import com.stuypulse.robot.subsystems.leds.instructions.LEDInstruction;
+import com.stuypulse.robot.subsystems.leds.instructions.LEDPulseColor;
+import com.stuypulse.robot.subsystems.leds.instructions.LEDRainbow;
+import com.stuypulse.robot.subsystems.leds.instructions.LEDSection;
+import com.stuypulse.robot.subsystems.leds.instructions.LEDSingleColor;
+import com.stuypulse.robot.subsystems.leds.instructions.RichieMode;
 import com.stuypulse.robot.util.SLColor; 
 
 public interface LEDColor {
     /******************************************/
-    /*** COLOR CONSTANTS TO BE USED IN CODE ***/
+    /*** LED CONSTANTS TO BE USED IN COMMANDS ***/
     /******************************************/
 
     public static final LEDInstruction AQUA = new LEDSingleColor(new SLColor(0, 255, 255));

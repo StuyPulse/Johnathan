@@ -1,4 +1,4 @@
-package com.stuypulse.robot.subsystems.leds;
+package com.stuypulse.robot.subsystems.leds.instructions;
 
 import com.stuypulse.robot.util.SLColor;
 
