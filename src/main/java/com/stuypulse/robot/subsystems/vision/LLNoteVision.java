@@ -2,8 +2,8 @@ package com.stuypulse.robot.subsystems.vision;
 
 import static com.stuypulse.robot.constants.Cameras.Limelight.*;
 
-import com.stuypulse.robot.subsystems.odometry.Odometry;
-import com.stuypulse.robot.util.vision.Limelight;
+import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
+import com.stuypulse.robot.util.Limelight;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -31,7 +31,7 @@ public class LLNoteVision extends NoteVision {
             }
         }
 
-        note = Odometry.getInstance().getField().getObject("Note");
+        note = AbstractOdometry.getInstance().getField().getObject("Note");
 
         notePose = new Translation2d();
     }
@@ -78,7 +78,7 @@ public class LLNoteVision extends NoteVision {
         Translation2d sum = new Translation2d();
 
         for (Limelight limelight : limelights) {
-            Odometry odometry = Odometry.getInstance();
+            AbstractOdometry odometry = AbstractOdometry.getInstance();
 
             Translation2d limelightToNote = new Translation2d(limelight.getDistanceToNote(), Rotation2d.fromDegrees(limelight.getXAngle()));
 
