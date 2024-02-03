@@ -7,6 +7,8 @@ package com.stuypulse.robot.commands.swerve;
 
 import static com.stuypulse.robot.constants.Settings.NoteDetection.*;
 
+import com.stuypulse.robot.constants.Settings.NoteDetection.Rotation;
+import com.stuypulse.robot.constants.Settings.NoteDetection.Translation;
 import com.stuypulse.robot.constants.Settings.Swerve;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
@@ -33,7 +35,6 @@ public class SwerveDriveDriveToNote extends Command {
 
     // Holonomic control
     private final HolonomicController controller;
-    private final BStream aligned;
 
     public SwerveDriveDriveToNote(){
         this.swerve = SwerveDrive.getInstance();
@@ -48,13 +49,7 @@ public class SwerveDriveDriveToNote extends Command {
 
         SmartDashboard.putData("Note Detection/Controller", controller);
 
-        aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(DEBOUNCE_TIME));
-
         addRequirements(swerve);
-    }
-
-    private boolean isAligned() {
-        return controller.isDone(THRESHOLD_X.get(), THRESHOLD_Y.get(), THRESHOLD_ANGLE.get());
     }
 
     @Override
@@ -62,21 +57,24 @@ public class SwerveDriveDriveToNote extends Command {
         Translation2d targetTranslation = odometry.getTranslation().plus(
             new Translation2d(Units.inchesToMeters(18), 0).rotateBy(odometry.getRotation()));
 
-        Rotation2d targetRotation = vision.getEstimatedNotePose().minus(targetTranslation).getAngle();
+        Rotation2d targetRotation = vision.getEstimatedNoteTranslation().minus(targetTranslation).getAngle();
 
         Pose2d targetPose = new Pose2d(targetTranslation, targetRotation);
 
         if (!vision.hasNoteData()) {
             swerve.setChassisSpeeds(controller.update(targetPose, new Pose2d(targetTranslation, odometry.getRotation())));
+        } else {
+            swerve.setChassisSpeeds(controller.update(targetPose, odometry.getPose()));
         }
-
-        swerve.setChassisSpeeds(controller.update(targetPose, odometry.getPose()));
-
-        SmartDashboard.putBoolean("Note Detection/Is Aligned", aligned.get());
     }
 
     @Override
     public boolean isFinished() {
-        return aligned.get();
+        return vision.getEstimatedNoteTranslation().minus(odometry.getTranslation()).getNorm() < CUTOFF_DISTANCE;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        swerve.stop();
     }
 }
