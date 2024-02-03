@@ -186,6 +186,8 @@ public interface Settings {
     }
 
     public interface NoteDetection {
+        double DETECTION_RANGE = Units.inchesToMeters(86);
+
         SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Note Detection/Debounce Time", 0.15);
 

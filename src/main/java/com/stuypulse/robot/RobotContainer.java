@@ -9,7 +9,9 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathConstraints;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
+import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
+import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToAutoStart;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
@@ -55,9 +57,9 @@ public class RobotContainer {
     public RobotContainer() {
         swerve.configureAutoBuilder();
         configureDefaultCommands();
-        configureButtonBindings();
         configureNamedCommands();
         configureAutons();
+        configureButtonBindings();
     }
 
     /**********************/
@@ -66,6 +68,9 @@ public class RobotContainer {
 
     private void configureNamedCommands() {
         NamedCommands.registerCommand("intake acquire", new IntakeAcquire());
+        NamedCommands.registerCommand("SwerveDriveDriveToNote", new SwerveDriveDriveToNote()
+            .alongWith(new IntakeAcquire())
+            .andThen(new IntakeStop()));
     }
 
     /****************/
@@ -91,20 +96,26 @@ public class RobotContainer {
             .onFalse(new IntakeStop());
 
         driver.getLeftTriggerButton()
-            .onFalse(new IntakeDeacquire())
+            .onTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
         driver.getBottomButton().whileTrue(new SwerveDriveToPose(new Pose2d(2, 5.5, new Rotation2d(Units.degreesToRadians(180)))));
         // driver.getRightButton().whileTrue(new SwerveDriveToPose(new Pose2d(1.5, 5.5, new Rotation2d())));
 
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
-        // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
-        driver.getLeftButton().whileTrue(new SwerveDriveToScore());
-        driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
-        // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
         
         driver.getStartButton()
             .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
+
+        driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
+
+        driver.getRightBumper()
+            .whileTrue(new SwerveDriveNoteAlignedDrive(driver));
+
+        driver.getLeftBumper()
+            .whileTrue(new SwerveDriveDriveToNote()
+                .alongWith(new IntakeAcquire())
+                .andThen(new IntakeStop()));
     }
 
     /**************/

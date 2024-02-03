@@ -66,6 +66,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
         // robot relative
         swerve.drive(speed.get(), angularVel);
 
+        SmartDashboard.putNumber("Note Detection/Target Rotation", targetRotation.getDegrees());
         SmartDashboard.putNumber("Note Detection/Angle Output", alignController.getOutput());
 
     }

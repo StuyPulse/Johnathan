@@ -108,6 +108,8 @@ public class LLNoteVision extends NoteVision {
     }
 
     private void updateTelemetry() {
+        SmartDashboard.putBoolean("Note Detection/Has Note Data", hasNoteData());
+
         if (hasNoteData()) {
             SmartDashboard.putNumber("Note Detection/X Angle", limelights[0].getXAngle());
             SmartDashboard.putNumber("Note Detection/Y Angle", limelights[0].getYAngle());

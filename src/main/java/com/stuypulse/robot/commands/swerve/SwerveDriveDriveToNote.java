@@ -14,25 +14,26 @@ import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.util.HolonomicController;
 import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
 import com.stuypulse.stuylib.control.feedback.PIDController;
-import com.stuypulse.stuylib.streams.booleans.BStream;
-import com.stuypulse.stuylib.streams.booleans.filters.BDebounceRC;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class SwerveDriveDriveToNote extends Command {
 
+    private static final double CUTOFF_DISTANCE = Units.inchesToMeters(25);
+
+    // Subsystems
     private final SwerveDrive swerve;
     private final AbstractOdometry odometry;
     private final NoteVision vision;
 
     private final HolonomicController controller;
-    private final BStream aligned;
 
-    public SwerveDriveDriveToNote(){
+    public SwerveDriveDriveToNote() {
         this.swerve = SwerveDrive.getInstance();
         this.odometry = AbstractOdometry.getInstance();
         this.vision = NoteVision.getInstance();
@@ -45,13 +46,7 @@ public class SwerveDriveDriveToNote extends Command {
 
         SmartDashboard.putData("Note Detection/Controller", controller);
 
-        aligned = BStream.create(this::isAligned).filtered(new BDebounceRC.Rising(DEBOUNCE_TIME));
-
         addRequirements(swerve);
-    }
-
-    private boolean isAligned() {
-        return controller.isDone(THRESHOLD_X.get(), THRESHOLD_Y.get(), THRESHOLD_ANGLE.get());
     }
 
     @Override
@@ -72,11 +67,19 @@ public class SwerveDriveDriveToNote extends Command {
             swerve.setChassisSpeeds(controller.update(targetPose, new Pose2d(targetTranslation, odometry.getRotation())));
         }
 
-        SmartDashboard.putBoolean("Note Detection/Is Aligned", aligned.get());
+        SmartDashboard.putNumber("Note Detection/Target Rotation", targetPose.getRotation().getDegrees());
+        SmartDashboard.putNumber("Note Detection/X", targetPose.getX());
+        SmartDashboard.putNumber("Note Detection/Y", targetPose.getY());
+        SmartDashboard.putNumber("Note Detection/D", vision.getEstimatedNotePose().minus(odometry.getTranslation()).getNorm());
     }
 
     @Override
     public boolean isFinished() {
-        return aligned.get();
+        return vision.getEstimatedNotePose().minus(odometry.getTranslation()).getNorm() < CUTOFF_DISTANCE;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        swerve.stop();
     }
 }
