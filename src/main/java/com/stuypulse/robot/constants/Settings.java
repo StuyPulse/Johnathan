@@ -173,6 +173,9 @@ public interface Settings {
     }
 
     public interface NoteDetection {
+
+        double CUTOFF_DISTANCE = Units.inchesToMeters(22);
+
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Note Detection/Debounce Time", 0.15);
         SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
         SmartNumber TARGET_NOTE_DISTANCE = new SmartNumber("Note Detection/Target Note Distance", 0.5);
@@ -182,22 +185,22 @@ public interface Settings {
         SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
 
         public interface Translation {
-            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 4.0);
+            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 6.0);
             SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
             SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
         }
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 1);
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.0);
             SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
-            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.03);
         }
     }
 
     public interface Alignment {
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Alignment/Debounce Time", 0.15);
-        SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.1);
-        SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.1);
-        SmartNumber ANGLE_TOLERANCE = new SmartNumber("Alignment/Angle Tolerance", 5);
+        SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.05);
+        SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.05);
+        SmartNumber ANGLE_TOLERANCE = new SmartNumber("Alignment/Angle Tolerance", 3);
 
         SmartNumber TARGET_DISTANCE_IN = new SmartNumber("Alignment/Target Distance (in)", 110);
         SmartNumber TAKEOVER_DISTANCE_IN = new SmartNumber("Alignment/Takeover Distance (in)", 50);

@@ -56,7 +56,7 @@ public class SwerveDriveNoteAlignedDrive extends Command {
         Translation2d targetTranslation = odometry.getTranslation().plus(
             new Translation2d(Swerve.CENTER_TO_INTAKE_FRONT, 0).rotateBy(odometry.getRotation()));
 
-        Rotation2d targetRotation = noteVision.getEstimatedNotePose().minus(targetTranslation).getAngle();
+        Rotation2d targetRotation = noteVision.getEstimatedNoteTranslation().minus(targetTranslation).getAngle();
 
         double angularVel = -alignController.update(
             Angle.fromRotation2d(targetRotation),
