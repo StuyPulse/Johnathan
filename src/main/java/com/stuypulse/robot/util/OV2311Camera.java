@@ -112,6 +112,28 @@ public class OV2311Camera {
             new Transform3d(offset.getTranslation(), offset.getRotation()).inverse());
     }
 
+    private boolean isValidData(VisionData data) {
+        for (long id : data.tids) {
+            boolean found = false;
+            for (Fiducial f : Field.FIDUCIALS) {
+                if (f.getID() == id) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                return false;
+            }
+        }
+
+        if (Double.isNaN(data.robotPose.getX()) || data.robotPose.getX() < 0  || data.robotPose.getX() > Field.WIDTH) return false;
+        if (Double.isNaN(data.robotPose.getY()) || data.robotPose.getY() < 0  || data.robotPose.getY() > Field.HEIGHT) return false;
+        if (Double.isNaN(data.robotPose.getZ()) || data.robotPose.getZ() < -1 || data.robotPose.getZ() > 1) return false;
+
+        return true;
+    }
+
     public Optional<VisionData> getVisionData() {
         updateData();
 
@@ -123,7 +145,11 @@ public class OV2311Camera {
 
         LogPose3d.logPose3d("Vision/Robot Pose", getRobotPose());
 
-        return Optional.of(new VisionData(rawIdData, offset, getRobotPose(), timestamp));
+        VisionData data = new VisionData(rawIdData, offset, getRobotPose(), timestamp);
+
+        if (!isValidData(data)) return Optional.empty();
+
+        return Optional.of(data);
     }
 
     public void setLayout(Fiducial[] layout) {
