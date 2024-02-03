@@ -11,6 +11,7 @@ import com.pathplanner.lib.path.PathConstraints;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
+import com.stuypulse.robot.commands.swerve.SwerveDriveToAutoStart;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
@@ -101,6 +102,9 @@ public class RobotContainer {
         driver.getLeftButton().whileTrue(new SwerveDriveToScore());
         driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
         // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
+        
+        driver.getStartButton()
+            .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
     }
 
     /**************/

@@ -61,7 +61,7 @@ public interface Motors {
         }
 
         public CANSparkMaxConfig(boolean inverted, IdleMode idleMode, int currentLimitAmps) {
-            this(inverted, idleMode, currentLimitAmps, 0.0);
+            this(inverted, idleMode, currentLimitAmps, 0.05);
         }
 
         public CANSparkMaxConfig(boolean inverted, IdleMode idleMode) {
@@ -95,7 +95,7 @@ public interface Motors {
         }
 
         public CANSparkFlexConfig(boolean inverted, IdleMode idleMode, int currentLimitAmps) {
-            this(inverted, idleMode, currentLimitAmps, 0.0);
+            this(inverted, idleMode, currentLimitAmps, 0.05);
         }
 
         public CANSparkFlexConfig(boolean inverted, IdleMode idleMode) {
