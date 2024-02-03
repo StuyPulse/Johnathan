@@ -7,6 +7,7 @@ package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathConstraints;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
@@ -20,11 +21,14 @@ import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.subsystems.vision.AbstractVision;
+import com.stuypulse.robot.commands.auton.ZeroAuton;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
+import com.stuypulse.robot.commands.leds.LEDAlign;
 import com.stuypulse.robot.commands.leds.LEDSet;
 import com.stuypulse.robot.subsystems.intake.*;
+import com.stuypulse.robot.subsystems.leds.LEDController;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
@@ -43,6 +47,7 @@ public class RobotContainer {
 
     // Subsystems
     public final SwerveDrive swerve = SwerveDrive.getInstance();
+    public final LEDController leds = LEDController.getInstance();
     public final AbstractOdometry odometry = AbstractOdometry.getInstance();
     public final AbstractVision vision = AbstractVision.getInstance();
     public final AbstractIntake intake = AbstractIntake.getInstance();
@@ -74,6 +79,7 @@ public class RobotContainer {
 
     private void configureDefaultCommands() {
         swerve.setDefaultCommand(new SwerveDriveDrive(driver));
+        //leds.setDefaultCommand(new LEDAlign(new PathPlannerAuto("0 Auton")));
     }
 
     /***************/
@@ -111,7 +117,7 @@ public class RobotContainer {
 
     public void configureAutons() {
         autonChooser = AutoBuilder.buildAutoChooser();
-        autonChooser.addOption("0 Auton", getAutonomousCommand());
+        autonChooser.addOption("0 Auton", new ZeroAuton());
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 

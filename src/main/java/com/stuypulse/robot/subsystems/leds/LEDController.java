@@ -89,8 +89,5 @@ public class LEDController extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (RobotBase.isReal()) {
-            forceSetLED(getDefaultColor());
-        }
     }
 }

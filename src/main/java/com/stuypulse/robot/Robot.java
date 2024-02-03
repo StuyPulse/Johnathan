@@ -5,8 +5,10 @@
 
 package com.stuypulse.robot;
 
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.pathfinding.LocalADStar;
 import com.pathplanner.lib.pathfinding.Pathfinding;
+import com.stuypulse.robot.commands.leds.LEDAlign;
 import com.stuypulse.robot.constants.Settings.RobotType;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -68,11 +70,13 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledInit() {
         state = MatchState.DISABLE;
-        SmartDashboard.putString("Match State", state.name());
+        SmartDashboard.putString("Match State", state.name()); 
     }
 
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+        scheduler.schedule(new LEDAlign(new PathPlannerAuto("0 Auton")));
+    }
 
     /***********************/
     /*** AUTONOMOUS MODE ***/
