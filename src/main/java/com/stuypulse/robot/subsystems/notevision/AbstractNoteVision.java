@@ -23,6 +23,6 @@ public abstract class AbstractNoteVision extends SubsystemBase {
     
     public abstract boolean hasNoteData();
 
-    public abstract Translation2d getEstimatedNotePose();
+    public abstract Translation2d getEstimatedNoteTranslation();
 
 }

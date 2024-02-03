@@ -66,7 +66,7 @@ public class NoteVision extends AbstractNoteVision {
     }
 
     @Override
-    public Translation2d getEstimatedNotePose() {
+    public Translation2d getEstimatedNoteTranslation() {
         return notePose;
     }
 
