@@ -115,6 +115,15 @@ public interface Settings {
                 double VELOCITY_CONVERSION = POSITION_CONVERSION / 60.0;
             }
         }
+
+        public interface Assist {
+            SmartNumber kP = new SmartNumber("Swerve/Assist/PID/kP", 1.0);
+            SmartNumber kI = new SmartNumber("Swerve/Assist/PID/kI", 0.1);
+            SmartNumber kD = new SmartNumber("Swerve/Assist/PID/kD", 0.1);
+
+            SmartNumber deadband = new SmartNumber("Swerve/Assist/Gamepad deadband", 0.1);
+            SmartNumber minDistToSPeaker = new SmartNumber("Swerve/Assist/Minimum Distance to Speaker", 10); //change
+        }
 	}
 
     public interface Driver {

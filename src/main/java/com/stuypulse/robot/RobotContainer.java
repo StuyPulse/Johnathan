@@ -7,6 +7,7 @@ package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.stuypulse.robot.commands.swerve.SwerveDriveAutomatic;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
@@ -96,8 +97,10 @@ public class RobotContainer {
             .onTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
+        // driver.getStartButton()
+        //     .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
         driver.getStartButton()
-            .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
+                .whileTrue(new SwerveDriveAutomatic(driver));
 
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
 

@@ -20,6 +20,16 @@ import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class NoteVision extends AbstractNoteVision {
+    private static final NoteVision instance;
+
+    static {
+        instance = new NoteVision();
+    }
+
+    public static NoteVision getInstance() {
+        return instance;
+    }
+
 
     // store limelight network tables
     private final Limelight[] limelights;
