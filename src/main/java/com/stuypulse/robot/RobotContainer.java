@@ -100,7 +100,7 @@ public class RobotContainer {
         // driver.getStartButton()
         //     .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
         driver.getStartButton()
-                .whileTrue(new SwerveDriveAutomatic(driver));
+                .onTrue(new SwerveDriveAutomatic(driver));
 
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
 
