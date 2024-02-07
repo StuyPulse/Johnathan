@@ -78,7 +78,7 @@ public class SwerveDriveAutomatic extends Command {
         Translation2d currentPose = odometry.getPose().getTranslation();
         Translation2d targetPose = getTargetPose();
 
-        Rotation2d currentAngle = odometry.getRotation();
+        Rotation2d currentAngle = odometry.getPose().getRotation();
         Rotation2d targetAngle;
 
         Translation2d speakerPose = Field.getSpeakerPose().getTranslation();
