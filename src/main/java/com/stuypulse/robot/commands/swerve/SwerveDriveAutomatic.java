@@ -1,5 +1,6 @@
 package com.stuypulse.robot.commands.swerve;
 
+import com.stuypulse.robot.commands.BuzzController;
 import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Swerve.*;
@@ -22,6 +23,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class SwerveDriveAutomatic extends Command {
     
@@ -129,5 +132,15 @@ public class SwerveDriveAutomatic extends Command {
         return Math.abs(driver.getRightX()) > Assist.deadband.getAsDouble() || (startButtonWasFalse && driver.getRawStartButton());
     }
 
-
+    @Override
+    public void end(boolean i) {
+        CommandScheduler.getInstance().schedule(
+            new BuzzController(driver,Assist.intensity)
+                .andThen(new WaitCommand(0.2))
+                .andThen(new BuzzController(driver, 0))
+                .andThen(new WaitCommand(0.2))
+                .andThen(new BuzzController(driver, Assist.intensity))
+                .andThen(new WaitCommand(0.2))
+                .andThen(new BuzzController(driver, 0)));
+    }
 }

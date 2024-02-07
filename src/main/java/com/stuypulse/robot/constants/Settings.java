@@ -123,6 +123,7 @@ public interface Settings {
 
             SmartNumber deadband = new SmartNumber("Swerve/Assist/Gamepad deadband", 0.2);
             SmartNumber minDistToSPeaker = new SmartNumber("Swerve/Assist/Minimum Distance to Speaker", 10); //change
+            double intensity = 0.5;
         }
 	}
 

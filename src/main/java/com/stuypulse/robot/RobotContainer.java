@@ -18,9 +18,11 @@ import com.stuypulse.robot.commands.swerve.SwerveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveWithAiming;
 import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.constants.Settings.Swerve.Assist;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.subsystems.vision.AbstractVision;
+import com.stuypulse.robot.commands.BuzzController;
 import com.stuypulse.robot.commands.intake.IntakeAcquire;
 import com.stuypulse.robot.commands.intake.IntakeDeacquire;
 import com.stuypulse.robot.commands.intake.IntakeStop;
@@ -32,6 +34,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class RobotContainer {
 
@@ -100,8 +103,11 @@ public class RobotContainer {
         // driver.getStartButton()
         //     .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
         driver.getStartButton()
-                .onTrue(new SwerveDriveAutomatic(driver));
-
+                .onTrue(new SwerveDriveAutomatic(driver))
+                .onTrue(new BuzzController(driver,Assist.intensity)
+                    .andThen(new WaitCommand(0.2))
+                    .andThen(new BuzzController(driver, 0)));
+                
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
 
         driver.getRightBumper()
