@@ -110,7 +110,11 @@ public class RobotContainer {
             .whileTrue(new IntakeAcquire())
             .onFalse(new IntakeStop());
 
-        driver.getRightButton().whileTrue(new SwerveDriveDriveToChain());
+        // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
+        driver.getLeftButton().whileTrue(new SwerveDriveToScore());
+        driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
+        // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
+
     }
 
     /**************/
