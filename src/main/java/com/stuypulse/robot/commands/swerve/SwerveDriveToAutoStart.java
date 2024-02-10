@@ -88,5 +88,4 @@ public class SwerveDriveToAutoStart extends Command {
         swerve.stop();
         targetPose2d.setPose(Double.NaN, Double.NaN, new Rotation2d(Double.NaN));
     }
-
 }

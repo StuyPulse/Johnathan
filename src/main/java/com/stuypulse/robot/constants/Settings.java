@@ -10,8 +10,11 @@ import com.stuypulse.stuylib.math.Vector2D;
 import com.stuypulse.stuylib.network.SmartBoolean;
 import com.stuypulse.stuylib.network.SmartNumber;
 
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 /*-
@@ -23,7 +26,7 @@ import edu.wpi.first.math.util.Units;
 public interface Settings {
     public enum RobotType {
         JIM("03262B9F"),           // DeviceCode=0x7AAE@EDITOR=vi@PWD=/@TERM=dumb@DeviceDesc=roboRIO 2.0@SHLVL=3@TargetClass=cRIO@serialnum=03262B9F@PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/frc/bin:/usr/local/natinst/bin@FPGADeviceCode=0x7AAF@_=/usr/local/frc/JRE/bin/java
-        OFFSEASON_BOT("0305a69d"), // DeviceCode=0x76F2@PWD=/usr/local/natinst/labview@DeviceDesc=roboRIO@SHLVL=2@TargetClass=cRIO@serialnum=0305a69d@FPGADeviceCode=0x77A9@_=/sbin/start-stop-daemon@
+        OFFSEASON_BOT("0305A69D"), // DeviceCode=0x76F2@PWD=/usr/local/natinst/labview@DeviceDesc=roboRIO@SHLVL=2@TargetClass=cRIO@serialnum=0305a69d@FPGADeviceCode=0x77A9@_=/sbin/start-stop-daemon@
         SIM("");
 
         public final String serialNum;
@@ -34,7 +37,7 @@ public interface Settings {
 
         public static RobotType fromString(String serialNum) {
             for (RobotType robot : RobotType.values()) {
-                if (robot.serialNum.equals(serialNum)) {
+                if (robot.serialNum.equals(serialNum.toUpperCase())) {
                     return robot;
                 }
             }
@@ -48,6 +51,7 @@ public interface Settings {
 	public interface Swerve {
         double WIDTH = Units.inchesToMeters(21);
         double LENGTH = Units.inchesToMeters(21);
+        double CENTER_TO_INTAKE_FRONT = Units.inchesToMeters(18);
 
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.05);
 		double MAX_MODULE_SPEED = 5.88;
@@ -112,7 +116,7 @@ public interface Settings {
             }
         }
 	}
-    
+
     public interface Driver {
         public interface Drive {
             SmartNumber DEADBAND = new SmartNumber("Driver Settings/Drive/Deadband", 0.03);
@@ -140,11 +144,6 @@ public interface Settings {
                 SmartNumber D = new SmartNumber("Driver Settings/Gyro Feedback/kD", 0.1);
             }
         }
-
-    }
-
-    public static Vector2D vpow(Vector2D vec, double power) {
-        return vec.mul(Math.pow(vec.magnitude(), power - 1));
     }
 
     public interface Intake {
@@ -155,8 +154,49 @@ public interface Settings {
         SmartNumber DEACQUIRE_SPEED_BOTTOM = new SmartNumber("Intake/Deacquire Speed Bottom", -1);
     }
 
-    public interface Alignment {
 
+    public interface Limelight {
+        String [] LIMELIGHTS = {
+            "limelight"
+        };
+
+        int[] PORTS = {5800, 5801, 5802, 5803, 5804, 5805};
+        Pose3d [] POSITIONS = new Pose3d[] {
+            new Pose3d(
+                new Translation3d(Units.inchesToMeters(3), 0, Units.inchesToMeters(13.75)),
+                new Rotation3d(0, Math.toRadians(8), Math.toRadians(2)))
+        };
+    }
+
+    public static Vector2D vpow(Vector2D vec, double power) {
+        return vec.mul(Math.pow(vec.magnitude(), power - 1));
+    }
+
+    public interface NoteDetection {
+
+        double CUTOFF_DISTANCE = Units.inchesToMeters(22);
+
+        SmartNumber DEBOUNCE_TIME = new SmartNumber("Note Detection/Debounce Time", 0.15);
+        SmartNumber X_ANGLE_RC = new SmartNumber("Note Detection/X Angle RC", 0.05);
+        SmartNumber TARGET_NOTE_DISTANCE = new SmartNumber("Note Detection/Target Note Distance", 0.5);
+
+        SmartNumber THRESHOLD_X = new SmartNumber("Note Detection/X Threshold", 0.2);
+        SmartNumber THRESHOLD_Y = new SmartNumber("Note Detection/Y Threshold", Units.inchesToMeters(2));
+        SmartNumber THRESHOLD_ANGLE = new SmartNumber("Note Detection/Angle Threshold", 1);
+
+        public interface Translation {
+            SmartNumber P = new SmartNumber("Note Detection/Translation/kP", 6.0);
+            SmartNumber I = new SmartNumber("Note Detection/Translation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Translation/kD", 0.15);
+        }
+        public interface Rotation {
+            SmartNumber P = new SmartNumber("Note Detection/Rotation/kP", 3.0);
+            SmartNumber I = new SmartNumber("Note Detection/Rotation/kI", 0.0);
+            SmartNumber D = new SmartNumber("Note Detection/Rotation/kD", 0.03);
+        }
+    }
+
+    public interface Alignment {
         SmartNumber DEBOUNCE_TIME = new SmartNumber("Alignment/Debounce Time", 0.15);
         SmartNumber X_TOLERANCE = new SmartNumber("Alignment/X Tolerance", 0.05);
         SmartNumber Y_TOLERANCE = new SmartNumber("Alignment/Y Tolerance", 0.05);
@@ -165,6 +205,10 @@ public interface Settings {
         SmartNumber TARGET_DISTANCE_IN = new SmartNumber("Alignment/Target Distance (in)", 110);
         SmartNumber TAKEOVER_DISTANCE_IN = new SmartNumber("Alignment/Takeover Distance (in)", 50);
 
+        SmartNumber TRAP_SETUP_DISTANCE = new SmartNumber("Alignment/Trap/Setup Pose Distance", Units.inchesToMeters(22.0));
+        SmartNumber TRAP_CLIMB_DISTANCE = new SmartNumber("Alignment/Trap/Climb Distance", Units.inchesToMeters(18.0));
+
+        SmartNumber INTO_CHAIN_SPEED = new SmartNumber("Alignment/Trap/Into Chain Speed", 0.25);
         public interface Translation {
             SmartNumber P = new SmartNumber("Alignment/Translation/kP", 2.5);
             SmartNumber I = new SmartNumber("Alignment/Translation/kI", 0);

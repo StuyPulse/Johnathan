@@ -141,6 +141,7 @@ public class SwerveDrive extends SubsystemBase {
 
         for (int i = 0; i < modules.length; i++) {
             positions[i] = modules[i].getModulePosition();
+            SmartDashboard.putNumber("Swerve/Modules/" + modules[i].getID() + "/Position", modules[i].getModulePosition().distanceMeters);
         }
 
         return positions;
