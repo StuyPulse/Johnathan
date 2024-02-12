@@ -10,7 +10,9 @@ import com.pathplanner.lib.auto.NamedCommands;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToChain;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
+import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToScore;
 import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
+import com.stuypulse.robot.commands.swerve.SwerveDrivePathFindTo;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToAutoStart;
 import com.stuypulse.robot.commands.swerve.SwerveDriveToPose;
@@ -111,8 +113,10 @@ public class RobotContainer {
             .onFalse(new IntakeStop());
 
         // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
-        driver.getLeftButton().whileTrue(new SwerveDriveToScore());
+        // driver.getLeftButton().whileTrue(new SwerveDriveToScore());
         driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
+        driver.getLeftButton().whileTrue(new SwerveDrivePathFindTo(Field.getFiducial(14).getPose().toPose2d()).get());
+        driver.getTopButton().whileTrue(new SwerveDriveToPose(Field.getFiducial(14).getPose().toPose2d()));
         // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
 
     }
