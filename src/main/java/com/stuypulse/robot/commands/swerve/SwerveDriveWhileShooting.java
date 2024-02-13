@@ -75,18 +75,26 @@ public class SwerveDriveWhileShooting extends Command {
 
     @Override
     public void execute() {
-        Vector2D velNote = new Vector2D(new Translation2d(Settings.Swerve.NOTE_VELOCITY, swerve.getGyroAngle())) // field relative 
+         Vector2D velNote = new Vector2D(new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getRotation())) // field relative 
             .sub(getVelocity()); 
+        //it should point in the opposite direction of velocity
 
         Rotation2d correctionAngle = velNote.getAngle().getRotation2d().minus(odometry.getRotation());
         Translation2d h = new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getRotation());
 
         Pose2d robotPose = AbstractOdometry.getInstance().getPose();
+        
 
         Rotation2d target = new Rotation2d(
                                 this.target.getX() - robotPose.getX(), 
                                 this.target.getY() - robotPose.getY())
-                                .plus(correctionAngle);
+                                .plus(correctionAngle.times(
+                                    //Math.signum(swerve.getChassisSpeeds().omegaRadiansPerSecond) //clockwise or ccw
+                                    Math.signum(- odometry.getRotation().getDegrees()) 
+                                    * Math.signum(-swerve.getChassisSpeeds().vxMetersPerSecond) *
+                                    Math.signum(-swerve.getChassisSpeeds().vyMetersPerSecond) // we want to move in the opposite direction
+                                    )
+                                    );
 
                                 //.minus(getVelocity().getAngle().getRotation2d()); // pointing at where we want it to
             
@@ -99,9 +107,10 @@ public class SwerveDriveWhileShooting extends Command {
         SmartDashboard.putNumber("preaim angle", velNote.getAngle().toDegrees());
         SmartDashboard.putNumber("Swerve/notevx", h.getX());
         SmartDashboard.putNumber("Swerve/notevy", h.getY());
-        SmartDashboard.putNumber("Swerve/target Angle", target.getDegrees());
-        SmartDashboard.putNumber("Swerve/angle setpoint", odometry.getRotation().getDegrees());
-        SmartDashboard.putNumber("Swerve/ velocity angle", velNote.getAngle().toDegrees());
+        SmartDashboard.putNumber("Swerve/target Angle (calculated)", target.getDegrees());
+        SmartDashboard.putNumber("Swerve/angle setpoint (from odometry)", odometry.getRotation().getDegrees());
+        SmartDashboard.putNumber("Swerve/angle added", correctionAngle.getDegrees());
+        SmartDashboard.putNumber("Swerve/velocity angle", velNote.getAngle().toDegrees());
 
     }
 }

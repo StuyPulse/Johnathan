@@ -52,7 +52,7 @@ public interface Settings {
 		SmartNumber MODULE_VELOCITY_DEADBAND = new SmartNumber("Swerve/Module velocity deadband (m per s)", 0.02);
 		double MAX_MODULE_SPEED = 5.88;
 
-        double NOTE_VELOCITY = Units.inchesToMeters(12);
+        double NOTE_VELOCITY = Units.inchesToMeters(600);
         SmartNumber VELOCITY_RC = new SmartNumber("Swerve/Velocity RC", 0.01);
 
         public interface Turn {
