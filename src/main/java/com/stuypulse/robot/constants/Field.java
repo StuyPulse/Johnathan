@@ -8,6 +8,7 @@ package com.stuypulse.robot.constants;
 import com.stuypulse.stuylib.network.SmartNumber;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.stuypulse.robot.util.Fiducial;
 
@@ -107,5 +108,30 @@ public interface Field {
     public static Pose2d getSpeakerPose() {
         boolean isBlue = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Blue;
         return SPEAKER_POSES[isBlue ? 0 : 1];
+    }
+
+    /*** TRAP ***/
+
+    Pose2d TRAP_POSES[][] = {
+    // BLUE
+    {
+        getFiducial(14).getPose().toPose2d(),
+        getFiducial(15).getPose().toPose2d(),
+        getFiducial(16).getPose().toPose2d()
+    },
+    // RED
+    {
+        getFiducial(11).getPose().toPose2d(),
+        getFiducial(12).getPose().toPose2d(),
+        getFiducial(13).getPose().toPose2d()
+    }
+    };
+    public static Pose2d[] getAllianceTrapPoses() {
+        boolean isBlue = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Blue;
+        return TRAP_POSES[isBlue ? 0 : 1];
+    }
+
+    public static Pose2d getClosestAllianceTrapPose(Pose2d robotPose) {
+        return robotPose.nearest(Arrays.asList(getAllianceTrapPoses()));
     }
 }

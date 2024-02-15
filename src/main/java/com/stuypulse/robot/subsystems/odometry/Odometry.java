@@ -1,5 +1,6 @@
 package com.stuypulse.robot.subsystems.odometry;
 
+import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.robot.subsystems.vision.AbstractVision;
 // import com.stuypulse.robot.subsystems.vision.AbstractVision;
@@ -9,6 +10,7 @@ import com.stuypulse.stuylib.network.SmartBoolean;
 
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
@@ -33,6 +35,7 @@ public class Odometry extends AbstractOdometry {
     private final FieldObject2d estimatorPose2D;
 
     private final SmartBoolean VISION_ACTIVE;
+    private Pose2d lastGoodPose;
 
     protected Odometry() {
         SwerveDrive swerve = SwerveDrive.getInstance();
@@ -58,6 +61,8 @@ public class Odometry extends AbstractOdometry {
         swerve.initModule2ds(field);
         SmartDashboard.putData("Field", field);
         VISION_ACTIVE = new SmartBoolean("Odometry/Vision Active", true);
+        
+        lastGoodPose = new Pose2d();
     }
 
     @Override
@@ -105,6 +110,16 @@ public class Odometry extends AbstractOdometry {
                     dataEntry.robotPose.toPose2d(),
                     dataEntry.timestamp);
             }
+        }
+
+        if (estimator.getEstimatedPosition().getTranslation().getNorm() > new Translation2d(Field.WIDTH, Field.HEIGHT).getNorm() || 
+            odometry.getPoseMeters().getTranslation().getNorm() > new Translation2d(Field.WIDTH, Field.HEIGHT).getNorm() ||
+            estimator.getEstimatedPosition().getX() == Double.NaN || estimator.getEstimatedPosition().getY() == Double.NaN ||
+            odometry.getPoseMeters().getX() == Double.NaN || odometry.getPoseMeters().getY() == Double.NaN
+        ) {
+            reset(lastGoodPose);
+        } else {
+            lastGoodPose = getPose();
         }
 
         odometryPose2D.setPose(odometry.getPoseMeters());

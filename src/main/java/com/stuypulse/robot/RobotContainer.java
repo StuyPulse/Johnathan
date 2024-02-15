@@ -7,8 +7,8 @@ package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.stuypulse.robot.commands.swerve.SwerveDriveAutomatic;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
+import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToChain;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
 import com.stuypulse.robot.commands.swerve.SwerveDriveNoteAlignedDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveResetHeading;
@@ -100,14 +100,9 @@ public class RobotContainer {
             .onTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
-        // driver.getStartButton()
-        //     .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
         driver.getStartButton()
-                .onTrue(new SwerveDriveAutomatic(driver))
-                .onTrue(new BuzzController(driver,Assist.intensity)
-                    .andThen(new WaitCommand(0.2))
-                    .andThen(new BuzzController(driver, 0)));
-                
+            .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
+
         driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
 
         driver.getRightBumper()
@@ -117,6 +112,12 @@ public class RobotContainer {
             .whileTrue(new SwerveDriveDriveToNote())
             .whileTrue(new IntakeAcquire())
             .onFalse(new IntakeStop());
+
+        // driver.getBottomButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(8).getPose().toPose2d(), driver));
+        driver.getLeftButton().whileTrue(new SwerveDriveToScore());
+        // driver.getRightButton().whileTrue(new SwerveDriveDriveToScore(driver));
+        // driver.getBottomButton().whileTrue(AutoBuilder.pathfindToPose(new Pose2d(), new PathConstraints(3, 4, Units.degreesToRadians(540), Units.degreesToRadians(720)), 0, 0));
+
     }
 
     /**************/
