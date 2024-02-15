@@ -7,6 +7,7 @@ import com.stuypulse.robot.constants.Settings.Swerve.*;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.subsystems.odometry.Odometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
+import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.notevision.NoteVision;
 import com.stuypulse.stuylib.control.angle.AngleController;
 import com.stuypulse.stuylib.control.angle.feedback.AnglePIDController;
@@ -31,15 +32,13 @@ public class SwerveDriveAutomatic extends Command {
     private final SwerveDrive swerve;
     private final VStream drive;
     private final AngleController controller;
-    private final NoteVision llNoteVision;
+    private final AbstractNoteVision llNoteVision;
     private final Gamepad driver;
     private final Odometry odometry;
 
     SmartBoolean intakeHasNote;
     SmartBoolean conveyorHasNote;
     SmartBoolean amperHasNote;
-
-    private boolean startButtonWasFalse;
 
     public SwerveDriveAutomatic(Gamepad driver) {
         this.driver = driver;
@@ -55,27 +54,22 @@ public class SwerveDriveAutomatic extends Command {
                 new VLowPassFilter(Drive.RC.get())
         );
         controller = new AnglePIDController(Assist.kP,Assist.kI,Assist.kD);
-        llNoteVision = NoteVision.getInstance();
+        llNoteVision = AbstractNoteVision.getInstance();
 
         intakeHasNote = new SmartBoolean("Swerve/Assist/Intake Has Note", false);
         conveyorHasNote = new SmartBoolean("Swerve/Assist/Conveyor Has Note", false);
         amperHasNote = new SmartBoolean("Swerve/Assist/Amper Has Note", false);
 
-        startButtonWasFalse = false;
-
         addRequirements(swerve);
     }
 
     @Override
-    public void initialize() {
-        startButtonWasFalse = false;
-    }
-
-    @Override
     public void execute() {
-        if (!startButtonWasFalse && !driver.getRawStartButton()) startButtonWasFalse = true;
+        double xPosition = swerve.getChassisSpeeds().vxMetersPerSecond * Assist.TIME;
+        double yPosition = swerve.getChassisSpeeds().vyMetersPerSecond * Assist.TIME;
+        Translation2d position = new Translation2d(xPosition, yPosition);
 
-        Translation2d currentPose = odometry.getPose().getTranslation();
+        Translation2d currentPose = odometry.getPose().getTranslation().plus(position);
         Translation2d targetPose = getTargetPose();
 
         Rotation2d currentAngle = odometry.getPose().getRotation();
@@ -129,7 +123,7 @@ public class SwerveDriveAutomatic extends Command {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(driver.getRightX()) > Assist.deadband.getAsDouble() || (startButtonWasFalse && driver.getRawStartButton());
+        return Math.abs(driver.getRightX()) > Assist.deadband.getAsDouble();
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.stuypulse.robot.constants.Field;
 import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Alignment;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
+import com.stuypulse.robot.constants.Settings.Swerve.Assist;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
 import com.stuypulse.stuylib.control.angle.AngleController;
@@ -20,6 +21,7 @@ import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -30,9 +32,9 @@ public class SwerveDriveWithAiming extends Command {
 
     private VStream speed;
     private final AngleController angleController;
-    private final Pose2d target;
+    private final Translation2d target;
 
-    public SwerveDriveWithAiming(Pose2d target, Gamepad driver) {
+    public SwerveDriveWithAiming(Translation2d target, Gamepad driver) {
         this.swerve = SwerveDrive.getInstance();
 
         this.speed = VStream.create(driver::getLeftStick)
@@ -53,23 +55,16 @@ public class SwerveDriveWithAiming extends Command {
 
     @Override
     public void execute() {
-        Pose2d robotPose = AbstractOdometry.getInstance().getPose();
+        double xPosition = swerve.getChassisSpeeds().vxMetersPerSecond * Assist.TIME;
+        double yPosition = swerve.getChassisSpeeds().vyMetersPerSecond * Assist.TIME;
+        Translation2d position = new Translation2d(xPosition, yPosition);
+        Translation2d robotPose = AbstractOdometry.getInstance().getPose().getTranslation().plus(position);
 
-        Rotation2d target = new Rotation2d(
-                                robotPose.getX() - this.target.getX(), 
-                                robotPose.getY() - this.target.getY());
+        Rotation2d target = robotPose.minus(this.target).getAngle();
             
         double angularVel = -angleController.update(
-                            Angle.fromRotation2d(target),
-                            Angle.fromRotation2d(swerve.getGyroAngle()));
-
-        Pose2d speaker = Field.getSpeakerPose();
-        Pose2d robot = AbstractOdometry.getInstance().getPose();
-        Vector2D speakerPos = new Vector2D(speaker.getX(), speaker.getY());
-        Vector2D robotPos = new Vector2D(robot.getX(), robot.getY());
-        Vector2D targetPos = speakerPos.add(robotPos.sub(speakerPos).normalize().mul(Units.inchesToMeters(TARGET_DISTANCE_IN.get())));
-        Rotation2d targetAngle = targetPos.getTranslation2d().minus(robotPos.getTranslation2d()).getAngle().plus(Rotation2d.fromDegrees(180));
-        SmartDashboard.putNumber("Vision/To Score/Target Angle", targetAngle.getDegrees());
+            Angle.fromRotation2d(target),
+            Angle.fromRotation2d(AbstractOdometry.getInstance().getRotation()));
 
         swerve.drive(speed.get(), angularVel);
     }

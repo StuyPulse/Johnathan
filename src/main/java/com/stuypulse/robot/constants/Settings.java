@@ -124,6 +124,7 @@ public interface Settings {
             SmartNumber deadband = new SmartNumber("Swerve/Assist/Gamepad deadband", 0.2);
             SmartNumber minDistToSPeaker = new SmartNumber("Swerve/Assist/Minimum Distance to Speaker", 10); //change
             double intensity = 0.5;
+            double TIME = 0.5;
         }
 	}
 
@@ -226,7 +227,7 @@ public interface Settings {
         }
 
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 1);
+            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 3.0);
             SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
         }

@@ -7,6 +7,7 @@ package com.stuypulse.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.stuypulse.robot.commands.swerve.SwerveDriveAutomatic;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDrive;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToChain;
 import com.stuypulse.robot.commands.swerve.SwerveDriveDriveToNote;
@@ -31,6 +32,7 @@ import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -91,6 +93,8 @@ public class RobotContainer {
         driver.getDPadDown().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(180)));
         driver.getDPadLeft().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(90)));
         driver.getDPadRight().onTrue(new SwerveDriveResetHeading(Rotation2d.fromDegrees(270)));
+
+        driver.getStartButton().onTrue(new SwerveDriveAutomatic(driver));
         
         driver.getRightTriggerButton()
             .onTrue(new IntakeAcquire())
@@ -100,10 +104,13 @@ public class RobotContainer {
             .onTrue(new IntakeDeacquire())
             .onFalse(new IntakeStop());
 
-        driver.getStartButton()
-            .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
+        // driver.getStartButton()
+        //     .whileTrue(new SwerveDriveToAutoStart(() -> autonChooser.getSelected().getName()));
 
-        driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose().toPose2d(), driver));
+        driver.getTopButton().whileTrue(new SwerveDriveWithAiming(Field.getFiducial(7).getPose()
+            .toPose2d()
+            .getTranslation()
+            .plus(new Translation2d(1, 2)), driver));
 
         driver.getRightBumper()
             .whileTrue(new SwerveDriveNoteAlignedDrive(driver));

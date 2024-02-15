@@ -4,6 +4,7 @@ import com.stuypulse.robot.constants.Settings;
 import com.stuypulse.robot.constants.Settings.Driver.Drive;
 import com.stuypulse.robot.constants.Settings.NoteDetection;
 import com.stuypulse.robot.constants.Settings.Swerve;
+import com.stuypulse.robot.constants.Settings.Swerve.Assist;
 import com.stuypulse.robot.subsystems.notevision.AbstractNoteVision;
 import com.stuypulse.robot.subsystems.odometry.AbstractOdometry;
 import com.stuypulse.robot.subsystems.swerve.SwerveDrive;
@@ -53,8 +54,13 @@ public class SwerveDriveNoteAlignedDrive extends Command {
 
    @Override
     public void execute() {
-        Translation2d targetTranslation = odometry.getTranslation().plus(
-            new Translation2d(Swerve.CENTER_TO_INTAKE_FRONT, 0).rotateBy(odometry.getRotation()));
+        double xPosition = swerve.getChassisSpeeds().vxMetersPerSecond * Assist.TIME;
+        double yPosition = swerve.getChassisSpeeds().vyMetersPerSecond * Assist.TIME;
+        Translation2d position = new Translation2d(xPosition, yPosition);
+
+        Translation2d targetTranslation = odometry.getTranslation()
+            .plus(position)
+            .plus(new Translation2d(Swerve.CENTER_TO_INTAKE_FRONT, 0).rotateBy(odometry.getRotation()));
 
         Rotation2d targetRotation = noteVision.getEstimatedNoteTranslation().minus(targetTranslation).getAngle();
 
