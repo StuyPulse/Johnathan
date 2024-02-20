@@ -175,7 +175,7 @@ public interface Settings {
         }
 
         public interface Rotation {
-            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 8);
+            SmartNumber P = new SmartNumber("Alignment/Rotation/kP", 10);
             SmartNumber I = new SmartNumber("Alignment/Rotation/kI", 0);
             SmartNumber D = new SmartNumber("Alignment/Rotation/kD", 0);
         }

@@ -30,6 +30,7 @@ import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -74,6 +75,7 @@ public class RobotContainer {
 
     private void configureDefaultCommands() {
         swerve.setDefaultCommand(new SwerveDriveWhileShooting(new Pose2d(Field.WIDTH / 2, Field.HEIGHT / 2, new Rotation2d()), driver));
+        //swerve.setDefaultCommand(new SwerveDriveWithAiming(new Pose2d(Field.WIDTH / 2, Field.HEIGHT / 2, new Rotation2d()), driver));
     }
 
     /***************/

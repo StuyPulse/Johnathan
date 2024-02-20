@@ -19,6 +19,7 @@ import com.stuypulse.stuylib.streams.vectors.filters.VRateLimit;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -31,7 +32,6 @@ public class SwerveDriveWhileShooting extends Command {
     private final AngleController controller;
     private final Pose2d target;
 
-   
     private VStream robotSpeed;
 
     public SwerveDriveWhileShooting(Pose2d target, Gamepad driver) {
@@ -53,7 +53,7 @@ public class SwerveDriveWhileShooting extends Command {
 
         this.robotSpeed = VStream.create(() -> chassisSpeedsVector())
             .filtered(new VLowPassFilter(Settings.Swerve.VELOCITY_RC.get()))
-            .filtered(new VRateLimit(5));
+            .filtered(new VRateLimit(3));
         
         odometry.getField().getObject("Target").setPose(target);
 
@@ -61,56 +61,56 @@ public class SwerveDriveWhileShooting extends Command {
     }
 
     private Vector2D chassisSpeedsVector() {
-        return  new Vector2D(
-            swerve.getChassisSpeeds().vxMetersPerSecond, 
-            swerve.getChassisSpeeds().vyMetersPerSecond
+        ChassisSpeeds speeds = swerve.getChassisSpeeds();
+        return new Vector2D(
+            speeds.vxMetersPerSecond,
+            speeds.vyMetersPerSecond
         );
-        
     }
    
     public Vector2D getVelocity(){
         return robotSpeed.get();
     }
 
+    public Vector2D getFieldRelativeSpeed(){
+        return robotSpeed.get().rotate(Angle.fromRotation2d(odometry.getPose().getRotation()));
+    }
 
     @Override
     public void execute() {
-         Vector2D velNote = new Vector2D(new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getRotation())) // field relative 
-            .sub(getVelocity()); 
-        //it should point in the opposite direction of velocity
 
-        Rotation2d correctionAngle = velNote.getAngle().getRotation2d().minus(odometry.getRotation());
-        Translation2d h = new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getRotation());
-
-        Pose2d robotPose = AbstractOdometry.getInstance().getPose();
+        //suspicion: getVelocity is wrong
+        Vector2D velNoteInitial = new Vector2D(new Translation2d(Settings.Swerve.NOTE_VELOCITY, odometry.getPose().getRotation())); 
         
 
-        Rotation2d target = new Rotation2d(
-                                this.target.getX() - robotPose.getX(), 
-                                this.target.getY() - robotPose.getY())
-                                .plus(correctionAngle.times(
-                                    //Math.signum(swerve.getChassisSpeeds().omegaRadiansPerSecond) //clockwise or ccw
-                                    Math.signum(- odometry.getRotation().getDegrees()) 
-                                    * Math.signum(-swerve.getChassisSpeeds().vxMetersPerSecond) *
-                                    Math.signum(-swerve.getChassisSpeeds().vyMetersPerSecond) // we want to move in the opposite direction
-                                    )
-                                    );
 
-                                //.minus(getVelocity().getAngle().getRotation2d()); // pointing at where we want it to
-            
+
+        Pose2d robotPose = odometry.getPose();
+        Vector2D targetVector = new Vector2D(
+                            this.target.getX() - robotPose.getX(), 
+                            this.target.getY() - robotPose.getY());
+
+        Vector2D velocityDifference = targetVector.sub(getFieldRelativeSpeed()); 
+    
         double angularVel = -controller.update(
-                            Angle.fromRotation2d(target),
+                            velocityDifference.getAngle(),
                             Angle.fromRotation2d(odometry.getRotation()));
+        
 
         swerve.drive(speed.get(), angularVel);
 
-        SmartDashboard.putNumber("preaim angle", velNote.getAngle().toDegrees());
-        SmartDashboard.putNumber("Swerve/notevx", h.getX());
-        SmartDashboard.putNumber("Swerve/notevy", h.getY());
-        SmartDashboard.putNumber("Swerve/target Angle (calculated)", target.getDegrees());
+        SmartDashboard.putNumber("Swerve/unadjusted angle", targetVector.getAngle().toDegrees());
+        SmartDashboard.putNumber("Swerve/targetVector x", targetVector.x);
+        SmartDashboard.putNumber("Swerve/targetVector y", targetVector.y);
+
+        SmartDashboard.putNumber("Swerve/adjusted (subtracted) angle", velocityDifference.getAngle().toDegrees());
         SmartDashboard.putNumber("Swerve/angle setpoint (from odometry)", odometry.getRotation().getDegrees());
-        SmartDashboard.putNumber("Swerve/angle added", correctionAngle.getDegrees());
-        SmartDashboard.putNumber("Swerve/velocity angle", velNote.getAngle().toDegrees());
+        SmartDashboard.putNumber("Swerve/getFieldRelativeSpeed x", getFieldRelativeSpeed().x);
+        SmartDashboard.putNumber("Swerve/getFieldRelativeSpeed y", getFieldRelativeSpeed().y);
+
+        //optimal velocity = target vector.sub(getFieldRelativeSpeedPoints)
+
+        
 
     }
 }
